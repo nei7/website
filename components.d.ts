@@ -3,7 +3,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    '// Read more': https://github.com/vuejs/vue-next/pull/3399
     Article: typeof import('./src/components/Article.vue')['default']
     Button: typeof import('./src/components/Button.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
