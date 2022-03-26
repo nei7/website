@@ -8,10 +8,10 @@ defineProps<{
 </script>
 
 <template>
-    <div class="w-full max-w-5xl mx-auto px-6">
+    <div class="w-full max-w-5xl mx-auto px-6 py-10">
         <h1 class="text-white text-6xl font-bold text-center mb-4">{{ frontmatter.name }}</h1>
-        <p class="text-white text-xl font-medium">{{ frontmatter.description }}</p>
-        <div class="content mt-6">
+        <i class="text-gray-300 text-xl font-medium">{{ frontmatter.description }}</i>
+        <div class="content mt-6 text-gray-300">
             <slot></slot>
         </div>
     </div>
@@ -33,9 +33,5 @@ defineProps<{
 .content p {
     font-size: 1.4rem;
     font-weight: 500;
-}
-
-.content {
-    color: white;
 }
 </style>

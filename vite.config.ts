@@ -34,7 +34,6 @@ export default defineConfig({
       ],
       extensions: ["vue", "md"],
       extendRoute(route) {
-        // Get inspired from anthony fu"s personal website
         // https://github.com/antfu/antfu.me
         const path = resolve(__dirname, route.component.slice(1));
         const md = readFileSync(path, "utf-8");
@@ -53,7 +52,6 @@ export default defineConfig({
       wrapperClasses: "content",
       wrapperComponent: "post",
       markdownItSetup(md) {
-        // https://prismjs.com/
         md.use(Prism);
         md.use(LinkAttributes, {
           matcher: (link: string) => /^https?:\/\//.test(link),
