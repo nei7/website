@@ -7,6 +7,8 @@ import ViteComponents from "vite-plugin-components";
 import AutoImport from "unplugin-auto-import/vite";
 import Prism from "markdown-it-prism";
 import LinkAttributes from "markdown-it-link-attributes";
+import { readFileSync } from "fs";
+import matter from "gray-matter";
 
 export default defineConfig({
   resolve: {
@@ -31,6 +33,16 @@ export default defineConfig({
         },
       ],
       extensions: ["vue", "md"],
+      extendRoute(route) {
+        // Get inspired from anthony fu"s personal website
+        // https://github.com/antfu/antfu.me
+        const path = resolve(__dirname, route.component.slice(1));
+        const md = readFileSync(path, "utf-8");
+        const { data } = matter(md);
+        if (path.split(".").pop() == "md") {
+          route.meta = Object.assign(route.meta || {}, { frontmatter: data });
+        }
+      },
     }),
     AutoImport({
       imports: ["vue", "vue-router"],
@@ -38,6 +50,8 @@ export default defineConfig({
     }),
     Markdown({
       headEnabled: true,
+      wrapperClasses: "content",
+      wrapperComponent: "post",
       markdownItSetup(md) {
         // https://prismjs.com/
         md.use(Prism);
