@@ -5,7 +5,7 @@ import Article from '../components/Article.vue';
 const posts = getPosts()
 </script>
 <template>
-    <div class="w-full mt-20 max-w-4xl mx-auto">
+    <div class="w-full mt-20 max-w-3xl mx-auto">
         <Article
             v-for="(post,i) in posts"
             :title="post.name"

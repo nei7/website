@@ -5,4 +5,4 @@ description: My first post on this site
 thumbnail: "/posts/first-post/python-developer.jpg"
 ---
 
-It's just a test post to see if everything works, there will be more posts here soon
+It's just a test post to see if everything works, there will be more posts here soon.

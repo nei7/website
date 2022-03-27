@@ -9,18 +9,18 @@ onMounted(async () => {
   const canvas = document.querySelector("#renderer-canvas") as HTMLElement
   if (!canvas) return
 
-  const target = new Three.Vector3(0, 0, 0)
+  const target = new Three.Vector3(-0.3, 0, 0)
 
   const scene = new Three.Scene();
 
   // Initialize camera
-  const camera = new Three.PerspectiveCamera(30, 300 / 200, 0.1, 100);
+  const camera = new Three.PerspectiveCamera(35, 300 / 250, 0.1, 100);
   camera.lookAt(target)
   camera.position.z = 5;
 
   // Create renderer
   const renderer = new Three.WebGLRenderer({ antialias: true, canvas, });
-  renderer.setSize(300, 200)
+  renderer.setSize(300, 250)
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setClearColor(0x121316)
   renderer.outputEncoding = Three.sRGBEncoding
@@ -57,10 +57,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="px-8 mx-auto max-w-7xl md:mt-20">
+  <div class="px-8 mx-auto max-w-7xl md:mt-20 mb-10">
     <div class="flex mx-auto w-full justify-center flex-col md:flex-row">
       <div class="flex justify-center mr-10">
-        <canvas id="renderer-canvas" class="cursor-grab ml-20 md:ml-0 md:mt-5"></canvas>
+        <canvas id="renderer-canvas" class="cursor-grab ml-16 md:ml-0"></canvas>
       </div>
       <div class="text-center md:text-left">
         <h1 class="font-bold leading-tight text-white text-6xl">Hello</h1>
@@ -76,9 +76,6 @@ onMounted(async () => {
       </div>
     </div>
   </div>
-  <img
-    src="../assets/svgs/bg-2.svg"
-    class="absolute opacity-70 z-0 h-72 invisible md:visible right-0"
-  />
+
   <Footer />
 </template>

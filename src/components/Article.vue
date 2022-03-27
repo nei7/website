@@ -28,6 +28,6 @@ defineProps<{
                 >Read more</button>
             </div>
         </div>
-        <img :src="thumbnail" class="h-full rounded-lg" />
+        <img :src="thumbnail" class="h-full w-60 rounded-lg" />
     </article>
 </template>
