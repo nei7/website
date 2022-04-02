@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute bottom-0 py-16 w-full justify-center px-20 md:px-72">
+    <div class="md:absolute bottom-0 py-16 w-full justify-center px-10 md:px-72">
         <div class="flex flex-col md:flex-row md:justify-between md:items-center md:gap-x-10">
             <span
                 class="font-semibold tracking-wider text-white uppercase whitespace-nowrap"

@@ -60,7 +60,7 @@ onMounted(async () => {
   <div class="px-8 mx-auto max-w-7xl md:mt-20 mb-10">
     <div class="flex mx-auto w-full justify-center flex-col md:flex-row">
       <div class="flex justify-center mr-10">
-        <canvas id="renderer-canvas" class="cursor-grab ml-16 md:ml-0"></canvas>
+        <canvas id="renderer-canvas" class="cursor-grab md:ml-0"></canvas>
       </div>
       <div class="text-center md:text-left">
         <h1 class="font-bold leading-tight text-white text-6xl">Hello</h1>
