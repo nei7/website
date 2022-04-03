@@ -6,6 +6,7 @@ declare module 'vue' {
     Article: typeof import('./src/components/Article.vue')['default']
     Button: typeof import('./src/components/Button.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
+    Computer: typeof import('./src/components/Computer.ts')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Post: typeof import('./src/components/Post.vue')['default']

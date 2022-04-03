@@ -4,8 +4,7 @@ import Navbar from './components/Navbar.vue';
 </script>
 <template>
   <div class="overflow-hidden w-full min-h-screen font-sans bg-gray-900">
-    <div class="relative h-screen">
-
+    <div class="relative min-h-screen">
       <Navbar />
       <router-view />
     </div>

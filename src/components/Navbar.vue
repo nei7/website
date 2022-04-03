@@ -31,6 +31,7 @@ const menu = [
                 </li>
             </ul>
             <button
+                @click="$router.push('/search')"
                 class="hidden py-3 px-6 font-medium tracking-wider leading-5 text-white rounded-md border-2 border-gray-800 transition md:inline-block hover:bg-teal-200 hover:text-gray-900 hover:shadow-lg"
             >Search</button>
         </nav>
