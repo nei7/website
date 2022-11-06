@@ -3,12 +3,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Google Sans", "sans-serif"],
+        body: ["Merriweather"],
       },
       colors: {
         gray: {
-          900: "#151618",
-          800: "#2f3339",
+          400: "#888888",
+          500: "#666666",
+          600: "#444444",
+          700: "#333333",
+          800: "#222222",
+          900: "#111111",
         },
         teal: {
           200: "#D4ECDD",

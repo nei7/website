@@ -3,13 +3,18 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppLink: typeof import('./src/components/AppLink.vue')['default']
     Article: typeof import('./src/components/Article.vue')['default']
     Button: typeof import('./src/components/Button.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
     Computer: typeof import('./src/components/Computer.ts')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    Input: typeof import('./src/components/Input.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
+    Newsletter: typeof import('./src/components/Newsletter.vue')['default']
     Post: typeof import('./src/components/Post.vue')['default']
+    ReadingTime: typeof import('./src/components/ReadingTime.vue')['default']
+    SpotifyStatus: typeof import('./src/components/SpotifyStatus.vue')['default']
   }
 }
 

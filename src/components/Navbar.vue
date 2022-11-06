@@ -1,39 +1,36 @@
 <script setup lang="ts">
 const menu = [
-    {
-        name: "Home",
-        path: "/"
-    },
-    {
-        name: "Blog",
-        path: "/blog"
-    },
-    {
-        name: "About",
-        path: "/about"
-    }
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Posts",
+    path: "/posts",
+  },
+  {
+    name: "Uses",
+    path: "/uses",
+  },
 ];
 </script>
 
 <template>
-    <div class="relative py-10 px-8 mx-auto max-w-7xl">
-        <nav class="flex justify-between items-center">
-            <a href="#" class="text-2xl font-semibold text-white">fszarek.me</a>
-            <ul
-                class="hidden md:items-center md:tracking-widest md:text-gray-300 md:gap-8 lg:gap-x-16 md:flex"
-            >
-                <li v-for="item in menu" :key="item.name">
-                    <router-link
-                        :to="item.path"
-                        class="transition hover:text-white"
-                        :class="$route.path === item.path && 'text-white'"
-                    >{{ item.name }}</router-link>
-                </li>
-            </ul>
-            <button
-                @click="$router.push('/search')"
-                class="hidden py-3 px-6 font-medium tracking-wider leading-5 text-white rounded-md border-2 border-gray-800 transition md:inline-block hover:bg-teal-200 hover:text-gray-900 hover:shadow-lg"
-            >Search</button>
-        </nav>
-    </div>
+  <div class="relative py-8 px-8 mx-auto max-w-7xl">
+    <nav class="flex justify-center items-center">
+      <ul
+        class="items-center tracking-widest text-gray-400 gap-x-5 flex leading-relaxed text-sm"
+      >
+        <li v-for="item in menu" :key="item.name">
+          <AppLink
+            class="hover:bg-gray-800 p-2 rounded-xl cursor-pointer px-3 transition"
+            :to="item.path"
+            :class="{ 'text-white': item.path === $route.path }"
+          >
+            {{ item.name }}
+          </AppLink>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </template>

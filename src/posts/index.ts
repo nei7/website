@@ -1,5 +1,24 @@
-import type { Post } from "../types";
 import { useRouter } from "vue-router";
+import dayjs from "dayjs";
+
+export interface Post {
+  description: string;
+  title: string;
+  date: string;
+  path: string;
+  thumbnail: string;
+}
+
+declare module "vue-router" {
+  interface RouteMeta {
+    frontmatter?: {
+      description: string;
+      title: string;
+      date: string;
+      thumbnail: string;
+    };
+  }
+}
 
 const getDataRoutes = () => {
   const router = useRouter();
@@ -8,14 +27,20 @@ const getDataRoutes = () => {
 };
 
 export const getPosts = (limit?: number) => {
-  const isPosts = getDataRoutes()
-    .filter((route) => route.path.startsWith("/posts"))
-    .map((post) => {
-      return {
-        ...(post.meta as any).frontmatter,
-        path: post.path,
-      };
-    });
+  const posts: Post[] = getDataRoutes()
+    .filter((route) => route.meta?.frontmatter)
+    .map(({ path, meta }) => {
+      const { date, description, thumbnail, title } = meta.frontmatter!;
 
-  return isPosts as Post[];
+      return {
+        title,
+        description,
+        thumbnail,
+        path,
+        date: dayjs(date).format("MMMM DD, YYYY"),
+      };
+    })
+    .slice(limit);
+
+  return posts;
 };

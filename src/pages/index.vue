@@ -1,33 +1,42 @@
 <script setup lang="ts">
-
-import Footer from '../components/Footer.vue'
-
-import Computer from '../components/Computer';
-
+import { ArrowLongRightIcon } from "@heroicons/vue/24/solid/";
 </script>
 
 <template>
-  <div class="px-8 mx-auto max-w-7xl md:mt-32 mb-10">
-    <div class="flex mx-auto w-full justify-center flex-col md:flex-row md:gap-6">
-      <div class="flex justify-center">
-        <Computer></Computer>
-      </div>
-      <div class="text-center md:text-left">
-        <h1 class="font-bold leading-tight text-white text-4xl md:text-6xl">Hello</h1>
-        <p
-          class="pt-2 max-w-xl text-lg md:text-xl tracking-wide leading-relaxed text-gray-300 mx-auto"
-        >
-          My name is
-          <b>Franek</b> I'm a 16 year old software engineer from Poland.
-        </p>
-        <div class="mt-7">
-          <router-link to="/blog">
-            <Button>My blog</Button>
-          </router-link>
-        </div>
-      </div>
-    </div>
-  </div>
+  <main class="w-full max-w-2xl mt-10 mx-auto px-4 sm:p-0">
+    <section class="text-justify sm:text-left">
+      <h1 class="mb-5 sm:mb-2">Hello</h1>
 
-  <Footer />
+      <p>
+        My name is Franek. I'm high school student in poland. My main interest
+        is programming; I'am passionate about gaining knowledge and solving
+        problems while working on new projects.
+      </p>
+      <p>
+        I'm currently developing several small open source projects which you
+        can find on my
+        <AppLink to="https://github.com/nei7">github</AppLink> profile. Apart
+        from that I run site that helps students cheat on online learning
+        platforms: <AppLink to="https://quizit.online">quizit.online</AppLink>.
+      </p>
+
+      <p>
+        When I'm not online I enjoy reading books, working out at the gym,
+        running and listening to music.
+      </p>
+    </section>
+
+    <section class="mt-10 mb-20">
+      <router-link
+        to="/posts"
+        class="flex items-center mt-8 text-white leading-7 rounded-lg transition-all h-6 cursor-pointer"
+      >
+        Read my posts
+        <ArrowLongRightIcon class="h-6 w-6 ml-1" />
+      </router-link>
+    </section>
+
+    <Newsletter />
+    <Footer />
+  </main>
 </template>
