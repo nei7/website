@@ -1,4 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getCurrentPlayingSong } from "../composables/api";
+import { onMounted, reactive, ref } from "vue";
+
+const song = reactive({ title: "Not Playing", artist: "", link: "" });
+onMounted(async () => {
+  const currentPlaying = await getCurrentPlayingSong();
+  if (currentPlaying.item && currentPlaying.is_playing) {
+    const {
+      item: {
+        artists: [artist],
+        name,
+        external_urls: { spotify },
+      },
+    } = currentPlaying;
+
+    song.artist = artist.name;
+    song.title = name;
+    song.link = spotify;
+  }
+});
+</script>
 
 <template>
   <div class="flex mb-7 gap-4 items-center">
@@ -14,7 +35,11 @@
     </svg>
 
     <div class="text-white font-sans font-medium text-base">
-      Not Playing - <span class="text-gray-300">Spotify</span>
+      <a :href="song.link" target="_blank" rel="noopener noreferrer"
+        >{{ song.title }}: {{ song.artist }}</a
+      >
+      -
+      <span class="text-gray-300">Spotify</span>
     </div>
   </div>
 </template>

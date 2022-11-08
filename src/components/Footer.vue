@@ -37,7 +37,7 @@
           class="text-gray-400 hover:text-gray-500 transition"
           target="_blank"
           rel="noopener noreferrer"
-          href=""
+          href="https://discord.com/users/624981292865552435"
           >Discord</a
         >
       </div>

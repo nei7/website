@@ -16,12 +16,13 @@ defineProps<{
         <div
           class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 bg-gray-800/50 sm:-inset-x-6 sm:rounded-2xl"
         ></div>
-        <AppLink :to="path">
+        <router-link :to="path">
           <span
             class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"
-          ></span
-          ><span class="relative z-10">{{ title }}</span></AppLink
-        >
+          >
+          </span>
+          <span class="relative z-10">{{ title }}</span>
+        </router-link>
       </h2>
       <time
         class="md:hidden relative z-10 order-first mb-3 flex items-center text-sm text-gray-500 pl-3.5"

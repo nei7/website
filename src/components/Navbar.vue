@@ -22,13 +22,13 @@ const menu = [
         class="items-center tracking-widest text-gray-400 gap-x-5 flex leading-relaxed text-sm"
       >
         <li v-for="item in menu" :key="item.name">
-          <AppLink
+          <router-link
             class="hover:bg-gray-800 p-2 rounded-xl cursor-pointer px-3 transition"
             :to="item.path"
             :class="{ 'text-white': item.path === $route.path }"
           >
             {{ item.name }}
-          </AppLink>
+          </router-link>
         </li>
       </ul>
     </nav>
