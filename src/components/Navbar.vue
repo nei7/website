@@ -9,8 +9,8 @@ const menu = [
     path: "/posts",
   },
   {
-    name: "Uses",
-    path: "/uses",
+    name: "Projects",
+    path: "/projects",
   },
 ];
 </script>
