@@ -13,6 +13,7 @@ declare module 'vue' {
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Newsletter: typeof import('./src/components/Newsletter.vue')['default']
     Post: typeof import('./src/components/Post.vue')['default']
+    ProjectCard: typeof import('./src/components/ProjectCard.vue')['default']
     ReadingTime: typeof import('./src/components/ReadingTime.vue')['default']
     SpotifyStatus: typeof import('./src/components/SpotifyStatus.vue')['default']
   }

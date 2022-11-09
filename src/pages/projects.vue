@@ -5,32 +5,37 @@
       <p>a list of my projects that I find quite useful or interesting</p>
     </section>
 
-    <section>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Card>
-          <header>
-            <h5 class="m-0">pv</h5>
-            <p class="m-0 text-sm">eee</p>
-          </header>
-          <footer class="mt-5">
-            <div class="flex items-center text-white text-xs gap-x-2">
-              <span class="w-3 h-3 rounded-full bg-[#dea584]"></span>
-              Rust
-            </div>
-          </footer>
-        </Card>
-        <Card>
-          <header>
-            <h5 class="m-0">gterm</h5>
-            <p class="m-0 text-sm">eewdwdw</p>
-          </header>
-          <footer class="mt-5">
-            <div class="flex items-center text-white text-xs gap-x-2">
-              <span class="w-3 h-3 rounded-full bg-[#00ADD8]"></span>
-              Go
-            </div>
-          </footer>
-        </Card>
+    <section class="pb-10">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5 grid-flow-row auto-rows-max"
+      >
+        <ProjectCard
+          title="pv"
+          description="Password manager that works in terminal"
+          language="Rust"
+          link="https://github.com/nei7/pv"
+        />
+
+        <ProjectCard
+          title="gterm"
+          description="Simple terminal emulator"
+          language="Go"
+          link="https://github.com/nei7/gterm"
+        />
+
+        <ProjectCard
+          title="httyped"
+          description="A cli tool and vscode extension that can generate typescript types from http request "
+          language="Typescript"
+          link="https://github.com/nei7/httyped"
+        />
+
+        <ProjectCard
+          title="odrabiamy"
+          description="A tool that download solutions from odrabiamy.pl so you don't have to pay in the future"
+          language="Go"
+          link="https://github.com/nei7/odrabiamy"
+        />
       </div>
     </section>
   </main>
