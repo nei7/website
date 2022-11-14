@@ -23,5 +23,7 @@ const time = computed(() => getReadingTime(props.text));
 </script>
 
 <template>
-  <span class="reading-time">{{ time }} minutes{{ time > 1 ? "s" : "" }}</span>
+  <span class="reading-time"
+    >{{ time }} minutes{{ time > 1 ? "s" : "" }} read</span
+  >
 </template>

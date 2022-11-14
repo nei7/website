@@ -5,17 +5,23 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppLink: typeof import('./src/components/AppLink.vue')['default']
     Article: typeof import('./src/components/Article.vue')['default']
+    BarChart: typeof import('./src/components/BarChart.vue')['default']
     Button: typeof import('./src/components/Button.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
     Computer: typeof import('./src/components/Computer.ts')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Input: typeof import('./src/components/Input.vue')['default']
+    LineChart: typeof import('./src/components/LineChart.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Newsletter: typeof import('./src/components/Newsletter.vue')['default']
     Post: typeof import('./src/components/Post.vue')['default']
     ProjectCard: typeof import('./src/components/ProjectCard.vue')['default']
     ReadingTime: typeof import('./src/components/ReadingTime.vue')['default']
+    SleepChart: typeof import('./src/components/SleepChart.vue')['default']
     SpotifyStatus: typeof import('./src/components/SpotifyStatus.vue')['default']
+    StatCard: typeof import('./src/components/StatCard.vue')['default']
+    StepsChart: typeof import('./src/components/StepsChart.vue')['default']
+    WorkoutsList: typeof import('./src/components/WorkoutsList.vue')['default']
   }
 }
 

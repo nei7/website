@@ -1,4 +1,4 @@
-interface PlayingResponse {
+export interface PlayingResponse {
   timestamp: number;
   context: {
     external_urls: {

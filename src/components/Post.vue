@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import { updateView } from "../composables/api";
 import { useRoute } from "vue-router";
-import type AppLinkVue from "./AppLink.vue";
 
 const { frontmatter } = defineProps<{
   frontmatter: Post;

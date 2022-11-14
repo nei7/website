@@ -1,6 +1,9 @@
 import { $fetch } from "ohmyfetch";
+import type { PlayingResponse } from "../@types/spotify";
+import type { Activity, IWorkout } from "../@types/stats";
 
-const apiBaseUrl = "https://api.fszarek.me";
+const apiBaseUrl =
+  import.meta.env.VITE_API_URL?.toString() || "http://api.fszarek.me";
 
 export async function updateView(postSlug: string): Promise<{ views: number }> {
   return $fetch(`/views/${postSlug}`, {
@@ -22,6 +25,20 @@ export async function registerToNewsletter(email: string) {
     body: {
       email,
     },
+    baseURL: apiBaseUrl,
+  });
+}
+
+export async function getStats(): Promise<Activity[]> {
+  return $fetch(`/stats`, {
+    method: "GET",
+    baseURL: apiBaseUrl,
+  });
+}
+
+export async function getWorkouts(): Promise<IWorkout[]> {
+  return $fetch(`/stats/workouts`, {
+    method: "GET",
     baseURL: apiBaseUrl,
   });
 }

@@ -8,7 +8,7 @@ import { ArrowLongRightIcon } from "@heroicons/vue/24/solid/";
       <h1 class="mb-5 sm:mb-2">Hello</h1>
 
       <p>
-        My name is Franek. I'm high school student in poland. My main interest
+        My name is Franek. I'm high school student in Poland. My main interest
         is programming; I'am passionate about gaining knowledge and solving
         problems while working on new projects.
       </p>

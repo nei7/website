@@ -1,6 +1,6 @@
 <template>
   <main class="w-full max-w-2xl mt-10 mx-auto px-4 sm:p-0">
-    <section class="text-justify sm:text-left">
+    <section class="text-justify sm:text-left mt-14">
       <h1 class="mb-5 sm:mb-2">Projects</h1>
       <p>a list of my projects that I find quite useful or interesting</p>
     </section>
@@ -38,5 +38,6 @@
         />
       </div>
     </section>
+    <Footer></Footer>
   </main>
 </template>

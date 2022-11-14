@@ -7,15 +7,20 @@
       class="w-full max-w-2xl sm:px-0 px-4 grid grid-cols-1 gap-10 sm:gap-4 pb-16 sm:grid-cols-3"
     >
       <div class="flex flex-col space-y-4">
-        <a class="text-gray-400 hover:text-gray-500 transition" href="/">
-          Home
+        <a
+          class="text-gray-400 hover:text-gray-500 transition"
+          href="/projects"
+        >
+          Projects
         </a>
         <a class="text-gray-400 hover:text-gray-500 transition" href="/posts">
           Posts
         </a>
         <a
           class="text-gray-400 hover:text-gray-500 transition"
-          href="/newsletter"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://newsletter.fszarek.me"
         >
           Newsletter
         </a>
