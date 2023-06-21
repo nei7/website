@@ -70,7 +70,7 @@ useEventListener("scroll", onWindowScroll);
     <nav class="flex relative z-50 justify-center items-center">
       <ul
         ref="navbar"
-        class="gap-x-5 flex m-0 font-medium px-3 py-2 rounded-3xl list-none text-slate-800"
+        class="gap-x-3 sm:gap-x-5 flex m-0 font-medium px-3 py-2 rounded-3xl list-none text-slate-800 text-sm sm:text-base"
         :class="toggleClass ? ['bg-white/50 backdrop-blur-lg	'] : []"
         hide-cursor
       >
@@ -87,7 +87,14 @@ useEventListener("scroll", onWindowScroll);
             :to="item.path"
           >
             {{ item.name }}
-            <slash v-if="item.path === '/'" />
+
+            <template v-if="item.path === '/'">
+              <span
+                class="rounded-md px-1.5 border-gray-300 border-2 text-xs sm:text-sm ml-2"
+              >
+                /
+              </span>
+            </template>
           </router-link>
         </li>
       </ul>

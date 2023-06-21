@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import prism from "prismjs";
-import "prismjs/themes/prism.css";
-
+import "prism-themes/themes/prism-coldark-dark.css";
 const { code } = defineProps<{ code: CodeBlockObjectResponse }>();
 
 const html = prism.highlight(
@@ -16,6 +15,7 @@ const html = prism.highlight(
   <div>
     <pre
       :class="'language-' + code.code.language"
+      class="text-lg"
     ><code v-html="html" ></code></pre>
   </div>
 </template>
