@@ -16,6 +16,10 @@ const menu = [
     name: "Stats",
     path: "/stats",
   },
+  {
+    name: "About",
+    path: "/about",
+  },
 ];
 
 const route = useRoute();
@@ -33,8 +37,8 @@ watch(route, () => setBarPosition());
 onMounted(() => setBarPosition());
 
 const setBarPosition = () => {
-  selectedIndex.value = menu.findIndex((_) => _.path === route.path);
-  if (selectedIndex.value === -1) return;
+  const index = menu.findIndex((_) => _.path === route.path);
+  selectedIndex.value = index === -1 ? 0 : index;
 
   const item = menuItems.value?.[selectedIndex.value];
   size.width = item.clientWidth;
@@ -78,8 +82,8 @@ useEventListener("scroll", onWindowScroll);
         >
           <router-link
             hide-cursor
-            class="p-2 rounded-3xl cursor-pointer px-3 flex"
-            :class="item.path === route.path && toggleClass ? ['bg-white'] : []"
+            class="p-2 rounded-3xl cursor-pointer px-4 flex"
+            :class="selectedIndex === i && toggleClass ? ['bg-white'] : []"
             :to="item.path"
           >
             {{ item.name }}
