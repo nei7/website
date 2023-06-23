@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Post } from "../utils/notion";
+import { Post } from "../../utils/notion";
 
 const props = defineProps<{
   post: Post;
 }>();
 
-const postLink = computed(() => `/posts/${props.post.slug}`);
+const postLink = `/posts/${props.post.slug}`;
 </script>
 
 <template>
