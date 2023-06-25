@@ -40,7 +40,7 @@ const { data, error } = await useAsyncData<{ results: BlockObjectResponse[] }>(
           <img :src="post.coverImage" alt="" style="object-fit: cover" />
         </div>
 
-        <PostReactions :postId="post.id" class="mt-10"></PostReactions>
+        <PostReactions :slug="post.slug" class="mt-10"></PostReactions>
       </header>
 
       <div class="prose prose-slate prose-lg mt-20" style="max-width: 100%">

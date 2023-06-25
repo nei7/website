@@ -25,7 +25,7 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_reactions: { Args: { postid: string } };
     };
     Enums: {
       [_ in never]: never;

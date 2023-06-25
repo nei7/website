@@ -8,7 +8,7 @@ export interface Post {
   description: string;
   coverImage: string;
   href: string;
-  slug: string | null;
+  slug: string;
 }
 
 export const convertPosts = (posts: any[]) => {
@@ -28,7 +28,7 @@ export const convertPosts = (posts: any[]) => {
       ) {
         return {
           id: post.id,
-          slug: URL.url,
+          slug: URL.url || "/",
           href: post.id,
           title: Title.title[0].plain_text,
           published: new Date(Published.created_time).toDateString(),
