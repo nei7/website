@@ -2,10 +2,20 @@
 defineProps<{
   transparent?: boolean;
 }>();
+
+const attrs = useAttrs();
+const router = useRouter();
+
+const onClick = () => {
+  const defaultHref = attrs["href"] || attrs["defaultHref"];
+
+  if (defaultHref) router.push(defaultHref);
+};
 </script>
 
 <template>
   <button
+    @click="onClick"
     :class="
       transparent
         ? ['text-slate-800']

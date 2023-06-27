@@ -55,11 +55,14 @@ export default defineEventHandler(async (event) => {
       return supabase.rpc("get_reactions", { postid: postId });
   } catch (err) {
     if (err instanceof ValidationError) {
+      setResponseStatus(event, 400);
+
       return {
         error: err.message,
       };
     }
 
+    setResponseStatus(event, 500);
     return { error: (err as any)?.message || err };
   }
 });

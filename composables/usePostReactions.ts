@@ -16,7 +16,7 @@ export default function usePostReactions(slug: string) {
 
   const storage = useLocalStorage(slug, initialReactionState);
 
-  const { data } = useFetch<{ data: Reactions }>(`/api/reaction/${slug}`);
+  const { data } = useFetch<{ data: Reactions }>(`/api/reactions/${slug}`);
 
   watchEffect(() => {
     if (data.value) {
@@ -31,7 +31,7 @@ export default function usePostReactions(slug: string) {
   watchEffect(() => {});
 
   const handleIncrementSkull = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
       body: {
         reaction: "skull",
@@ -45,7 +45,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementSkull = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
       body: {
         reaction: "skull",
@@ -59,7 +59,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleIncrementThumbup = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
 
       body: {
@@ -74,7 +74,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementThumbup = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
 
       body: {
@@ -89,7 +89,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleIncrementHeart = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
 
       body: {
@@ -104,7 +104,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementHeart = async () => {
-    await $fetch(`/api/reaction/${slug}`, {
+    await $fetch(`/api/reactions/${slug}`, {
       method: "POST",
 
       body: {

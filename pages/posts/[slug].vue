@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  BlockObjectResponse,
+  ListBlockChildrenResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 import { BookOpenIcon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
@@ -7,12 +10,11 @@ const route = useRoute();
 const { data: posts } = await usePosts();
 
 const post = computed(() =>
-  posts.value.find((p) => p.slug === route.params.slug.toString())
+  posts.value.find(({ slug }) => slug === route.params.slug.toString())
 );
 
-const { data, error } = await useAsyncData<{ results: BlockObjectResponse[] }>(
-  "blocks",
-  () => $fetch("/api/notion/blocks/" + post.value?.id)
+const { data, error } = useCachedFetch<{ results: BlockObjectResponse[] }>(
+  `/api/notion/blocks/${post.value?.id}`
 );
 </script>
 <template>
