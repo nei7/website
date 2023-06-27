@@ -16,19 +16,12 @@ export default function usePostReactions(slug: string) {
 
   const storage = useLocalStorage(slug, initialReactionState);
 
-  const { data } = useFetch<{ data: Reactions }>(`/api/reactions/${slug}`);
-
-  watchEffect(() => {
-    if (data.value) {
-      const { thumbup_count, skull_count, heart_count } = data.value.data;
-
-      reactions.heart_count = heart_count;
-      reactions.thumbup_count = thumbup_count;
-      reactions.skull_count = skull_count;
-    }
+  onMounted(async () => {
+    const { data } = await $fetch<{ data: Reactions }>(
+      `/api/reactions/${slug}`
+    );
+    Object.assign(reactions, data);
   });
-
-  watchEffect(() => {});
 
   const handleIncrementSkull = async () => {
     await $fetch(`/api/reactions/${slug}`, {

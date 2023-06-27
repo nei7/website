@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "1.0.0-rc.1",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/supabase": "^0.3.7",
     "@types/node": "^18",
@@ -21,6 +22,7 @@
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
     "@notionhq/client": "^2.2.5",
+    "@nuxtjs/cloudinary": "2.0.0-rc.3",
     "@nuxtjs/tailwindcss": "^6.7.2",
     "@supabase/supabase-js": "^2.26.0",
     "@tailwindcss/typography": "^0.5.9",

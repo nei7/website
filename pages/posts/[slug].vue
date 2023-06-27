@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import {
-  BlockObjectResponse,
-  ListBlockChildrenResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BookOpenIcon } from "@heroicons/vue/24/outline";
+import { useReadingTime } from "~/composables/utils";
 
 const route = useRoute();
 
-const { data: posts } = await usePosts();
+const { data } = await usePosts();
 
 const post = computed(() =>
-  posts.value.find(({ slug }) => slug === route.params.slug.toString())
+  data.value.posts.find(({ slug }) => slug === route.params.slug.toString())
 );
 
-const { data, error } = useCachedFetch<{ results: BlockObjectResponse[] }>(
-  `/api/notion/blocks/${post.value?.id}`
+const { data: blocks, error } = await useCachedFetch<{
+  results: BlockObjectResponse[];
+}>(`/api/notion/blocks/${post.value?.id}`);
+
+const relatedPosts = computed(() => data.value.posts.slice(0, 3));
+
+const readingTime = computed(() =>
+  blocks.value.results ? useReadingTime(blocks.value.results) : 0
 );
 </script>
 <template>
@@ -32,21 +36,21 @@ const { data, error } = useCachedFetch<{ results: BlockObjectResponse[] }>(
           ·
           <div class="flex items-center">
             <BookOpenIcon class="w-5 h-5 mr-3" />
-            10 min read
+            {{ readingTime }} min read
           </div>
         </div>
 
         <div
           class="aspect-video lg:aspect-[2/1] relative overflow-hidden rounded-3xl mt-12"
         >
-          <img :src="post.coverImage" alt="" style="object-fit: cover" />
+          <nuxt-img :src="post.coverImage" fit="cover" />
         </div>
 
         <PostReactions :slug="post.slug" class="mt-10"></PostReactions>
       </header>
 
       <div class="prose prose-slate prose-lg mt-20" style="max-width: 100%">
-        <NotionRender :blocks="data.results"></NotionRender>
+        <NotionRender :blocks="blocks.results"></NotionRender>
       </div>
     </article>
 
@@ -56,7 +60,7 @@ const { data, error } = useCachedFetch<{ results: BlockObjectResponse[] }>(
     <h1 class="font-bold text-4xl text-center">Related posts</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 mt-10">
-      <Post v-for="post in posts.slice(0, 3)" :post="post"></Post>
+      <Post v-for="post in relatedPosts" :post="post"></Post>
     </div>
   </div>
 </template>

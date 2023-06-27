@@ -1,24 +1,17 @@
 <script setup lang="ts">
-const { data } = usePosts();
-
-const tags = computed(() =>
-  data.value
-    ? data.value.reduce<{ name: string; color: string }[]>((acc, post) => {
-        acc.push(...post.tags);
-        return acc;
-      }, [])
-    : []
-);
+const { data } = await usePosts();
 
 const selectedTag = ref("");
 
-const posts = computed(() =>
-  selectedTag.value
-    ? data.value.filter((post) =>
-        post.tags.find((tag) => tag.name === selectedTag.value)
-      )
-    : data.value
-);
+const posts = computed(() => {
+  if (selectedTag.value) {
+    return data.value.posts.filter((post) =>
+      post.tags.find((tag) => tag.name === selectedTag.value)
+    );
+  }
+
+  return data.value.posts;
+});
 </script>
 
 <template>
@@ -38,11 +31,11 @@ const posts = computed(() =>
           All
         </PostTag>
         <PostTag
-          v-for="tag in tags"
-          :active="selectedTag === tag.name"
-          @click="selectedTag = tag.name"
+          v-for="tag in data.tags"
+          :active="selectedTag === tag"
+          @click="selectedTag = tag"
         >
-          {{ tag.name }}
+          {{ tag }}
         </PostTag>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-12">

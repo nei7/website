@@ -12,7 +12,9 @@ export interface Post {
 }
 
 export const convertPosts = (posts: any[]) => {
-  return posts
+  const tags: string[] = [];
+
+  const convertedPosts = posts
     .filter(isFullPage)
     .map((post) => {
       const { Title, Published, Tags, Description, URL } = post.properties;
@@ -32,14 +34,20 @@ export const convertPosts = (posts: any[]) => {
           href: post.id,
           title: Title.title[0].plain_text,
           published: new Date(Published.created_time).toDateString(),
-          tags: Tags.multi_select.map((tag) => ({
-            name: tag.name,
-            color: tag.color.toString(),
-          })),
+          tags: Tags.multi_select.map((tag) => {
+            tags.push(tag.name);
+
+            return {
+              name: tag.name,
+              color: tag.color.toString(),
+            };
+          }),
           description: Description.rich_text[0].plain_text,
           coverImage: CoverImage.rich_text[0].plain_text,
         };
       }
     })
     .filter((_): _ is Post => _ !== undefined);
+
+  return { tags, posts: convertedPosts };
 };

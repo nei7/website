@@ -16,8 +16,8 @@ const onClick = useDebounceFn(
 <template>
   <div
     @click="onClick"
-    class="sm:py-4 sm:px-6 py-3 px-5 bg-[#f8fafc] border rounded-3xl cursor-pointer transition ease-in-out active:scale-90"
-    :class="isActive ? 'bg-gray-200' : ''"
+    class="sm:py-4 sm:px-6 py-3 px-5 border rounded-3xl cursor-pointer transition ease-in-out active:scale-90"
+    :class="isActive ? 'bg-gray-200' : 'bg-[#f8fafc] '"
   >
     <slot></slot>
   </div>

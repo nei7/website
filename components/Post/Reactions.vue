@@ -22,8 +22,8 @@ const {
       :decrementFn="handleDecrementThumbup"
       :isActive="storage.liked"
     >
-      👍 {{ reactions.thumbup_count }}</PostReaction
-    >
+      👍 {{ reactions.thumbup_count }}
+    </PostReaction>
     <PostReaction
       :incrementFn="handleIncrementHeart"
       :decrementFn="handleDecrementHeart"

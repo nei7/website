@@ -10,7 +10,7 @@ const postLink = `/posts/${props.post.slug}`;
 
 <template>
   <RouterLink :to="postLink" class="cursor-pointer">
-    <img
+    <nuxt-img
       class="rounded-3xl hover:opacity-80 transition-opacity"
       :src="post.coverImage"
     />

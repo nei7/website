@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div
+  <span
     v-for="element in richText"
     :class="{
       'font-bold': element.annotations.bold,
@@ -51,5 +51,5 @@ defineProps<{
     <template v-else>
       {{ element.plain_text }}
     </template>
-  </div>
+  </span>
 </template>
