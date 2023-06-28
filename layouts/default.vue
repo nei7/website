@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useHead } from "@vueuse/head";
 import { provide, ref } from "vue";
 import Navbar from "../components/Navbar.vue";
 
@@ -10,6 +9,8 @@ provide("scrollRef", scrollRef);
 
 <template>
   <Navbar></Navbar>
+  <CommandPalette></CommandPalette>
+
   <div
     class="min-h-screen w-full bg-gray-100 dark:bg-gray-900 overflow-hidden"
     ref="scrollRef"

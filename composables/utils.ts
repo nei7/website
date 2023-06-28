@@ -29,3 +29,7 @@ export const hasRichText = (
     (block[block.type]?.rich_text as RichTextItemResponse[])?.length > 0
   );
 };
+
+export function classNames(...classes: any[string]) {
+  return classes.filter(Boolean).join(" ");
+}

@@ -20,6 +20,8 @@ const relatedPosts = computed(() => data.value.posts.slice(0, 3));
 const readingTime = computed(() =>
   blocks.value.results ? useReadingTime(blocks.value.results) : 0
 );
+
+useCustomHead(post.value?.title, post.value?.description);
 </script>
 <template>
   <section v-if="data && post">
@@ -31,7 +33,7 @@ const readingTime = computed(() =>
             {{ post.title }}
           </h1>
           <div
-            class="flex items-center gap-x-4 mx-auto w-max mt-8 text-lg text-slate-700"
+            class="flex items-center gap-x-4 mx-auto w-max mt-8 text-lg text-slate-600"
           >
             <div>{{ post.published }}</div>
             ·

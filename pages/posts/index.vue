@@ -12,6 +12,8 @@ const posts = computed(() => {
 
   return data.value.posts;
 });
+
+useCustomHead("My blog", "");
 </script>
 
 <template>
@@ -21,11 +23,12 @@ const posts = computed(() => {
     <header class="mt-48">
       <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>
       <p class="text-slate-700 text-xl mt-10">
-        I occasionally publish articles here
+        I occasionally publish articles here. Hope you find something useful
+        here
       </p>
     </header>
 
-    <section class="mt-32">
+    <section class="mt-16">
       <div class="flex items-center gap-5">
         <PostTag :active="selectedTag === ''" @click="selectedTag = ''">
           All
