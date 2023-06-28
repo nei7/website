@@ -1,0 +1,3 @@
+<template>
+  <Error></Error>
+</template>

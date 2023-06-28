@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <p>
+  <p class="min-h-[1rem]">
     <NotionRichText :richText="paragraph.paragraph.rich_text"></NotionRichText>
   </p>
 </template>

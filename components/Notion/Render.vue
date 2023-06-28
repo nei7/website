@@ -16,5 +16,16 @@ defineProps<{
     />
     <NotionImage v-else-if="block.type === 'image'" :image="block" />
     <NotionCode v-else-if="block.type === 'code'" :code="block" />
+    <NotionListItem
+      v-else-if="
+        block.type === 'bulleted_list_item' ||
+        block.type === 'numbered_list_item'
+      "
+      :list_item="block"
+    />
+    <NotionTable
+      v-else-if="block.type === 'table'"
+      :table="block"
+    ></NotionTable>
   </div>
 </template>
