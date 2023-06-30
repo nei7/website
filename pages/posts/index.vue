@@ -17,14 +17,11 @@ useCustomHead("My blog", "");
 </script>
 
 <template>
-  <div class="isolate max-w-6xl mx-auto">
-    <GradientTop />
-
+  <div class="relative isolate max-w-6xl mx-auto">
     <header class="mt-48">
       <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>
       <p class="text-slate-700 text-xl mt-10">
         I occasionally publish articles here. Hope you find something useful
-        here
       </p>
     </header>
 
@@ -45,5 +42,6 @@ useCustomHead("My blog", "");
         <Post v-for="post in posts" :post="post"></Post>
       </div>
     </section>
+    <GradientBottom></GradientBottom>
   </div>
 </template>
