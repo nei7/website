@@ -24,13 +24,7 @@ export default function usePostReactions(slug: string) {
   });
 
   const handleIncrementSkull = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-      body: {
-        reaction: "skull",
-        type: "increment",
-      },
-    });
+    await apiRequest("skull", "increment");
 
     reactions.skull_count++;
 
@@ -38,13 +32,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementSkull = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-      body: {
-        reaction: "skull",
-        type: "decrement",
-      },
-    });
+    await apiRequest("skull", "decrement");
 
     reactions.skull_count--;
 
@@ -52,14 +40,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleIncrementThumbup = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-
-      body: {
-        reaction: "thumbup",
-        type: "increment",
-      },
-    });
+    await apiRequest("thumbup", "increment");
 
     reactions.thumbup_count++;
 
@@ -67,14 +48,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementThumbup = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-
-      body: {
-        reaction: "thumbup",
-        type: "decrement",
-      },
-    });
+    await apiRequest("thumbup", "decrement");
 
     reactions.thumbup_count--;
 
@@ -82,14 +56,7 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleIncrementHeart = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-
-      body: {
-        reaction: "heart",
-        type: "increment",
-      },
-    });
+    await apiRequest("heart", "increment");
 
     reactions.heart_count++;
 
@@ -97,18 +64,22 @@ export default function usePostReactions(slug: string) {
   };
 
   const handleDecrementHeart = async () => {
-    await $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
-
-      body: {
-        reaction: "heart",
-        type: "decrement",
-      },
-    });
+    await apiRequest("heart", "decrement");
 
     reactions.heart_count--;
 
     updateReaction("loved");
+  };
+
+  const apiRequest = (reaction: string, type: "decrement" | "increment") => {
+    return $fetch(`/api/reactions/${slug}`, {
+      method: "POST",
+
+      body: {
+        reaction,
+        type,
+      },
+    });
   };
 
   const updateReaction = (reaction: "loved" | "liked" | "hated") => {

@@ -29,6 +29,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^10.2.0",
     "@vueuse/head": "^1.1.26",
+    "chart.js": "^4.3.0",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
     "yup": "^1.2.0"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useEventListener } from "@vueuse/core";
-
 import { onMounted, ref, watch, reactive } from "vue";
 import { useRoute } from "vue-router";
 
@@ -24,19 +23,13 @@ const menu = [
 ];
 
 const route = useRoute();
-
-const currentIndex = ref(0);
-
 const menuItems = ref<HTMLLIElement[]>([]);
 
+const currentIndex = ref(0);
 const position = reactive({ x: 0, y: 0 }),
   size = reactive({ width: 0, height: 0 });
 
 const toggleClass = ref(false);
-
-watch(route, () => setBarPosition());
-
-onMounted(() => setBarPosition());
 
 const setBarPosition = async () => {
   toggleClass.value = false;
@@ -54,7 +47,9 @@ const setBarPosition = async () => {
   position.y = item.offsetTop;
 };
 
-useEventListener("resize", () => setBarPosition());
+watch(route, setBarPosition);
+onMounted(setBarPosition);
+useEventListener("resize", setBarPosition);
 
 useEventListener("scroll", () => {
   if (window.scrollY > 10) toggleClass.value = true;

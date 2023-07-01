@@ -46,7 +46,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
       </ProjectCard>
     </div>
 
-    <div class="mx-auto mt-20 w-max text-slate-600">
+    <div class="mx-auto mt-20 w-max text-slate-600 text-lg">
       More projects on my <AppLink to="https://github.com/nei7">github</AppLink>
     </div>
   </main>
