@@ -1,0 +1,16 @@
+<script setup lang="ts">
+import { SmartwatchData } from "~/types/huami";
+
+const props = defineProps<{ data: SmartwatchData[] }>();
+
+const distance = computed(
+  () => props.data.reduce((a, b) => a + b.steps.distance, 0) / 1000
+);
+</script>
+
+<template>
+  <Card>
+    <h2 class="font-bold text-xl text-slate-800 mb-5">Total distance walked</h2>
+    <p class="text-slate-600 text-lg">{{ distance }} km</p>
+  </Card>
+</template>

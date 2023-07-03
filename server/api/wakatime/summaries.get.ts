@@ -1,7 +1,10 @@
 import { Summary } from "../../../types/wakatime";
+import { getToken } from "../../utils/wakatime";
+import { yyyymmdd } from "../../utils";
 
 export default defineEventHandler(async () => {
-  const summaries = await getSummaries();
+  const { access_token } = await getToken();
+  const summaries = await getSummaries(access_token);
 
   return summaries.data.map(
     ({
@@ -24,7 +27,7 @@ export default defineEventHandler(async () => {
   );
 });
 
-const getSummaries = async () => {
+const getSummaries = async (token: string) => {
   const date = new Date();
   const endDate = yyyymmdd(date);
 
@@ -35,10 +38,8 @@ const getSummaries = async () => {
     `https://wakatime.com/api/v1/users/current/summaries?start=${startDate}&end=${endDate}`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.WAKATIME_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
 };
-
-const yyyymmdd = (date: Date) => date.toISOString().substring(0, 10);

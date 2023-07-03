@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  ChartData,
-  ChartOptions,
-  ChartType,
-  ChartTypeRegistry,
-  TooltipItem,
-} from "chart.js";
-import Chart from "./index.vue";
+import { ChartData, ChartOptions, ChartType } from "chart.js";
 import { Summary } from "~/types/wakatime";
 import { colorScheme } from "~/constants/colors";
 
@@ -47,5 +40,15 @@ const options: ChartOptions = {
 </script>
 
 <template>
-  <Chart :type="type" :data="data" :options="options" class="max-h-64"></Chart>
+  <Card>
+    <h2 class="font-bold text-xl text-slate-800 mb-5 text-center">
+      Activities
+    </h2>
+    <Chart
+      :type="type"
+      :data="data"
+      :options="options"
+      class="max-h-64"
+    ></Chart>
+  </Card>
 </template>

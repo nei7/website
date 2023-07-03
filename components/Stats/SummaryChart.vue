@@ -6,7 +6,6 @@ import {
   ChartTypeRegistry,
   TooltipItem,
 } from "chart.js";
-import Chart from "./index.vue";
 import { Datapoint } from "~/types/wakatime";
 import { colorScheme } from "~/constants/colors";
 
@@ -34,7 +33,9 @@ const options: ChartOptions = {
     },
     tooltip: {
       callbacks: {
-        label: props.tooltipLabelCb,
+        label: (item: TooltipItem<keyof ChartTypeRegistry>) => {
+          return `${item.formattedValue}% (${props.data[item.dataIndex].text})`;
+        },
       },
     },
   },
