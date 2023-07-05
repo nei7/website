@@ -1,6 +1,6 @@
 import { getToken } from "../../utils/wakatime";
 
-export default defineEventHandler(async (event) => {
+export default cachedEventHandler(async (event) => {
   const { access_token } = await getToken();
 
   return getStats(access_token);

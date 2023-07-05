@@ -21,23 +21,12 @@ useCustomHead("My blog", "");
     <header class="mt-48">
       <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>
       <p class="text-slate-700 text-xl mt-10">
-        I occasionally publish articles here. Hope you find something useful
+        I occasionally publish articles here. Hope you find something useful for
+        yourself.
       </p>
     </header>
 
     <section class="mt-16">
-      <div class="flex items-center gap-5">
-        <PostTag :active="selectedTag === ''" @click="selectedTag = ''">
-          All
-        </PostTag>
-        <PostTag
-          v-for="tag in data.tags"
-          :active="selectedTag === tag"
-          @click="selectedTag = tag"
-        >
-          {{ tag }}
-        </PostTag>
-      </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-12">
         <Post v-for="post in posts" :post="post"></Post>
       </div>

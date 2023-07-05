@@ -61,7 +61,7 @@ const options: ChartOptions = {
 
 <template>
   <Card>
-    <h2 class="font-bold text-xl text-slate-800 mb-5 text-center">
+    <h2 class="font-bold text-xl text-slate-700 mb-5 text-center">
       Sleep time
     </h2>
     <Chart type="bar" :data="data" :options="options" class="max-h-96"></Chart

@@ -15,7 +15,7 @@ const date = computed(() => {
 
 <template>
   <Card>
-    <h2 class="font-bold text-xl text-slate-800 mb-5">Avg. sleep time</h2>
+    <h2 class="font-bold text-xl text-slate-700 mb-5">Avg. sleep time</h2>
     <p class="text-slate-600 text-lg">{{ date }}</p>
   </Card>
 </template>

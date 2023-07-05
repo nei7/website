@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 
-export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
+export default cachedEventHandler(async (event) => {
+  const query = getQuery(event as any);
 
   const notion = new Client({ auth: process.env.NOTION_API_TOKEN });
 

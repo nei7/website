@@ -47,8 +47,8 @@ useCustomHead(
         ></p>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <StatsWakatime></StatsWakatime>
-        <StatsSmartWatch></StatsSmartWatch>
+        <StatsWakatime />
+        <StatsSmartWatch />
       </div>
     </section>
 

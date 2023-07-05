@@ -28,4 +28,4 @@ async function getActivities() {
   return parseActivities(data);
 }
 
-export default defineEventHandler(getActivities);
+export default cachedEventHandler(getActivities);

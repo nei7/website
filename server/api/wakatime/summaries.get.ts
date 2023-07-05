@@ -2,7 +2,7 @@ import { Summary } from "../../../types/wakatime";
 import { getToken } from "../../utils/wakatime";
 import { yyyymmdd } from "../../utils";
 
-export default defineEventHandler(async () => {
+export default cachedEventHandler(async () => {
   const { access_token } = await getToken();
   const summaries = await getSummaries(access_token);
 

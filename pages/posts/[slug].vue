@@ -2,6 +2,7 @@
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BookOpenIcon } from "@heroicons/vue/24/outline";
 import { useReadingTime } from "~/composables/utils";
+import NotFound from "~/components/NotFound.vue";
 
 const route = useRoute();
 
@@ -65,5 +66,5 @@ useCustomHead(post.value?.title, post.value?.description);
       </div>
     </div>
   </section>
-  <Error v-else-if="error"> </Error>
+  <NotFound v-else-if="error"> </NotFound>
 </template>

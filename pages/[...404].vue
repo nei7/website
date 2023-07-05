@@ -1,3 +1,0 @@
-<template>
-  <Error></Error>
-</template>

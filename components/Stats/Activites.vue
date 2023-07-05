@@ -41,7 +41,7 @@ const options: ChartOptions = {
 
 <template>
   <Card>
-    <h2 class="font-bold text-xl text-slate-800 mb-5 text-center">
+    <h2 class="font-bold text-xl text-slate-700 mb-5 text-center">
       Activities
     </h2>
     <Chart
