@@ -15,7 +15,7 @@ const items = [
   {
     title: "Stats",
     description: "",
-    href: "/contact",
+    href: "/stats",
   },
   {
     title: "Projects",
@@ -23,6 +23,18 @@ const items = [
     href: "/projects",
   },
 ];
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  link: [
+    {
+      rel: "icon",
+      href: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>",
+    },
+  ],
+});
 </script>
 
 <template>
@@ -31,7 +43,7 @@ const items = [
   <CommandPalette :items="items"></CommandPalette>
 
   <div
-    class="min-h-screen w-full bg-gray-100 dark:bg-gray-900 overflow-hidden"
+    class="min-h-screen w-full bg-gray-50 dark:bg-gray-900 overflow-hidden"
     ref="scrollRef"
   >
     <NuxtPage />

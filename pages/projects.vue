@@ -6,11 +6,11 @@ useCustomHead("Projects", "A selection list of my favorite projects");
   <main class="mx-auto pt-20 max-w-6xl px-4 xs:px-0">
     <div class="mt-32">
       <h1 class="font-bold text-4xl sm:text-6xl">
-        A selection list of my favorite projects
+        List of my favorite projects
       </h1>
     </div>
 
-    <div class="mt-7 sm:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
       <ProjectCard
         title="Pv"
         description="Password vault for the terminal"
@@ -44,10 +44,6 @@ useCustomHead("Projects", "A selection list of my favorite projects");
       >
         <template #icon> 💻 </template>
       </ProjectCard>
-    </div>
-
-    <div class="mx-auto mt-20 w-max text-slate-600 text-lg">
-      More projects on my <AppLink to="https://github.com/nei7">github</AppLink>
     </div>
   </main>
 </template>

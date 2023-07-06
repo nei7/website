@@ -13,6 +13,7 @@ const postLink = `/posts/${props.post.slug}`;
     <nuxt-img
       class="rounded-3xl hover:opacity-80 transition-opacity"
       :src="post.coverImage"
+      :alt="post.description"
     />
     <h3 class="text-2xl font-bold mt-5">{{ post.title }}</h3>
     <p class="mt-3 text-slate-600">{{ post.published }}</p>

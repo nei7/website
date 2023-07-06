@@ -32,7 +32,7 @@ onMounted(async () => {
     "
     :target="currentSong.is_playing ? '_blank' : ''"
   >
-    <Card>
+    <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
       <h3 class="font-bold text-2xl flex items-center gap-x-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"

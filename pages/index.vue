@@ -68,9 +68,9 @@ const posts = computed(() => data.value.posts.slice(0, 3));
         <Post v-for="post in posts" :post="post" />
       </div>
     </section>
-    <section class="mt-32 mb-20">
+    <!-- <section class="mt-32 mb-20">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <SpotifyStatus></SpotifyStatus>
+       
         <Card>
           <h3 class="font-bold text-2xl flex items-center gap-x-3">
             <img src="../assets/icons/vscode.svg" class="w-5 h-5" />
@@ -79,8 +79,8 @@ const posts = computed(() => data.value.posts.slice(0, 3));
           <p class="mt-4">Offline</p>
         </Card>
       </div>
-    </section>
-
+    </section> -->
+    <Footer class="my-32"></Footer>
     <GradientBottom />
   </main>
 </template>

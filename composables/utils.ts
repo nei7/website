@@ -33,3 +33,5 @@ export const hasRichText = (
 export function classNames(...classes: any[string]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export const yyyymmdd = (date: Date) => date.toISOString().substring(0, 10);

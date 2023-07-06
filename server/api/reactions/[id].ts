@@ -1,6 +1,6 @@
 import { object, mixed, ValidationError } from "yup";
 import { serverSupabaseClient } from "#supabase/server";
-import { Database } from "../../../types/database";
+import { Database } from "../../types/supabase";
 
 const reactionSchema = object({
   reaction: mixed<"thumbup" | "skull" | "heart">()

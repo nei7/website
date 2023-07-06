@@ -15,7 +15,7 @@
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex justify-center mt-32 p-4 sm:p-0">
           <div
-            class="bg-white py-2 rounded-2xl w-full max-w-2xl drop-shadow-2xl"
+            class="bg-white py-2 rounded-2xl w-full max-w-xl drop-shadow-2xl"
             ref="commandPalleteRef"
           >
             <div class="pb-1 border-b px-5">
