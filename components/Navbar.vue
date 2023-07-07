@@ -70,7 +70,7 @@ useEventListener("scroll", () => {
     <nav class="flex relative z-50 justify-center items-center">
       <ul
         class="gap-x-3 sm:gap-x-5 flex m-0 font-medium px-3 py-2 rounded-3xl list-none text-slate-800 text-sm sm:text-base"
-        :class="toggleClass ? ['bg-white/50 backdrop-blur-lg'] : []"
+        :class="toggleClass ? ['bg-gray-100/50 backdrop-blur-lg border'] : []"
       >
         <li
           v-for="(item, i) in menu"

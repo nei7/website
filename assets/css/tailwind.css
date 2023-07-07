@@ -13,4 +13,7 @@
   body {
     overflow-y: scroll;
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }

@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@nuxt/image",
     "@nuxtjs/google-fonts",
+    "@pinia/nuxt",
   ],
   image: {
     provider: "cloudinary",

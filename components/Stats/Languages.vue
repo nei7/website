@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <Card>
+  <Card class="bg-white">
     <h2 class="font-bold text-xl text-slate-700 mb-5 text-center">Languages</h2>
     <SummaryChart type="doughnut" :data="data" />
   </Card>

@@ -9,7 +9,7 @@ const distance = computed(
 </script>
 
 <template>
-  <Card>
+  <Card class="bg-white">
     <h2 class="font-bold text-xl text-slate-700 mb-5">Total distance walked</h2>
     <p class="text-slate-600 text-lg">{{ distance }} km</p>
   </Card>

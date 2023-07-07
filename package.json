@@ -25,11 +25,13 @@
     "@notionhq/client": "^2.2.5",
     "@nuxtjs/cloudinary": "2.0.0-rc.3",
     "@nuxtjs/tailwindcss": "^6.7.2",
+    "@pinia/nuxt": "^0.4.11",
     "@supabase/supabase-js": "^2.26.0",
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^10.2.0",
     "@vueuse/head": "^1.1.26",
     "chart.js": "^4.3.0",
+    "mitt": "^3.0.1",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
     "yup": "^1.2.0"
