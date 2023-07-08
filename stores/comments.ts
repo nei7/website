@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-interface Comment {
+export interface Comment {
   id: number;
   username: string;
   data: string;
@@ -48,14 +48,14 @@ export const useCommentStore = defineStore("comments", {
         if (treeMap.has(replyComment.reply_of)) {
           const rootComment = treeMap.get(replyComment.reply_of)!;
 
-          treeMap.set(replyComment.id, {
+          treeMap.set(replyComment.reply_of, {
             ...rootComment,
             children: [...rootComment.children, replyComment],
           });
         }
       }
 
-      return Array.from(treeMap.values());
+      return Array.from(treeMap.values()).reverse();
     },
   },
 

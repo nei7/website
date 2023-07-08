@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import { useCommentStore } from "~/stores/comments";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { useCommentReply } from "~/composables/comment";
 
 const supabase = useSupabaseClient();
 const user = await supabase.auth.getUser();
+
+const commentFormRef = ref<HTMLDivElement>();
 
 const isCommenting = ref(false);
 const commentText = ref("");
 
 const { handleAddComment } = useCommentStore();
-const { isReplying, replyOf, replyUsername, commentFormRef } =
-  useCommentsEvents();
+
+const { commentId, commentUsername } = useCommentReply();
+watch(commentId, (data) => {
+  if (data !== null)
+    commentFormRef.value?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+});
 
 const handleSignIn = () => {
   if (!user) {
@@ -20,10 +31,14 @@ const handleSignIn = () => {
   }
 };
 
+const onClick = async () => {
+  await handleAddComment(commentText.value, commentId.value);
+  commentText.value = "";
+};
+
 const handleDismissReply = () => {
-  isReplying.value = false;
-  replyUsername.value = "";
-  replyOf.value = null;
+  commentId.value = null;
+  commentUsername.value = null;
 };
 </script>
 
@@ -41,23 +56,20 @@ const handleDismissReply = () => {
         v-if="isCommenting"
         size="sm"
         :disabled="!commentText"
-        @click="
-          handleAddComment(commentText, replyOf);
-          commentText = '';
-        "
+        @click="onClick"
       >
         Submit
       </Button>
 
       <div
-        v-if="isReplying"
-        class="bg-gray-100 px-4 py-2 rounded-md flex items-center text-sm font-medium text-slate-600"
+        v-if="commentId !== null"
+        class="bg-gray-100 px-4 py-2 rounded-xl flex items-center text-xs font-medium text-slate-600"
       >
-        Replying to: @{{ replyUsername }}
+        Replying to: @{{ commentUsername }}
 
-        <span class="ml-2 cursor-pointer" @click="handleDismissReply"
-          ><XMarkIcon class="w-4 h-4"></XMarkIcon
-        ></span>
+        <span class="ml-2 cursor-pointer" @click="handleDismissReply">
+          <XMarkIcon class="w-4 h-4"></XMarkIcon>
+        </span>
       </div>
     </div>
   </div>

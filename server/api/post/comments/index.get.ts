@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from "#supabase/server";
-import { Database } from "../../types/supabase";
+import { Database } from "../../../types/supabase";
 
 export default defineEventHandler((event) => {
   const supabase = serverSupabaseClient<Database>(event);

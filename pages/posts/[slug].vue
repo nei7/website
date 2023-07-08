@@ -2,7 +2,6 @@
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { useReadingTime } from "~/composables/utils";
 import NotFound from "~/components/NotFound.vue";
-import Comments from "~/components/Post/Comments.vue";
 import { useCommentStore } from "~/stores/comments";
 
 const route = useRoute();
@@ -25,11 +24,11 @@ const readingTime = computed(() =>
   blocks.value.results ? useReadingTime(blocks.value.results) : 0
 );
 
-const { comments, fetchList } = useCommentStore();
+const { $state, fetchList } = useCommentStore();
 
 fetchList(post.value.id);
 
-const commentsCount = computed(() => comments.length);
+const commentsCount = computed(() => $state.comments.length);
 </script>
 <template>
   <div
@@ -69,11 +68,7 @@ const commentsCount = computed(() => comments.length);
         Top Comments ({{ commentsCount }})
       </h2>
 
-      <PostCommentForm></PostCommentForm>
-    </div>
-
-    <div class="mt-20">
-      <Comments />
+      <CommentsContainer></CommentsContainer>
     </div>
 
     <div class="mt-24">
