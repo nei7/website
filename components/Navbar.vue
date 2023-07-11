@@ -60,7 +60,7 @@ useEventListener("scroll", () => {
 <template>
   <div class="fixed z-50 top-5 left-0 right-0 w-full">
     <div
-      class="absolute bg-white opacity-50 rounded-3xl z-10 duration-[200ms] transition-all ease-in-out"
+      class="absolute bg-white rounded-3xl z-10 duration-[200ms] transition-all ease-in-out"
       :style="{
         transform: `translate(${position.x + 'px'}, ${position.y + 'px'})`,
         width: size.width + 'px',

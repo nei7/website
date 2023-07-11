@@ -16,6 +16,10 @@ const age = calculateAge().toFixed(3);
 const { data } = await usePosts();
 
 const posts = computed(() => data.value.posts.slice(0, 3));
+
+const { $useModal } = useNuxtApp();
+
+if (process.client) console.log($useModal(""));
 </script>
 
 <template>

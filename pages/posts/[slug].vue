@@ -28,7 +28,7 @@ const { $state, fetchList } = useCommentStore();
 
 fetchList(post.value.id);
 
-const commentsCount = computed(() => $state.comments.length);
+const commentsCount = computed(() => $state.rootComments.length);
 </script>
 <template>
   <div

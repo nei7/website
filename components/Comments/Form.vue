@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { useCommentReply } from "~/composables/comment";
 
 const supabase = useSupabaseClient();
-const user = await supabase.auth.getUser();
+const user = useSupabaseUser();
 
 const commentFormRef = ref<HTMLDivElement>();
 
@@ -24,7 +24,7 @@ watch(commentId, (data) => {
 });
 
 const handleSignIn = () => {
-  if (!user) {
+  if (!user.value) {
     supabase.auth.signInWithOAuth({
       provider: "github",
     });
@@ -63,7 +63,7 @@ const handleDismissReply = () => {
 
       <div
         v-if="commentId !== null"
-        class="bg-gray-100 px-4 py-2 rounded-xl flex items-center text-xs font-medium text-slate-600"
+        class="bg-gray-100 px-4 py-2 rounded-lg flex items-center text-xs font-medium text-slate-800"
       >
         Replying to: @{{ commentUsername }}
 

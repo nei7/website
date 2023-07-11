@@ -16,57 +16,56 @@ type ReplyComment = Omit<Comment, "reply_of"> & { reply_of: number };
 
 export interface CommentTreeNode {
   comment: Comment;
-  children: Array<Comment>;
+  children: Array<CommentTreeNode>;
 }
 
 export const useCommentStore = defineStore("comments", {
   state(): {
-    comments: Comment[];
+    rootComments: Comment[];
     postId: string;
+    childComments: Map<number, Comment[]>;
   } {
     return {
-      comments: [],
+      rootComments: [],
       postId: "",
+      childComments: new Map(),
     };
   },
   getters: {
-    commentTreeList: (state): Array<CommentTreeNode> => {
-      const roots = state.comments.filter(
-        (comment) => comment.reply_of === null
-      );
-
-      const childrens: ReplyComment[] = state.comments.filter(
-        (comment): comment is ReplyComment => comment.reply_of !== null
-      );
-
-      const treeMap = new Map<
-        number,
-        { comment: Comment; children: Array<Comment> }
-      >(roots.map((comment) => [comment.id, { comment, children: [] }]));
-
-      for (const replyComment of childrens) {
-        if (treeMap.has(replyComment.reply_of)) {
-          const rootComment = treeMap.get(replyComment.reply_of)!;
-
-          treeMap.set(replyComment.reply_of, {
-            ...rootComment,
-            children: [...rootComment.children, replyComment],
-          });
-        }
-      }
-
-      return Array.from(treeMap.values()).reverse();
+    getChildComments: (state) => {
+      return (id: number) => state.childComments.get(id);
     },
   },
 
   actions: {
     async fetchList(postId: string) {
+      this.childComments = new Map();
+      this.rootComments = [];
+
       const { data: comments } = await useCachedFetch<{ data: Comment[] }>(
         `/api/post/comments?postId=${postId}`
       );
 
-      this.comments = comments.value.data;
+      this.rootComments = comments.value.data.filter(
+        (comment) => comment.reply_of === null
+      );
+
       this.postId = postId;
+
+      comments.value.data.forEach((comment) => {
+        if (comment.reply_of === null) return;
+
+        if (this.childComments.has(comment.reply_of)) {
+          this.childComments.get(comment.reply_of)?.push(comment);
+        } else {
+          this.childComments.set(comment.reply_of, [comment]);
+        }
+      });
+    },
+    async handleDeleteComment(id: number) {
+      await $fetch("/api/post/comments", {
+        method: "DELETE",
+      });
     },
 
     async handleAddComment(text: string, replyOf: null | number) {
@@ -83,7 +82,12 @@ export const useCommentStore = defineStore("comments", {
           }
         );
 
-        this.comments.push(...data);
+        if (replyOf === null) this.rootComments.push(...data);
+        else {
+          if (this.childComments.has(replyOf))
+            this.childComments.get(replyOf)?.push(...data);
+          else this.childComments.set(replyOf, data);
+        }
       } catch (err) {
       } finally {
       }

@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@pinia/nuxt",
   ],
+  plugins: ["~/plugins/dialog/index.client.ts"],
   image: {
     provider: "cloudinary",
     cloudinary: {

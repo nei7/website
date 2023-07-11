@@ -15,6 +15,9 @@
       <li class="text-slate-600 text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/projects">Projects</nuxt-link>
       </li>
+      <li class="text-slate-600 text-lg py-3 hover:text-slate-800">
+        <nuxt-link to="/signout">Log out</nuxt-link>
+      </li>
     </ul>
     <ul class="">
       <li class="font-medium text-lg text-slate-900 mb-4">Contact</li>

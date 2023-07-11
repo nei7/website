@@ -4,6 +4,7 @@ import {
   ChatBubbleLeftEllipsisIcon,
 } from "@heroicons/vue/24/outline";
 import { useCommentReply } from "~/composables/comment";
+import { useCommentStore } from "~/stores/comments";
 
 const props = defineProps<{
   id: number;
@@ -20,6 +21,7 @@ const loved = ref(props.loved);
 const created = computed(() => yyyymmdd(new Date(props.created_at)));
 
 const { commentUsername, commentId } = useCommentReply();
+const {} = useCommentStore();
 
 const onReply = () => {
   commentId.value = props.id;
@@ -27,11 +29,13 @@ const onReply = () => {
 };
 
 const handleReaction = async () => {
-  await $fetch("/api/post/comments/reaction", {
+  await $fetch(`/api/post/comments/reaction?commentId=${props.id}`, {
     method: "POST",
   });
   loved.value++;
 };
+
+const handleDelete = async () => {};
 </script>
 
 <template>
@@ -41,27 +45,27 @@ const handleReaction = async () => {
     </a>
 
     <div class="w-full">
-      <div class="border-[#eceef0] border p-4 rounded-md px-4">
-        <span class="text-slate-500">
-          <b class="text-slate-900">{{ username }}</b>
-          / <span class="text-sm"> {{ created }}</span>
+      <div class="border-[#eceef0] border p-4 rounded-lg px-4">
+        <span class="text-slate-500 text-sm">
+          <b class="text-slate-900 font-medium">{{ username }}</b>
+          / {{ created }}
         </span>
 
         <p class="text-slate-600 mt-2 break-all">{{ data }}</p>
       </div>
-      <div class="py-3 px-1 flex items-center text-slate-700 text-sm gap-x-4">
+      <div class="flex items-center text-slate-700 text-sm gap-x-4 py-2">
         <div
-          class="flex items-center cursor-pointer transition-colors"
+          class="flex items-center cursor-pointer transition ease-in-out active:scale-90 hover:bg-gray-100 py-2 px-2 rounded-lg"
           @click="handleReaction"
         >
           <HeartIcon class="w-5 h-5 mr-2" /> {{ loved }} likes
         </div>
         <div
-          class="flex items-center cursor-pointer transition-colors"
+          class="flex items-center cursor-pointer transition ease-in-out active:scale-90 hover:bg-gray-100 py-2 px-2 rounded-lg"
           @click="onReply"
         >
           <ChatBubbleLeftEllipsisIcon class="w-5 h-5 mr-2" />
-          reply
+          Reply
         </div>
       </div>
     </div>

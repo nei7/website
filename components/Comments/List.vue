@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { useCommentStore } from "~/stores/comments";
-import { storeToRefs } from "pinia";
+import { Comment as CommentType, useCommentStore } from "~/stores/comments";
 import Comment from "./Comment.vue";
 
-const store = useCommentStore();
+defineProps<{ comments: CommentType[] | undefined }>();
 
-const { commentTreeList } = storeToRefs(store);
+const { getChildComments } = useCommentStore();
 </script>
 
 <template>
@@ -16,7 +15,7 @@ const { commentTreeList } = storeToRefs(store);
     leave-from-class="opacity-0 translate-y-3"
     tag="div"
   >
-    <div v-for="{ comment, children } in commentTreeList" :key="comment.id">
+    <template v-for="comment in comments" :key="comment.id" v-if="comments">
       <Comment
         class="mt-10"
         :id="comment.id"
@@ -28,17 +27,10 @@ const { commentTreeList } = storeToRefs(store);
         :loved="comment.loved"
       ></Comment>
 
-      <Comment
-        v-for="childComment in children"
-        class="mt-10 ml-10"
-        :id="childComment.id"
-        :username="childComment.username"
-        :avatar_url="childComment.avatar_url"
-        :data="childComment.data"
-        :created_at="childComment.created_at"
-        :profile_url="childComment.profile_url"
-        :loved="childComment.loved"
-      ></Comment>
-    </div>
+      <CommentsList
+        :comments="getChildComments(comment.id)"
+        class="ml-10"
+      ></CommentsList>
+    </template>
   </TransitionGroup>
 </template>
