@@ -17,11 +17,17 @@
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/projects">Projects</nuxt-link>
       </li>
-      <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
-        <nuxt-link to="/signout">Log out</nuxt-link>
+      <li
+        class="text-slate-600 sm:text-lg py-3 hover:text-slate-800"
+        v-if="user"
+      >
+        <nuxt-link to="/logout">Log out</nuxt-link>
+      </li>
+      <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800" v-else>
+        <nuxt-link to="/enter">Log in</nuxt-link>
       </li>
     </ul>
-    <ul class="justify-self-end pr-8 sm:p-0 text-right sm:text-left">
+    <ul class="pr-8 sm:p-0 text-right sm:text-left">
       <li class="font-medium text-lg text-slate-900 mb-4">Contact</li>
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <a
@@ -52,3 +58,7 @@
     </ul>
   </div>
 </template>
+
+<script setup lang="ts">
+const user = useSupabaseUser();
+</script>

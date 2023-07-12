@@ -6,6 +6,7 @@
       :placeholder="placeholder"
       :class="inputClass"
       class="relative rounded-lg block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 placeholder-gray-400 text-gray-900"
+      :type="type"
     />
     <span
       v-if="icon"

@@ -22,7 +22,8 @@ const sizes = {
 
 const buttonClasses = classNames(
   sizes[props.size || "md"],
-  props.color || "bg-indigo-600 text-white hover:bg-indigo-500"
+  props.color ||
+    "bg-indigo-600 text-white hover:bg-indigo-500 disabled:bg-indigo-400"
 );
 </script>
 

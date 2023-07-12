@@ -20,7 +20,9 @@ const { data: blocks, error } = await useCachedFetch<{
 
 useCustomHead(post.value?.title, post.value?.description);
 
-const relatedPosts = computed(() => data.value.posts.slice(0, 3));
+const relatedPosts = computed(() =>
+  data.value.posts.slice(0, 3).filter(({ id }) => id !== post.value.id)
+);
 const readingTime = computed(() =>
   blocks.value.results ? useReadingTime(blocks.value.results) : 0
 );
