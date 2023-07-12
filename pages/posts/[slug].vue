@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { useReadingTime } from "~/composables/utils";
+
 import NotFound from "~/components/NotFound.vue";
 import { useCommentStore } from "~/stores/comments";
 
@@ -83,4 +84,6 @@ const commentsCount = computed(() => $state.rootComments.length);
   <NotFound v-else-if="error"> </NotFound>
 
   <Footer class="max-w-6xl mx-auto my-20"></Footer>
+
+  <AuthDialog></AuthDialog>
 </template>

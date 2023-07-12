@@ -2,9 +2,7 @@
 import { useCommentStore } from "~/stores/comments";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { useCommentReply } from "~/composables/comment";
-
-const supabase = useSupabaseClient();
-const user = useSupabaseUser();
+import useAuthDialog from "~/composables/useAuthDialog";
 
 const commentFormRef = ref<HTMLDivElement>();
 
@@ -14,6 +12,7 @@ const commentText = ref("");
 const { handleAddComment } = useCommentStore();
 
 const { commentId, commentUsername } = useCommentReply();
+
 watch(commentId, (data) => {
   if (data !== null)
     commentFormRef.value?.scrollIntoView({
@@ -23,16 +22,11 @@ watch(commentId, (data) => {
     });
 });
 
-const handleSignIn = () => {
-  if (!user.value) {
-    supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-  }
-};
+const user = useSupabaseUser();
 
 const onClick = async () => {
-  await handleAddComment(commentText.value, commentId.value);
+  if (!user.value) return;
+  await handleAddComment(commentText.value, user.value?.id, commentId.value);
   commentText.value = "";
 };
 
@@ -40,6 +34,8 @@ const handleDismissReply = () => {
   commentId.value = null;
   commentUsername.value = null;
 };
+
+const { openOnUnlogged } = useAuthDialog();
 </script>
 
 <template>
@@ -48,7 +44,7 @@ const handleDismissReply = () => {
       v-model="commentText"
       placeholder="Leave a comment..."
       @focus="isCommenting = true"
-      @click="handleSignIn"
+      @click.prevent="openOnUnlogged"
     ></Textarea>
 
     <div class="flex gap-x-5 items-center mt-5">

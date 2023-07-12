@@ -10,6 +10,7 @@ export interface Comment {
   post_id: string;
   profile_url: string;
   created_at: string;
+  user_id: string;
 }
 
 type ReplyComment = Omit<Comment, "reply_of"> & { reply_of: number };
@@ -62,13 +63,12 @@ export const useCommentStore = defineStore("comments", {
         }
       });
     },
-    async handleDeleteComment(id: number) {
-      await $fetch("/api/post/comments", {
-        method: "DELETE",
-      });
-    },
 
-    async handleAddComment(text: string, replyOf: null | number) {
+    async handleAddComment(
+      text: string,
+      userId: string,
+      replyOf: null | number
+    ) {
       try {
         const { data } = await $fetch<{ data: Comment[] }>(
           "/api/post/comments",
@@ -77,6 +77,7 @@ export const useCommentStore = defineStore("comments", {
             body: {
               text: text,
               postId: this.postId,
+              userId,
               replyOf,
             },
           }
@@ -92,5 +93,24 @@ export const useCommentStore = defineStore("comments", {
       } finally {
       }
     },
+
+    async handleDeleteComment(commentId: number, replyOf: number | null) {
+      await $fetch(`/api/post/comments?postId=${commentId}`, {
+        method: "DELETE",
+      });
+
+      if (replyOf === null) removeCommentById(commentId, this.rootComments);
+      else {
+        const comments = this.childComments.get(replyOf);
+        if (comments) removeCommentById(commentId, comments);
+      }
+    },
   },
 });
+
+function removeCommentById(id: number, comments: Comment[]) {
+  return comments.splice(
+    comments.findIndex((comment) => comment.id === id),
+    1
+  );
+}

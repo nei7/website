@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useAuthDialog from "~/composables/useAuthDialog";
+
 const { slug } = defineProps<{
   slug: string;
 }>();
@@ -13,10 +15,12 @@ const {
   handleDecrementSkull,
   handleIncrementSkull,
 } = usePostReactions(slug);
+
+const { openOnUnlogged } = useAuthDialog();
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex gap-4" @click.prevent="openOnUnlogged">
     <PostReaction
       :incrementFn="handleIncrementThumbup"
       :decrementFn="handleDecrementThumbup"

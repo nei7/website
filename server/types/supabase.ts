@@ -9,6 +9,7 @@ export interface Database {
           data: string;
           avatar: string;
           loved: number;
+          user_id: string;
         };
         Insert: {
           id: number;
@@ -17,6 +18,7 @@ export interface Database {
           data: string;
           avatar: string;
           loved: number;
+          user_id: string;
         };
       };
 

@@ -2,6 +2,7 @@
 import {
   HeartIcon,
   ChatBubbleLeftEllipsisIcon,
+  TrashIcon,
 } from "@heroicons/vue/24/outline";
 import { useCommentReply } from "~/composables/comment";
 import { useCommentStore } from "~/stores/comments";
@@ -14,6 +15,8 @@ const props = defineProps<{
   created_at: string;
   profile_url: string;
   loved: number;
+  deletable: boolean;
+  replyOf: null | number;
 }>();
 
 const loved = ref(props.loved);
@@ -21,7 +24,7 @@ const loved = ref(props.loved);
 const created = computed(() => yyyymmdd(new Date(props.created_at)));
 
 const { commentUsername, commentId } = useCommentReply();
-const {} = useCommentStore();
+const { handleDeleteComment } = useCommentStore();
 
 const onReply = () => {
   commentId.value = props.id;
@@ -34,8 +37,6 @@ const handleReaction = async () => {
   });
   loved.value++;
 };
-
-const handleDelete = async () => {};
 </script>
 
 <template>
@@ -58,14 +59,23 @@ const handleDelete = async () => {};
           class="flex items-center cursor-pointer transition ease-in-out active:scale-90 hover:bg-gray-100 py-2 px-2 rounded-lg"
           @click="handleReaction"
         >
-          <HeartIcon class="w-5 h-5 mr-2" /> {{ loved }} likes
+          <HeartIcon class="w-4 h-4 mr-2" /> {{ loved }} likes
         </div>
         <div
           class="flex items-center cursor-pointer transition ease-in-out active:scale-90 hover:bg-gray-100 py-2 px-2 rounded-lg"
           @click="onReply"
         >
-          <ChatBubbleLeftEllipsisIcon class="w-5 h-5 mr-2" />
+          <ChatBubbleLeftEllipsisIcon class="w-4 h-4 mr-2" />
           Reply
+        </div>
+
+        <div
+          v-if="deletable"
+          class="flex items-center cursor-pointer transition ease-in-out active:scale-90 hover:bg-gray-100 py-2 px-2 rounded-lg"
+          @click="handleDeleteComment(id, replyOf)"
+        >
+          <TrashIcon class="w-4 h-4 mr-2" />
+          Delete
         </div>
       </div>
     </div>

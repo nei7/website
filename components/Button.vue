@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
-  transparent?: boolean;
   size?: keyof typeof sizes;
   disabled?: boolean;
+  color?: string;
 }>();
 
 const attrs = useAttrs();
@@ -22,9 +22,7 @@ const sizes = {
 
 const buttonClasses = classNames(
   sizes[props.size || "md"],
-  props.transparent
-    ? ["text-slate-800"]
-    : ["bg-indigo-600 text-white  hover:bg-indigo-500"]
+  props.color || "bg-indigo-600 text-white hover:bg-indigo-500"
 );
 </script>
 
@@ -32,7 +30,7 @@ const buttonClasses = classNames(
   <button
     @click="onClick"
     :class="buttonClasses"
-    class="rounded-3xl appearance-none justify-center outline-offset-2 transition duration-300 active:transition-none disabled:bg-indigo-400"
+    class="rounded-3xl appearance-none justify-center outline-offset-2 transition duration-300 active:transition-none items-center inline-flex"
     :disabled="disabled"
   >
     <slot></slot>

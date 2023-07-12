@@ -5,7 +5,7 @@
       @input="onInput"
       :placeholder="placeholder"
       :class="inputClass"
-      class="relative rounded-xl block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 placeholder-gray-400 text-gray-900"
+      class="relative rounded-lg block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 placeholder-gray-400 text-gray-900"
     />
     <span
       v-if="icon"
@@ -36,7 +36,7 @@ const props = withDefaults(
 
 const sizes = {
   xl: "text-xl py-3 px-5",
-  lg: "text-lg py-2 px-4",
+  lg: "py-2 px-4",
   md: "text-base py-1.5 px-3",
   sm: "text-sm py-1.5 px-2.5",
 };
@@ -54,6 +54,6 @@ const inputClass = classNames(
   props.icon ? "ps-10" : "",
   props.transparent
     ? ""
-    : "bg-gray-50 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary-500 shadow-sm"
+    : "ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
 );
 </script>

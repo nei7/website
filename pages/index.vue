@@ -16,10 +16,6 @@ const age = calculateAge().toFixed(3);
 const { data } = await usePosts();
 
 const posts = computed(() => data.value.posts.slice(0, 3));
-
-const { $useModal } = useNuxtApp();
-
-if (process.client) console.log($useModal(""));
 </script>
 
 <template>
@@ -52,7 +48,11 @@ if (process.client) console.log($useModal(""));
           Get in touch
           <ArrowRightIcon class="w-4 h-4 ml-2"></ArrowRightIcon>
         </Button>
-        <Button class="flex items-center mx-auto" transparent href="/posts">
+        <Button
+          class="flex items-center mx-auto"
+          href="/posts"
+          color="bg-transparent"
+        >
           Read my blog
           <ArrowRightIcon class="w-4 h-4 ml-2"></ArrowRightIcon>
         </Button>
@@ -72,18 +72,7 @@ if (process.client) console.log($useModal(""));
         <Post v-for="post in posts" :post="post" />
       </div>
     </section>
-    <!-- <section class="mt-32 mb-20">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-       
-        <Card>
-          <h3 class="font-bold text-2xl flex items-center gap-x-3">
-            <img src="../assets/icons/vscode.svg" class="w-5 h-5" />
-            Visual studio code
-          </h3>
-          <p class="mt-4">Offline</p>
-        </Card>
-      </div>
-    </section> -->
+
     <Footer class="my-32"></Footer>
     <GradientBottom />
   </main>

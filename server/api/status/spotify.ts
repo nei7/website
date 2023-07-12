@@ -22,16 +22,21 @@ const getAccessToken = () => {
 };
 
 const getNowPlaying = async () => {
-  const { access_token } = await getAccessToken();
+  try {
+    const { access_token } = await getAccessToken();
 
-  return await $fetch(
-    "https://api.spotify.com/v1/me/player/currently-playing",
-    {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    }
-  );
+    return await $fetch(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+  } catch (err) {
+    console.error(err);
+    return;
+  }
 };
 
 export default defineEventHandler((event) => getNowPlaying());

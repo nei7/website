@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
       post_id: body.postId,
       profile_url: `https://github.com/${preferred_username}`,
       reply_of: body.replyOf,
+      user_id: body.userId,
     })
     .select();
 });
