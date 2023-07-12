@@ -15,7 +15,7 @@ const postLink = `/posts/${props.post.slug}`;
       :src="post.coverImage"
       :alt="post.description"
     />
-    <h3 class="text-2xl font-bold mt-5">{{ post.title }}</h3>
-    <p class="mt-3 text-slate-600">{{ post.published }}</p>
+    <h3 class="text-xl sm:text-2xl font-bold mt-5">{{ post.title }}</h3>
+    <p class="mt-3 sm:text-base text-sm text-slate-600">{{ post.published }}</p>
   </RouterLink>
 </template>

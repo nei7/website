@@ -36,6 +36,11 @@ const handleDismissReply = () => {
 };
 
 const { openOnUnlogged } = useAuthDialog();
+
+const onFocus = (e: FocusEvent) => {
+  if (user.value) isCommenting.value = true;
+  else (e.target as HTMLInputElement).blur();
+};
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const { openOnUnlogged } = useAuthDialog();
     <Textarea
       v-model="commentText"
       placeholder="Leave a comment..."
-      @focus="isCommenting = true"
+      @focus="onFocus"
       @click.prevent="openOnUnlogged"
     ></Textarea>
 

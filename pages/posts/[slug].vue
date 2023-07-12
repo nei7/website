@@ -33,7 +33,7 @@ const commentsCount = computed(() => $state.rootComments.length);
 </script>
 <template>
   <div
-    class="isolate mx-auto mt-48 rounded-2xl py-20 max-w-6xl px-5 sm:px-20 xs:px-0 bg-white"
+    class="isolate mx-auto mt-24 sm:mt-48 rounded-2xl py-20 max-w-6xl px-5 sm:px-20 xs:px-0 bg-white"
     v-if="data && post"
   >
     <article>
@@ -83,7 +83,7 @@ const commentsCount = computed(() => $state.rootComments.length);
 
   <NotFound v-else-if="error"> </NotFound>
 
-  <Footer class="max-w-6xl mx-auto my-20"></Footer>
+  <Footer class="max-w-6xl mx-auto my-20 px-4"></Footer>
 
   <AuthDialog></AuthDialog>
 </template>

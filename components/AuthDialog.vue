@@ -5,8 +5,8 @@ import useAuthDialog from "~/composables/useAuthDialog";
 const { setIsOpen, isOpen } = useAuthDialog();
 </script>
 <template>
-  <Dialog @close="setIsOpen" :open="isOpen" class="px-6 pb-8">
-    <div class="flex items-center justify-between">
+  <Dialog @close="setIsOpen" :open="isOpen" class="sm:px-6 pb-8 px-2">
+    <div class="flex items-center justify-between mb-5">
       <DialogTitle>Log in </DialogTitle>
       <button
         @click="setIsOpen(false)"

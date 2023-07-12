@@ -21,7 +21,7 @@ const posts = computed(() => data.value.posts.slice(0, 3));
 <template>
   <Cursor />
   <main
-    class="relative isolate mx-auto pt-20 max-w-6xl px-4 xs:px-0"
+    class="relative isolate mx-auto sm:pt-20 max-w-6xl px-4 xs:px-0"
     ref="scrollRef"
   >
     <GradientTop />
@@ -30,7 +30,7 @@ const posts = computed(() => data.value.posts.slice(0, 3));
         <h1 class="font-bold text-4xl sm:text-6xl">Hi. I'm franek 👋</h1>
 
         <p
-          class="text-xl leading-9 text-justify sm:text-left mt-10 text-slate-600"
+          class="leading-8 sm:leading-10 sm:text-xl text-justify sm:text-left mt-10 text-slate-600"
         >
           I'm high school student in Poland. I'm
           <span class="underline decoration-wavy font-semibold">
@@ -61,7 +61,7 @@ const posts = computed(() => data.value.posts.slice(0, 3));
 
     <section class="mt-44">
       <h1 class="text-4xl font-bold">Blog posts 📝</h1>
-      <p class="text-xl text-slate-600 mt-7">
+      <p class="sm:text-xl text-slate-600 mt-7">
         I love to share my knowledge through writing. Check some of my new
         posts:
       </p>

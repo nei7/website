@@ -16,8 +16,8 @@ const onClick = () => {
 
 const sizes = {
   lg: "",
-  md: "py-3 px-8 font-medium",
-  sm: "text-sm py-3 px-6 font-medium",
+  md: "text-xs sm:text-base py-3 px-8 font-medium",
+  sm: "text-xs sm:text-sm py-3 px-6 font-medium",
 };
 
 const buttonClasses = classNames(

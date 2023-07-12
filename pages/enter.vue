@@ -28,7 +28,7 @@ const handleSignIn = (provider: Provider | "email") => {
 
 <template>
   <div
-    class="bg-white w-full max-w-2xl mx-auto mt-48 sn:px-20 sm:p-10 p-6 py-16 rounded-xl pb-14"
+    class="bg-white w-full max-w-2xl mx-auto mt-32 sm:mt-48 sn:px-20 sm:p-10 p-6 py-16 rounded-xl pb-14"
   >
     <div class="mb-10 text-center">
       <h1 class="font-bold text-4xl">Welcome</h1>

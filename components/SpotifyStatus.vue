@@ -33,7 +33,7 @@ onMounted(async () => {
     :target="currentSong.is_playing ? '_blank' : ''"
   >
     <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
-      <h3 class="font-bold text-2xl flex items-center gap-x-3">
+      <h3 class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-5 h-5"
@@ -47,10 +47,13 @@ onMounted(async () => {
         {{ currentSong.is_playing ? "On repeat" : "Spotify" }}
       </h3>
 
-      <p class="mt-4 text-slate-800" v-if="currentSong.is_playing">
+      <p
+        class="mt-4 text-slate-800 sm:text-base text-sm"
+        v-if="currentSong.is_playing"
+      >
         {{ currentSong.item.name }} by {{ currentSong.item.artists[0].name }}
       </p>
-      <p class="mt-4 text-slate-800" v-else>Not playing</p>
+      <p class="mt-4 text-slate-800 sm:text-base text-sm" v-else>Not playing</p>
     </Card></a
   >
 </template>

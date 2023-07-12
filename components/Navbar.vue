@@ -69,7 +69,7 @@ useEventListener("scroll", () => {
     ></div>
     <nav class="flex relative z-50 justify-center items-center">
       <ul
-        class="gap-x-3 sm:gap-x-5 flex m-0 font-medium px-3 py-2 rounded-3xl list-none text-slate-800 text-sm sm:text-base"
+        class="gap-x-3 sm:gap-x-5 flex m-0 font-medium px-3 py-2 rounded-3xl list-none text-slate-800 text-xs sm:text-base"
         :class="toggleClass ? ['bg-gray-100/50 backdrop-blur-lg border'] : []"
       >
         <li
@@ -87,7 +87,7 @@ useEventListener("scroll", () => {
 
             <template v-if="item.path === '/'">
               <span
-                class="rounded-md px-1.5 border-gray-300 border-2 text-xs sm:text-sm ml-2"
+                class="rounded-md px-1.5 border-gray-300 border-2 hidden text-xs sm:text-sm ml-2"
               >
                 /
               </span>

@@ -37,12 +37,12 @@ useCustomHead(
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto pt-20 px-5">
+  <div class="w-full max-w-7xl mx-auto sm:pt-20">
     <section class="mt-32">
       <div>
         <h1 class="font-bold text-4xl sm:text-6xl">📊 My weekly stats</h1>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 mt-10">
         <StatsWakatime />
         <StatsSmartWatch />
       </div>

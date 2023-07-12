@@ -18,8 +18,8 @@ defineProps<{
         <slot name="icon"></slot>
       </span>
       <div class="min-w-0 flex-1 px-4">
-        <h1 class="text-slate-700 text-xl font-bold">{{ title }}</h1>
-        <p class="flex items-center mt-1 text-slate-600">
+        <h1 class="text-slate-700 sm:text-xl font-bold">{{ title }}</h1>
+        <p class="flex items-center mt-1 text-slate-600 sm:text-base text-sm">
           {{ description }}
         </p>
       </div>

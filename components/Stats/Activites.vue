@@ -48,7 +48,7 @@ const options: ChartOptions = {
       :type="type"
       :data="data"
       :options="options"
-      class="max-h-64"
+      class="w-full max-h-64"
     ></Chart>
   </Card>
 </template>
