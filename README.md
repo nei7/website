@@ -1,6 +1,12 @@
-# Nuxt 3 Minimal Starter
+# Website 📚
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> My personal website and blog.
+
+- Styling: [Tailwind CSS](https://tailwindcss.com/)
+- Framework: [Nuxt 3](https://nuxt.com/)
+- Content management: [Notion](https://www.notion.so/)
+- Images: [Cloudinary](https://cloudinary.com/)
+- Database, Auth: [Supabase](https://supabase.com/)
 
 ## Setup
 
@@ -59,5 +65,3 @@ pnpm run preview
 # yarn
 yarn preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
