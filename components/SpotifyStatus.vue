@@ -21,19 +21,18 @@ const currentSong = ref<CurrentSongResponse>({
 onMounted(async () => {
   currentSong.value = await $fetch<CurrentSongResponse>("/api/status/spotify");
 });
+
+const onClick = () => {
+  if (currentSong.value.is_playing) {
+    window.open(currentSong.value.item.external_urls.spotify);
+  }
+};
 </script>
 
 <template>
-  <a
-    :href="
-      currentSong.is_playing
-        ? currentSong.item.external_urls.spotify
-        : 'javascript:void(0)'
-    "
-    :target="currentSong.is_playing ? '_blank' : ''"
-  >
+  <div @click="onClick">
     <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
-      <h3 class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
+      <div class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-5 h-5"
@@ -45,7 +44,7 @@ onMounted(async () => {
           ></path>
         </svg>
         {{ currentSong.is_playing ? "On repeat" : "Spotify" }}
-      </h3>
+      </div>
 
       <p
         class="mt-4 text-slate-800 sm:text-base text-sm"
@@ -54,6 +53,6 @@ onMounted(async () => {
         {{ currentSong.item.name }} by {{ currentSong.item.artists[0].name }}
       </p>
       <p class="mt-4 text-slate-800 sm:text-base text-sm" v-else>Not playing</p>
-    </Card></a
-  >
+    </Card>
+  </div>
 </template>

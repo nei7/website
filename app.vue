@@ -28,6 +28,7 @@ useHead({
   htmlAttrs: {
     lang: "en",
   },
+
   link: [
     {
       rel: "icon",

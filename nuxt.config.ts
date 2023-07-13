@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   typescript: {
     strict: true,
@@ -16,6 +17,7 @@ export default defineNuxtConfig({
       baseURL: "https://res.cloudinary.com/neiblog/image/upload/v1687877980",
     },
   },
+
   googleFonts: {
     families: {
       "Work Sans": {
