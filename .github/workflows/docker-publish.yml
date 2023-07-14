@@ -1,0 +1,55 @@
+name: Docker Image Publish
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log into registry Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: nei7/blog
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          secrets: |
+            "NOTION_API_TOKEN=${{ secrets.NOTION_API_TOKEN }}"
+
+            "NOTION_POST_DATABASE=${{ secrets.NOTION_POST_DATABASE }}"
+
+            "SUPABASE_URL=${{ secrets.SUPABASE_URL }}"
+            "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}"
+
+            "SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}"
+            "SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}"
+            "SPOTIFY_REFRESH_TOKEN=${{ secrets.SPOTIFY_REFRESH_TOKEN }}"
+
+            "CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}"
+
+            "WAKATIME_TOKEN=${{ secrets.WAKATIME_TOKEN }}"
+            "WAKATIME_REFRESH_TOKEN=${{ secrets.WAKATIME_REFRESH_TOKEN }}"
+            "WAKATIME_CLIENT_ID=${{ secrets.WAKATIME_CLIENT_ID }}"
+            "WAKATIME_CLIENT_SECRET=${{ secrets.WAKATIME_CLIENT_SECRET }}"
+
+            "HUAMI_TOKEN=${{ secrets.HUAMI_TOKEN }}"
