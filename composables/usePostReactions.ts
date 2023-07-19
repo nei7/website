@@ -18,7 +18,7 @@ export default function usePostReactions(slug: string) {
 
   onMounted(async () => {
     const { data } = await $fetch<{ data: Reactions }>(
-      `/api/reactions/${slug}`
+      `/api/post/reactions/${slug}`
     );
     Object.assign(reactions, data);
   });
@@ -71,15 +71,24 @@ export default function usePostReactions(slug: string) {
     updateReaction("loved");
   };
 
-  const apiRequest = (reaction: string, type: "decrement" | "increment") => {
-    return $fetch(`/api/reactions/${slug}`, {
-      method: "POST",
+  const apiRequest = async (
+    reaction: string,
+    type: "decrement" | "increment"
+  ) => {
+    try {
+      return $fetch(`/api/post/reactions/${slug}`, {
+        method: "POST",
 
-      body: {
-        reaction,
-        type,
-      },
-    });
+        body: {
+          reaction,
+          type,
+        },
+      });
+    } catch (err) {
+      useToast({
+        text: (err as Error).message,
+      });
+    }
   };
 
   const updateReaction = (reaction: "loved" | "liked" | "hated") => {

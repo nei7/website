@@ -4,12 +4,12 @@ import Editors from "./Editors.vue";
 import Languages from "./Languages.vue";
 
 const { data: summaries } = useCachedFetch<Summary[]>(
-  "/api/wakatime/summaries"
+  "/api/stats/wakatime/summaries"
 );
 
 const { data: stats } = useCachedFetch<{
   data: { editors: Datapoint[]; languages: Datapoint[] };
-}>("/api/wakatime/stats");
+}>("/api/stats/wakatime");
 </script>
 
 <template>

@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
   const supabase = serverSupabaseClient<Database>(event);
   const user = await supabase.auth.getUser();
 
-  console.log(user);
   if (!user.data.user) return;
 
   const { avatar_url, picture, preferred_username } =

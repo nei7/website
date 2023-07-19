@@ -4,7 +4,6 @@ import {
   ChatBubbleLeftEllipsisIcon,
   TrashIcon,
 } from "@heroicons/vue/24/outline";
-import { useCommentReply } from "~/composables/comment";
 import { useCommentStore } from "~/stores/comments";
 
 const props = defineProps<{
@@ -23,12 +22,12 @@ const loved = ref(props.loved);
 
 const created = computed(() => yyyymmdd(new Date(props.created_at)));
 
-const { commentUsername, commentId } = useCommentReply();
-const { handleDeleteComment } = useCommentStore();
+const { handleDeleteComment, $patch } = useCommentStore();
 
 const onReply = () => {
-  commentId.value = props.id;
-  commentUsername.value = props.username;
+  $patch({
+    replyComment: props,
+  });
 };
 
 const handleReaction = async () => {

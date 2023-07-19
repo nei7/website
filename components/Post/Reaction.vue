@@ -7,10 +7,19 @@ const props = defineProps<{
   isActive: boolean;
 }>();
 
+const user = useSupabaseUser();
+
 const onClick = useDebounceFn(
-  () => (props.isActive ? props.decrementFn() : props.incrementFn()),
+  () =>
+    user.value
+      ? props.isActive
+        ? props.decrementFn()
+        : props.incrementFn()
+      : setIsOpen(!user.value),
   300
 );
+
+const { setIsOpen } = useAuthDialog();
 </script>
 
 <template>

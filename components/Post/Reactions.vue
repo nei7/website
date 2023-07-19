@@ -15,12 +15,10 @@ const {
   handleDecrementSkull,
   handleIncrementSkull,
 } = usePostReactions(slug);
-
-const { openOnUnlogged } = useAuthDialog();
 </script>
 
 <template>
-  <div class="flex gap-4" @click.prevent="openOnUnlogged">
+  <div class="flex gap-4">
     <PostReaction
       :incrementFn="handleIncrementThumbup"
       :decrementFn="handleDecrementThumbup"

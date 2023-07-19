@@ -1,6 +1,6 @@
 import { object, mixed, ValidationError } from "yup";
 import { serverSupabaseClient } from "#supabase/server";
-import { Database } from "../../types/supabase";
+import { Database } from "../../../types/supabase";
 
 const reactionSchema = object({
   reaction: mixed<"thumbup" | "skull" | "heart">()
@@ -55,14 +55,15 @@ export default defineEventHandler(async (event) => {
       return supabase.rpc("get_reactions", { postid: postId });
   } catch (err) {
     if (err instanceof ValidationError) {
-      setResponseStatus(event, 400);
-
-      return {
-        error: err.message,
-      };
+      return createError({
+        statusCode: 400,
+        message: err.message,
+      });
     }
 
-    setResponseStatus(event, 500);
-    return { error: (err as any)?.message || err };
+    return createError({
+      statusCode: 500,
+      message: (err as Error).message,
+    });
   }
 });

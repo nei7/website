@@ -20,28 +20,22 @@ export default defineEventHandler(async (event) => {
   const comment = await supabase
     .from("comments")
     .select("*")
-    .eq("id", query.postId)
+    .eq("id", query.commentId)
     .limit(1)
     .single();
 
   if (!comment.data) {
-    return makeResponse(
-      event,
-      {
-        error: "Comment not found",
-      },
-      { code: 404 }
-    );
+    return createError({
+      statusCode: 404,
+      message: "Comment not found",
+    });
   }
 
   if (comment.data.user_id !== user.id)
-    return makeResponse(
-      event,
-      {
-        error: "Forbidden",
-      },
-      { code: 403 }
-    );
+    return createError({
+      statusCode: 403,
+      message: "Forbidden",
+    });
 
   return supabase.from("comments").delete().eq("id", query.postId);
 });

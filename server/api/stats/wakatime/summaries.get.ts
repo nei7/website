@@ -1,6 +1,6 @@
-import { Summary } from "../../../types/wakatime";
-import { getToken } from "../../utils/wakatime";
-import { yyyymmdd } from "../../../composables/utils";
+import { Summary } from "../../../../types/wakatime";
+import { getToken } from "../../../utils/wakatime";
+import { yyyymmdd } from "../../../../composables/utils";
 
 export default cachedEventHandler(async () => {
   const { access_token } = await getToken();

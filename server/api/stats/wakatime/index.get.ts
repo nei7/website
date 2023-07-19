@@ -1,4 +1,4 @@
-import { getToken } from "../../utils/wakatime";
+import { getToken } from "../../../utils/wakatime";
 
 export default cachedEventHandler(async (event) => {
   const { access_token } = await getToken();

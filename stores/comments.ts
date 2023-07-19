@@ -23,13 +23,15 @@ export interface CommentTreeNode {
 export const useCommentStore = defineStore("comments", {
   state(): {
     rootComments: Comment[];
-    postId: string;
     childComments: Map<number, Comment[]>;
+    postId: string;
+    replyComment: Comment | null;
   } {
     return {
       rootComments: [],
       postId: "",
       childComments: new Map(),
+      replyComment: null,
     };
   },
   getters: {
@@ -64,11 +66,7 @@ export const useCommentStore = defineStore("comments", {
       });
     },
 
-    async handleAddComment(
-      text: string,
-      userId: string,
-      replyOf: null | number
-    ) {
+    async handleAddComment(text: string, userId: string) {
       try {
         const { data } = await $fetch<{ data: Comment[] }>(
           "/api/post/comments",
@@ -78,16 +76,16 @@ export const useCommentStore = defineStore("comments", {
               text: text,
               postId: this.postId,
               userId,
-              replyOf,
+              replyOf: this.replyComment?.id,
             },
           }
         );
 
-        if (replyOf === null) this.rootComments.push(...data);
+        if (this.replyComment === null) this.rootComments.push(...data);
         else {
-          if (this.childComments.has(replyOf))
-            this.childComments.get(replyOf)?.push(...data);
-          else this.childComments.set(replyOf, data);
+          if (this.childComments.has(this.replyComment.id))
+            this.childComments.get(this.replyComment.id)?.push(...data);
+          else this.childComments.set(this.replyComment.id, data);
         }
       } catch (err) {
       } finally {
@@ -95,15 +93,17 @@ export const useCommentStore = defineStore("comments", {
     },
 
     async handleDeleteComment(commentId: number, replyOf: number | null) {
-      await $fetch(`/api/post/comments?postId=${commentId}`, {
-        method: "DELETE",
-      });
+      try {
+        await $fetch(`/api/post/comments?d=${commentId}`, {
+          method: "DELETE",
+        });
 
-      if (replyOf === null) removeCommentById(commentId, this.rootComments);
-      else {
-        const comments = this.childComments.get(replyOf);
-        if (comments) removeCommentById(commentId, comments);
-      }
+        if (replyOf === null) removeCommentById(commentId, this.rootComments);
+        else {
+          const comments = this.childComments.get(replyOf);
+          if (comments) removeCommentById(commentId, comments);
+        }
+      } catch (err) {}
     },
   },
 });

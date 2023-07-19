@@ -2,7 +2,7 @@
 import { SmartwatchData } from "~/types/huami";
 
 const { data: activites } =
-  useCachedFetch<SmartwatchData[]>("/api/huami/stats");
+  useCachedFetch<SmartwatchData[]>("/api/stats/huami");
 </script>
 
 <template>

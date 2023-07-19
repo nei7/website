@@ -1,4 +1,4 @@
-// module.exports = {
-//   extends: ["@nuxtjs/eslint-config-typescript"],
-//   rules: {},
-// };
+module.exports = {
+  extends: ["@nuxtjs/eslint-config-typescript"],
+  rules: {},
+};
