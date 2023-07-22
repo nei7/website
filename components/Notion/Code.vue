@@ -5,11 +5,18 @@ import "prism-themes/themes/prism-coldark-dark.css";
 
 const { code } = defineProps<{ code: CodeBlockObjectResponse }>();
 
-const html = prism.highlight(
-  code.code.rich_text[0].plain_text,
-  prism.languages[code.code.language],
-  code.code.language
-);
+function highlightCode() {
+  const grammar = prism.languages[code.code.language];
+  if (grammar)
+    return prism.highlight(
+      code.code.rich_text[0].plain_text,
+      grammar,
+      code.code.language
+    );
+  else return prism.util.encode(code.code.rich_text[0].plain_text);
+}
+
+const html = highlightCode();
 </script>
 
 <template>

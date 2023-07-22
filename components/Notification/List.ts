@@ -3,12 +3,13 @@ import Notification from "./index";
 import { eventBus, Props } from "~/composables/useToast";
 
 export default defineComponent({
+  name: "Notifications",
   setup() {
-    const notifications = ref<Props[]>([]);
+    const notifications = reactive<Props[]>([]);
 
     onMounted(() =>
       eventBus.on("notification", (props) => {
-        notifications.value.push(props);
+        notifications.push(props);
       })
     );
 
@@ -27,19 +28,13 @@ export default defineComponent({
           leaveToClass: "opacity-0 scale-95",
         },
         () =>
-          notifications.value.map((props, id) =>
-            h(
-              Notification,
-              {
-                ...props,
-                id,
-                onClose: (idx: number) => notifications.value.splice(idx, 1),
-                key: id,
-              },
-              {
-                onClose: () => console.log("closed"),
-              }
-            )
+          notifications.map((props, id) =>
+            h(Notification, {
+              ...props,
+              id,
+              onClose: (idx: number) => notifications.splice(idx, 1),
+              key: id,
+            })
           )
       );
   },

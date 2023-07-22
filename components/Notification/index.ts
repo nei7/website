@@ -5,6 +5,7 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 import useTimer from "~/composables/useTimer";
 
 export default defineComponent({
+  name: "Notification",
   props: {
     id: {
       type: Number,
@@ -14,7 +15,7 @@ export default defineComponent({
     timeout: {
       type: Number,
       required: false,
-      default: 4000,
+      default: 1000,
     },
     text: {
       type: String,
@@ -35,14 +36,15 @@ export default defineComponent({
       return { width: `${remainingPercent || 0}%` };
     });
 
-    const onClose = () => emit("close", props.id);
-
     let timer: ReturnType<typeof useTimer> | null = null;
-
+    const onClose = () => {
+      timer?.stop();
+      emit("close", props.id);
+    };
     onMounted(() => {
-      timer = useTimer(() => onClose(), props.timeout);
-
-      const startTime = Date.now();
+      timer = useTimer(() => {
+        onClose();
+      }, props.timeout);
 
       watchEffect(() => {
         if (timer) remaining.value = timer.remaining.value;

@@ -1,51 +1,36 @@
 <script setup lang="ts">
-import { Provider } from "@supabase/supabase-js";
+import { AuthError, Provider } from "@supabase/supabase-js";
 
 useCustomHead(
   "Log in",
   "Log in to get the ability to comment, add reactions and more"
 );
 
-const errorMessage = ref("");
+const error = ref<null | string>(null);
+const alertType = ref<"danger" | "warning" | "info">("danger");
+
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-const email = ref("");
-const password = ref("");
-
-const buttonDisabled = ref(true);
-
 const router = useRouter();
 
-watchEffect(() => {
-  if (email.value.trim().length > 0 && password.value.trim().length > 0) {
-    buttonDisabled.value = false;
-  }
-});
+const onError = (authError: AuthError) => {
+  console.log(authError);
 
-const handleSignIn = async (provider: Provider | "email") => {
+  error.value = authError.message;
+};
+
+const handleSignIn = async (
+  provider: Provider | "email",
+  credentials: { email: string; password: string }
+) => {
   try {
     if (provider === "email") {
-      const { error } = await supabase.auth.signUp({
-        email: email.value,
-        password: password.value,
-      });
+      const { error } = await supabase.auth.signUp(credentials);
+      if (error) return onError(error);
 
-      if (error) {
-        errorMessage.value = error.message;
-        return;
-      }
-
-      const data = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value,
-      });
-
-      if (data.error) {
-        errorMessage.value = data.error.message;
-
-        return;
-      }
+      const data = await supabase.auth.signInWithPassword(credentials);
+      if (data.error) return onError(data.error);
 
       router.push("/");
       return;
@@ -57,18 +42,21 @@ const handleSignIn = async (provider: Provider | "email") => {
       });
     }
   } catch (err) {
-    console.log({ err });
+    if (err instanceof AuthError) onError(err);
   }
+};
+
+const onUpdate = () => {
+  console.log("kd");
 };
 </script>
 
 <template>
   <div class="w-full max-w-2xl mx-auto mt-32 sm:mt-48">
-    <Alert type="danger" v-if="errorMessage">
-      <span class="font-medium">Error</span> {{ errorMessage }}
-    </Alert>
-
-    <div class="bg-white sn:px-20 sm:p-10 p-6 py-16 rounded-xl pb-14">
+    <Form
+      v-slot:default="props"
+      class="bg-white sn:px-20 sm:p-10 p-6 py-16 rounded-xl pb-14"
+    >
       <div class="mb-10 text-center">
         <h1 class="font-bold text-4xl">Welcome</h1>
         <p class="mt-2 text-slate-600">
@@ -79,7 +67,7 @@ const handleSignIn = async (provider: Provider | "email") => {
       <div class="flex flex-col gap-y-6">
         <Button
           size="sm"
-          @click="handleSignIn('github')"
+          @click="handleSignIn('github', props.data)"
           color="text-white bg-gray-700 hover:bg-gray-800 rounded-lg"
         >
           <img
@@ -92,7 +80,7 @@ const handleSignIn = async (provider: Provider | "email") => {
 
         <Button
           size="sm"
-          @click="handleSignIn('discord')"
+          @click="handleSignIn('discord', props.data)"
           color="bg-transparent hover:bg-gray-50 border rounded-lg shadow-sm text-slate-700"
         >
           <img
@@ -110,39 +98,29 @@ const handleSignIn = async (provider: Provider | "email") => {
         <p class="mx-4">Or</p>
       </div>
 
-      <div>
-        <div>
-          <label for="" class="text-slate-800"> Email </label>
-          <Input
-            placeholder=""
-            size="lg"
-            type="email"
-            class="mt-2"
-            v-model="email"
-          />
-        </div>
-
-        <div class="mt-5">
-          <label for="" class="text-slate-800"> Password </label>
-          <Input
-            placeholder=""
-            size="lg"
-            type="password"
-            class="mt-2"
-            v-model="password"
-          />
-        </div>
-
-        <div class="my-10">
-          <Button
-            :disabled="buttonDisabled"
-            size="sm"
-            class="w-full rounded-lg"
-            @click="handleSignIn('email')"
-            >Log in</Button
-          >
-        </div>
+      <div class="mt-5">
+        <label for="email" class="text-slate-800"> Email </label>
+        <Input
+          id="email"
+          placeholder="Enter an email..."
+          size="lg"
+          type="email"
+          class="mt-2"
+          v-model="props.data.email"
+        />
       </div>
-    </div>
+
+      <div class="mt-5">
+        <label for="password" class="text-slate-800"> Password </label>
+        <Input
+          id="password"
+          placeholder="Enter a password..."
+          size="lg"
+          type="password"
+          class="mt-2"
+          v-model="props.data.password"
+        />
+      </div>
+    </Form>
   </div>
 </template>

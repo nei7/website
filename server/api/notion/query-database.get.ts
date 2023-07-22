@@ -3,7 +3,10 @@ import { Client } from "@notionhq/client";
 export default cachedEventHandler(async (event) => {
   const query = getQuery(event as any);
 
-  const notion = new Client({ auth: process.env.NOTION_API_TOKEN });
+  const notion = new Client({
+    auth: process.env.NOTION_API_TOKEN,
+    timeoutMs: 7000,
+  });
 
   const size = query.size?.toString();
   const response = await notion.databases.query({

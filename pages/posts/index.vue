@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await usePosts();
+const { data, error } = await usePosts();
 
 const selectedTag = ref("");
 
@@ -9,6 +9,7 @@ const posts = computed(() => {
       post.tags.find((tag) => tag.name === selectedTag.value)
     );
   }
+  console.log(error);
 
   return data.value.posts;
 });

@@ -17,7 +17,9 @@ export default defineNuxtConfig({
       baseURL: "https://res.cloudinary.com/neiblog/image/upload/v1687877980",
     },
   },
-
+  nitro: {
+    runtimeConfig: {},
+  },
   googleFonts: {
     families: {
       "Work Sans": {
