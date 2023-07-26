@@ -94,7 +94,7 @@ export const useCommentStore = defineStore("comments", {
 
     async handleDeleteComment(commentId: number, replyOf: number | null) {
       try {
-        await $fetch(`/api/post/comments?d=${commentId}`, {
+        await $fetch(`/api/post/comments?id=${commentId}`, {
           method: "DELETE",
         });
 
@@ -103,7 +103,9 @@ export const useCommentStore = defineStore("comments", {
           const comments = this.childComments.get(replyOf);
           if (comments) removeCommentById(commentId, comments);
         }
-      } catch (err) {}
+      } catch (err) {
+        useToast({ title: "Error", text: (err as any).response._data.message });
+      }
     },
   },
 });

@@ -21,7 +21,13 @@ const { data: blocks, error } = await useCachedFetch<{
 useCustomHead(post.value?.title, post.value?.description);
 
 const relatedPosts = computed(() =>
-  data.value.posts.slice(0, 3).filter(({ id }) => id !== post.value.id)
+  data.value.posts
+    .slice(0, 3)
+    .filter(
+      ({ id, tags }) =>
+        id !== post.value.id &&
+        tags.some((tag) => post.value.tags.includes(tag))
+    )
 );
 const readingTime = computed(() =>
   blocks.value.results ? useReadingTime(blocks.value.results) : 0
@@ -60,7 +66,10 @@ const commentsCount = computed(() => $state.rootComments.length);
         <PostReactions :slug="post.slug" class="mt-10"></PostReactions>
       </header>
 
-      <div class="prose prose-slate prose-lg mt-20" style="max-width: 100%">
+      <div
+        class="prose prose-slate prose-base lg:prose-lg mt-20 prose-p:my-2 prose-headings:mt-14 prose-headings:mb-5"
+        style="max-width: 100%"
+      >
         <NotionRender :blocks="blocks.results"></NotionRender>
       </div>
     </article>

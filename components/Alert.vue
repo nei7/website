@@ -5,8 +5,8 @@ const props = defineProps<{
 
 const color = {
   danger: "text-red-800 bg-red-100",
-  warning: "text-blue-800 bg-blue-100",
-  info: "text-yellow-800 text-yellow-100",
+  info: "text-blue-800 bg-blue-100",
+  warning: "text-yellow-800 bg-yellow-100",
 };
 </script>
 

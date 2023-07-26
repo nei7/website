@@ -18,7 +18,18 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    runtimeConfig: {},
+    routeRules: {
+      "/notion/**": {
+        cache: {
+          maxAge: 60 * 60 * 24,
+        },
+      },
+      "/stats/**": {
+        cache: {
+          maxAge: 60 * 60 * 12,
+        },
+      },
+    },
   },
   googleFonts: {
     families: {

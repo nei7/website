@@ -15,7 +15,7 @@ export default defineComponent({
     timeout: {
       type: Number,
       required: false,
-      default: 1000,
+      default: 5000,
     },
     text: {
       type: String,
@@ -69,7 +69,12 @@ export default defineComponent({
             },
 
             [
-              h("div", { class: "flex-1 mr-3" }, props.text),
+              h("div", { class: "flex-1 mr-3 " }, [
+                props.title &&
+                  h("div", { class: "text-lg font-medium" }, props.title),
+
+                h("div", { class: "text-sm" }, props.text),
+              ]),
               h(
                 "div",
                 {

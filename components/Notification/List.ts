@@ -19,7 +19,7 @@ export default defineComponent({
         {
           tag: "div",
           class:
-            "fixed bottom-5 left-1/2 right-1/2  flex flex-col w-full max-w-xs gap-5",
+            "fixed bottom-5 left-1/2 right-1/2 -translate-x-1/2  flex flex-col w-full max-w-sm gap-5",
           enterActiveClass: "duration-200 ease-out",
           enterFromClass: "opacity-0 scale-95",
           enterToClass: "opacity-0 scale-95",
