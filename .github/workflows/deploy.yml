@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     env:
       SSH_KEY: ${{secrets.SSHKEY}}
@@ -34,4 +34,5 @@ jobs:
       - run: chmod 400 ~/.ssh/github-action
       - run: echo -e "Host vps\n\tUser root\n\tHostname $HOST\n\tIdentityFile ~/.ssh/github-action\n\tStrictHostKeyChecking No" >> ~/.ssh/config
       - run: rsync -re ssh ./.output/ vps:/home/root/blog/.output
-      - run: ssh vps "pm2 restart blog"
+      - run: rsync -re ssh ./ecosystem.config.js vps:/home/root/blog/
+      - run: ssh vps "cd /home/root/blog && pm2 start ecosystem.config.js"
