@@ -10,7 +10,7 @@ const isLoading = ref(false);
 const errorMessage = ref<undefined | string>();
 const alertType = ref<"danger" | "warning" | "info">("danger");
 
-const supabase = useSupabaseClient();
+const supabase = useSupabaseAuthClient();
 const user = useSupabaseUser();
 
 const router = useRouter();
@@ -18,7 +18,8 @@ const router = useRouter();
 const showAlert = (authError: AuthError) => {
   errorMessage.value = authError.message;
 
-  console.log(authError.status);
+  if (authError.message === "Email not confirmed") alertType.value = "info";
+  else alertType.value = "danger";
 };
 
 const state = reactive({

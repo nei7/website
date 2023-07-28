@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-import useAuthDialog from "~/composables/useAuthDialog";
+import { storeToRefs } from "pinia";
+import { useAppStore } from "~/stores";
 
-const { setIsOpen, isOpen } = useAuthDialog();
+const { authDialog } = storeToRefs(useAppStore());
 </script>
 <template>
-  <Dialog @close="setIsOpen" :open="isOpen" class="sm:px-6 pb-8 px-2">
+  <Dialog
+    @close="authDialog = false"
+    :open="authDialog"
+    class="sm:px-6 pb-8 px-2"
+  >
     <div class="flex items-center justify-between mb-5">
       <DialogTitle>Log in </DialogTitle>
       <button
-        @click="setIsOpen(false)"
+        @click="authDialog = false"
         class="p-1 hover:bg-gray-100 rounded-lg"
       >
         <XMarkIcon class="w-6 h-6"></XMarkIcon>
@@ -26,8 +31,9 @@ const { setIsOpen, isOpen } = useAuthDialog();
         transparent
         href="/enter"
         color="bg-transparent text-slate-700"
-        >Create account</Button
       >
+        Create account
+      </Button>
     </div>
   </Dialog>
 </template>

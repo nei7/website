@@ -30,7 +30,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <div @click="onClick">
+  <div @click="onClick" class="cursor-pointer">
     <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
       <div class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
         <svg

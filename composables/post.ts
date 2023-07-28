@@ -1,3 +1,5 @@
+import { Post } from "~/utils/notion";
+import { useCachedAsyncData } from "./cachedData";
 import { useLocalStorage } from "@vueuse/core";
 import { Reactions } from "~/types/post";
 
@@ -7,7 +9,7 @@ const initialReactionState = {
   hated: false,
 };
 
-export default function usePostReactions(slug: string) {
+export function usePostReactions(slug: string) {
   const reactions = reactive<Reactions>({
     thumbup_count: 0,
     skull_count: 0,
@@ -105,4 +107,12 @@ export default function usePostReactions(slug: string) {
     handleDecrementThumbup,
     storage,
   };
+}
+
+export function usePosts(limit?: number) {
+  return useCachedAsyncData<{ posts: Post[]; tags: string[] }>("posts", () =>
+    $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(
+      ({ results }) => convertPosts(results)
+    )
+  );
 }

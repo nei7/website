@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import useAuthDialog from "~/composables/useAuthDialog";
-
 const { slug } = defineProps<{
   slug: string;
 }>();

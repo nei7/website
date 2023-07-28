@@ -83,7 +83,7 @@ const commentsCount = computed(() => $state.rootComments.length);
       <CommentsContainer></CommentsContainer>
     </div>
 
-    <div class="mt-24">
+    <div class="mt-24" v-if="relatedPosts.length > 0">
       <h1 class="font-bold text-4xl text-center">Related posts</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-10">
@@ -96,5 +96,5 @@ const commentsCount = computed(() => $state.rootComments.length);
 
   <Footer class="max-w-6xl mx-auto my-20 px-4"></Footer>
 
-  <AuthDialog></AuthDialog>
+  <DialogAuth></DialogAuth>
 </template>

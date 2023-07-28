@@ -21,17 +21,6 @@ onClickOutside(dialogRef, () => emit("close", false));
 
 <template>
   <Teleport to="body">
-    <!--
-    Background backdrop, show/hide based on modal state.
-
-    Entering: "ease-out duration-300"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "ease-in duration-200"
-      From: "opacity-100"
-      To: "opacity-0"
-  -->
-
     <Transition
       enter-active-class="duration-300 ease-out"
       enter-from-class="opacity-0"

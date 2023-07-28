@@ -1,15 +1,5 @@
-import { object, mixed, ValidationError } from "yup";
 import { serverSupabaseClient } from "#supabase/server";
 import { Database } from "../../../types/supabase";
-
-const reactionSchema = object({
-  reaction: mixed<"thumbup" | "skull" | "heart">()
-    .oneOf(["thumbup", "skull", "heart"] as const)
-    .defined(),
-  type: mixed<"decrement" | "increment">()
-    .oneOf(["decrement", "increment"] as const)
-    .defined(),
-});
 
 export default defineEventHandler(async (event) => {
   const supabase = serverSupabaseClient<Database>(event);
@@ -23,9 +13,7 @@ export default defineEventHandler(async (event) => {
     };
   try {
     if (method === "POST") {
-      const body = await readBody(event);
-
-      const { reaction, type } = await reactionSchema.validate(body);
+      const { reaction, type } = await readBody(event);
 
       const { data } = await supabase
         .from("reactions")
@@ -54,13 +42,6 @@ export default defineEventHandler(async (event) => {
     if (method === "GET")
       return supabase.rpc("get_reactions", { postid: postId });
   } catch (err) {
-    if (err instanceof ValidationError) {
-      return createError({
-        statusCode: 400,
-        message: err.message,
-      });
-    }
-
     return createError({
       statusCode: 500,
       message: (err as Error).message,

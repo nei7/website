@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const router = useRouter();
+const client = useSupabaseAuthClient();
 
-const supabase = useSupabaseClient();
+const signOut = async () => {
+  await client.auth.signOut();
 
-const signOut = () => {
-  supabase.auth.signOut();
-
-  router.push("/");
+  navigateTo("/");
 };
 </script>
 

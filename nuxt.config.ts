@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@pinia/nuxt",
   ],
+
   image: {
     provider: "cloudinary",
     cloudinary: {
