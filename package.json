@@ -7,9 +7,12 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "source ./.env && echo $NOTION_API_TOKEN &&  node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "lhci:mobile": "lhci autorun",
+    "lhci:desktop": "lhci autorun --collect.settings.preset=desktop"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.12.0",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "1.0.0-rc.1",
     "@nuxtjs/eslint-module": "^4.1.0",
