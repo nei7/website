@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { useEventListener } from "@vueuse/core";
-import { inject, onMounted, reactive, ref, watchEffect, type Ref } from "vue";
+import { reactive, ref, watchEffect } from "vue";
 
-const scrollRef = inject<Ref<HTMLDivElement>>("scrollRef");
 const cordinates = reactive({ x: 0, y: 0 });
-const x = ref(0),
-  y = ref(0);
+const x = ref(0);
+const y = ref(0);
 
 const onMouseMove = (e: MouseEvent) => {
   x.value = e.clientX;
   y.value = e.clientY;
 };
 
-onMounted(() => {
-  scrollRef?.value.addEventListener("mousemove", onMouseMove);
-});
+if (process.client) useEventListener(document.body, "mousemove", onMouseMove);
 
 const cursorScale = ref(20);
 
@@ -26,7 +23,7 @@ useEventListener("mousedown", (e) => {
   }
 });
 
-useEventListener("mouseup", (e) => {
+useEventListener("mouseup", () => {
   cursorScale.value = 20;
 });
 
@@ -52,7 +49,7 @@ watchEffect(() => {
   <div
     class="fixed z-50 transition-all ease-out duration-700 pointer-events-none hidden sm:block"
     :style="{
-      transform: `translateX(${cordinates.x}px) translateY(${cordinates.y}px) translateZ(0) translate3d(0, 0, 0)`,
+      transform: `translateX(${cordinates.x}px) translateY(${cordinates.y}px) translateZ(0) translate3d(0, 0, 0)`
     }"
   >
     <Transition

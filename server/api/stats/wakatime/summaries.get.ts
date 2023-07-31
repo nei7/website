@@ -14,7 +14,7 @@ export default cachedEventHandler(async () => {
       languages,
       machines,
       operating_systems,
-      range,
+      range
     }) => ({
       categories,
       grand_total,
@@ -22,12 +22,12 @@ export default cachedEventHandler(async () => {
       languages,
       machines,
       operating_systems,
-      range,
+      range
     })
   );
 });
 
-const getSummaries = async (token: string) => {
+const getSummaries = (token: string) => {
   const date = new Date();
   const endDate = yyyymmdd(date);
 
@@ -38,8 +38,8 @@ const getSummaries = async (token: string) => {
     `https://wakatime.com/api/v1/users/current/summaries?start=${startDate}&end=${endDate}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     }
   );
 };

@@ -4,7 +4,7 @@ import {
   ChartOptions,
   ChartType,
   ChartTypeRegistry,
-  TooltipItem,
+  TooltipItem
 } from "chart.js";
 import { Datapoint } from "~/types/wakatime";
 import { colorScheme } from "~/constants/colors";
@@ -21,24 +21,24 @@ const data: ChartData = {
   datasets: [
     {
       data: props.data.map(({ percent }) => percent),
-      backgroundColor: colorScheme,
-    },
-  ],
+      backgroundColor: colorScheme
+    }
+  ]
 };
 
 const options: ChartOptions = {
   plugins: {
     legend: {
-      position: "bottom",
+      position: "bottom"
     },
     tooltip: {
       callbacks: {
         label: (item: TooltipItem<keyof ChartTypeRegistry>) => {
           return `${item.formattedValue}% (${props.data[item.dataIndex].text})`;
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 };
 </script>
 

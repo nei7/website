@@ -21,21 +21,21 @@ const data: ChartData = {
           .filter((datapoint) => datapoint.name === name)
           .map(({ decimal }) => parseFloat(decimal))
       )
-      .flat(),
-  })),
+      .flat()
+  }))
 };
 
 const options: ChartOptions = {
   plugins: {
     legend: {
-      position: "bottom",
+      position: "bottom"
     },
     tooltip: {
       callbacks: {
-        label: (item) => `${item.raw} hours`,
-      },
-    },
-  },
+        label: (item) => `${item.raw} hours`
+      }
+    }
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data, error } = await usePosts();
+const { data } = await usePosts();
 
 const selectedTag = ref("");
 
@@ -9,7 +9,6 @@ const posts = computed(() => {
       post.tags.find((tag) => tag.name === selectedTag.value)
     );
   }
-  console.log(error);
 
   return data.value.posts;
 });
@@ -29,7 +28,7 @@ useCustomHead("My blog", "");
 
     <section class="mt-16 px-4 mb-32">
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-12">
-        <Post v-for="post in posts" :post="post"></Post>
+        <Post v-for="post in posts" :key="post.id" :post="post"></Post>
       </div>
     </section>
     <GradientBottom></GradientBottom>

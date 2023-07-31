@@ -11,7 +11,7 @@ onClickOutside(target, () => (isOpen.value = false));
 </script>
 
 <template>
-  <div class="relative inline-block text-left" ref="target">
+  <div ref="target" class="relative inline-block text-left">
     <slot></slot>
   </div>
 </template>

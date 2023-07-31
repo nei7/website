@@ -13,8 +13,6 @@ export interface Comment {
   user_id: string;
 }
 
-type ReplyComment = Omit<Comment, "reply_of"> & { reply_of: number };
-
 export interface CommentTreeNode {
   comment: Comment;
   children: Array<CommentTreeNode>;
@@ -31,13 +29,13 @@ export const useCommentStore = defineStore("comments", {
       rootComments: [],
       postId: "",
       childComments: new Map(),
-      replyComment: null,
+      replyComment: null
     };
   },
   getters: {
     getChildComments: (state) => {
       return (id: number) => state.childComments.get(id);
-    },
+    }
   },
 
   actions: {
@@ -73,29 +71,28 @@ export const useCommentStore = defineStore("comments", {
           {
             method: "POST",
             body: {
-              text: text,
+              text,
               postId: this.postId,
               userId,
-              replyOf: this.replyComment?.id,
-            },
+              replyOf: this.replyComment?.id
+            }
           }
         );
 
         if (this.replyComment === null) this.rootComments.push(...data);
-        else {
-          if (this.childComments.has(this.replyComment.id))
-            this.childComments.get(this.replyComment.id)?.push(...data);
-          else this.childComments.set(this.replyComment.id, data);
-        }
+        else if (this.childComments.has(this.replyComment.id))
+          this.childComments.get(this.replyComment.id)?.push(...data);
+        else this.childComments.set(this.replyComment.id, data);
       } catch (err) {
       } finally {
+        useToast({ text: "" });
       }
     },
 
     async handleDeleteComment(commentId: number, replyOf: number | null) {
       try {
         await $fetch(`/api/post/comments?id=${commentId}`, {
-          method: "DELETE",
+          method: "DELETE"
         });
 
         if (replyOf === null) removeCommentById(commentId, this.rootComments);
@@ -106,8 +103,8 @@ export const useCommentStore = defineStore("comments", {
       } catch (err) {
         useToast({ title: "Error", text: (err as any).response._data.message });
       }
-    },
-  },
+    }
+  }
 });
 
 function removeCommentById(id: number, comments: Comment[]) {

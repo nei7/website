@@ -13,7 +13,7 @@ export enum ActivityMode {
   SlowWalking = 1,
   FastWalking = 3,
   Running = 4,
-  LightActivity = 7,
+  LightActivity = 7
 }
 
 export interface Summary {
@@ -85,15 +85,15 @@ export function parseActivities(activities: Activity[]): SmartwatchData[] {
         minutes: totalSleepTime / 60,
         deepSleep: slp.dp,
         lightSleep: slp.lt,
-        total: totalSleepTime,
+        total: totalSleepTime
       },
       steps: {
         total: stp.ttl,
         calories: stp.cal,
-        distance: stp.dis,
+        distance: stp.dis
       },
       date: activity.date_time,
-      uuid: activity.uuid,
+      uuid: activity.uuid
     };
   });
 }

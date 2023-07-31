@@ -1,5 +1,5 @@
-import { serverSupabaseClient } from "#supabase/server";
 import { Database } from "../../../types/supabase";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const supabase = serverSupabaseClient<Database>(event);
@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const postId = event.context.params?.id;
   if (!postId)
     return {
-      error: "invalid post id provided",
+      error: "invalid post id provided"
     };
   try {
     if (method === "POST") {
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
         .from("reactions")
         .update({
           [`${reaction}_count`]:
-            type === "increment" ? reactionCount + 1 : reactionCount - 1,
+            type === "increment" ? reactionCount + 1 : reactionCount - 1
         })
         .eq("post_id", postId);
     }
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
   } catch (err) {
     return createError({
       statusCode: 500,
-      message: (err as Error).message,
+      message: (err as Error).message
     });
   }
 });

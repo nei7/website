@@ -8,6 +8,6 @@ defineProps<{
 
 <template>
   <p class="min-h-[1rem]">
-    <NotionRichText :richText="paragraph.paragraph.rich_text"></NotionRichText>
+    <NotionRichText :rich-text="paragraph.paragraph.rich_text"></NotionRichText>
   </p>
 </template>

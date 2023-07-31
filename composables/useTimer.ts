@@ -11,7 +11,7 @@ export default function useTimer(
   const {
     pause: tPause,
     resume: tResume,
-    timestamp,
+    timestamp
   } = useTimestamp({ ...(options || {}), controls: true });
   const startTime = ref<number | null>(null);
 
@@ -66,6 +66,6 @@ export default function useTimer(
     stop,
     pause,
     resume,
-    remaining,
+    remaining
   };
 }

@@ -8,7 +8,8 @@ defineProps<{
 
 <template>
   <span
-    v-for="element in richText"
+    v-for="(element, i) in richText"
+    :key="i"
     :class="{
       'font-bold': element.annotations.bold,
       italic: element.annotations.italic,
@@ -42,7 +43,7 @@ defineProps<{
       'bg-brown-200 dark:bg-brown-800':
         element.annotations.color == 'brown_background',
       'bg-gray-200 dark:bg-gray-800':
-        element.annotations.color == 'gray_background',
+        element.annotations.color == 'gray_background'
     }"
   >
     <a v-if="element.href" class="cursor-pointer" :href="element.href">

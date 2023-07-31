@@ -14,7 +14,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
       <ProjectCard
         title="Pv"
         description="Password vault for the terminal"
-        githubLink="https://github.com/nei7/pv"
+        github-link="https://github.com/nei7/pv"
       >
         <template #icon>🔒</template>
       </ProjectCard>
@@ -22,7 +22,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
       <ProjectCard
         title="Httyped"
         description="A cli tool that can generate typescript types from http request"
-        githubLink="https://github.com/nei7/httyped"
+        github-link="https://github.com/nei7/httyped"
       >
         <template #icon>📝</template>
       </ProjectCard>
@@ -39,7 +39,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
       <ProjectCard
         title="fszarek.me"
         description="My porfolio and blog"
-        githubLink="https://github.com/nei7/website"
+        github-link="https://github.com/nei7/website"
         link="https://fszarek.me"
       >
         <template #icon> 💻 </template>

@@ -24,7 +24,7 @@ const showAlert = (authError: AuthError) => {
 
 const state = reactive({
   password: "",
-  email: "",
+  email: ""
 });
 
 const handleSignIn = async (provider: Provider | "email") => {
@@ -43,7 +43,7 @@ const handleSignIn = async (provider: Provider | "email") => {
 
     if (!user.value) {
       await supabase.auth.signInWithOAuth({
-        provider,
+        provider
       });
     }
   } catch (err) {
@@ -56,7 +56,7 @@ const handleSignIn = async (provider: Provider | "email") => {
 
 <template>
   <div class="w-full max-w-2xl mx-auto mt-32 sm:mt-48">
-    <Alert :type="alertType" v-if="errorMessage" class="mb-10">
+    <Alert v-if="errorMessage" :type="alertType" class="mb-10">
       <span class="font-medium">{{ errorMessage }}</span>
     </Alert>
     <form novalidate @submit.prevent="handleSignIn('email')">
@@ -72,8 +72,8 @@ const handleSignIn = async (provider: Provider | "email") => {
           <Button
             type="button"
             size="sm"
-            @click="handleSignIn('github')"
             color="text-white bg-gray-700 hover:bg-gray-800 rounded-lg"
+            @click="handleSignIn('github')"
           >
             <img
               src="~/assets/icons/github.svg"
@@ -86,8 +86,8 @@ const handleSignIn = async (provider: Provider | "email") => {
           <Button
             type="button"
             size="sm"
-            @click="handleSignIn('discord')"
             color="bg-transparent hover:bg-gray-50 border rounded-lg shadow-sm text-slate-700"
+            @click="handleSignIn('discord')"
           >
             <img
               src="~/assets/icons/discord.svg"
@@ -108,11 +108,11 @@ const handleSignIn = async (provider: Provider | "email") => {
           <label for="email" class="text-slate-800"> Email </label>
           <Input
             id="email"
+            v-model="state.email"
             placeholder="Enter an email..."
             size="lg"
             type="email"
             class="mt-2"
-            v-model="state.email"
           />
           <span> </span>
         </div>
@@ -121,11 +121,11 @@ const handleSignIn = async (provider: Provider | "email") => {
           <label for="password" class="text-slate-800"> Password </label>
           <Input
             id="password"
+            v-model="state.password"
             placeholder="Enter a password..."
             size="lg"
             type="password"
             class="mt-2"
-            v-model="state.password"
           />
         </div>
 

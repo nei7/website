@@ -19,8 +19,8 @@ async function getActivities() {
       headers: {
         apptoken: process.env.HUAMI_TOKEN as string,
         appname: "com.xiaomi.hm.health",
-        appPlatform: "web",
-      },
+        appPlatform: "web"
+      }
     }
   );
 

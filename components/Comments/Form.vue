@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useCommentStore } from "~/stores/comments";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { useCommentStore } from "~/stores/comments";
 import { useAppStore } from "~/stores";
 
 const commentFormRef = ref<HTMLDivElement>();
@@ -18,7 +18,7 @@ watch(
       commentFormRef.value?.scrollIntoView({
         behavior: "smooth",
         block: "center",
-        inline: "center",
+        inline: "center"
       });
   }
 );
@@ -31,7 +31,7 @@ const onClick = async () => {
 
 const handleDismissReply = () => {
   store.$patch({
-    replyComment: null,
+    replyComment: null
   });
 };
 

@@ -7,15 +7,15 @@ const { authDialog } = storeToRefs(useAppStore());
 </script>
 <template>
   <Dialog
-    @close="authDialog = false"
     :open="authDialog"
     class="sm:px-6 pb-8 px-2"
+    @close="authDialog = false"
   >
     <div class="flex items-center justify-between mb-5">
       <DialogTitle>Log in </DialogTitle>
       <button
-        @click="authDialog = false"
         class="p-1 hover:bg-gray-100 rounded-lg"
+        @click="authDialog = false"
       >
         <XMarkIcon class="w-6 h-6"></XMarkIcon>
       </button>

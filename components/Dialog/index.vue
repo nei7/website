@@ -9,7 +9,7 @@ defineProps<{
 }>();
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 });
 
 const emit = defineEmits(["close"]);
@@ -30,13 +30,13 @@ onClickOutside(dialogRef, () => emit("close", false));
       leave-to-class="opacity-0"
     >
       <div
-        @click="$emit('close', false)"
         v-if="open"
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-[60]"
+        @click="$emit('close', false)"
       ></div>
     </Transition>
 
-    <div class="z-[70] fixed inset-0 overflow-y-auto" v-if="open">
+    <div v-if="open" class="z-[70] fixed inset-0 overflow-y-auto">
       <div
         class="flex min-h-full justify-center p-4 text-center items-center sm:p-0"
       >
@@ -50,9 +50,9 @@ onClickOutside(dialogRef, () => emit("close", false));
           leave-to-class="opacity-0 scale-95"
         >
           <div
-            class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
             v-bind="$attrs"
             ref="dialogRef"
+            class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
           >
             <div class="bg-white p-4">
               <div

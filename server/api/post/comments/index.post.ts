@@ -1,5 +1,5 @@
-import { serverSupabaseClient } from "#supabase/server";
 import { Database } from "../../../types/supabase";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
         ? `https://github.com/${preferred_username}`
         : null,
       reply_of: body.replyOf,
-      user_id: body.userId,
+      user_id: body.userId
     })
     .select();
 });

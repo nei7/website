@@ -7,15 +7,15 @@ const currentSong = ref<CurrentSongResponse>({
     artists: [],
     album: {
       external_urls: {
-        spotify: "",
+        spotify: ""
       },
-      name: "",
+      name: ""
     },
     external_urls: {
-      spotify: "",
+      spotify: ""
     },
-    name: "",
-  },
+    name: ""
+  }
 });
 
 onMounted(async () => {
@@ -30,7 +30,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <div @click="onClick" class="cursor-pointer">
+  <div class="cursor-pointer" @click="onClick">
     <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
       <div class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
         <svg
@@ -47,12 +47,12 @@ const onClick = () => {
       </div>
 
       <p
-        class="mt-4 text-slate-800 sm:text-base text-sm"
         v-if="currentSong.is_playing"
+        class="mt-4 text-slate-800 sm:text-base text-sm"
       >
         {{ currentSong.item.name }} by {{ currentSong.item.artists[0].name }}
       </p>
-      <p class="mt-4 text-slate-800 sm:text-base text-sm" v-else>Not playing</p>
+      <p v-else class="mt-4 text-slate-800 sm:text-base text-sm">Not playing</p>
     </Card>
   </div>
 </template>

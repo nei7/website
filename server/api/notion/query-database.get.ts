@@ -5,7 +5,7 @@ export default cachedEventHandler(async (event) => {
 
   const notion = new Client({
     auth: process.env.NOTION_API_TOKEN,
-    timeoutMs: 7000,
+    timeoutMs: 7000
   });
 
   const size = query.size?.toString();
@@ -15,16 +15,16 @@ export default cachedEventHandler(async (event) => {
     filter: {
       property: "Status",
       status: {
-        equals: "Published",
-      },
+        equals: "Published"
+      }
     },
     sorts: [
       {
         property: "Published",
-        direction: "descending",
-      },
+        direction: "descending"
+      }
     ],
-    page_size: size ? parseInt(size) : undefined,
+    page_size: size ? parseInt(size) : undefined
   });
 
   return response;

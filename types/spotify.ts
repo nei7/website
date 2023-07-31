@@ -1,3 +1,7 @@
+type ExternalUrls = {
+  spotify: string;
+};
+
 export interface CurrentSongResponse {
   is_playing: boolean;
   item: {
@@ -11,7 +15,3 @@ export interface CurrentSongResponse {
     name: string;
   };
 }
-
-type ExternalUrls = {
-  spotify: string;
-};

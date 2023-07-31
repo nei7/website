@@ -1,19 +1,20 @@
 import { createVNode, render, getCurrentInstance } from "vue";
 import NotificationList from "~/components/Notification/List";
-import mitt from "mitt";
+import { useAppStore } from "~/stores";
 
 let vnode: null | VNode = null;
 
-export const eventBus = mitt<{ notification: Props }>();
-
-export type Props = {
+export type Notification = {
+  id: string;
   title?: string;
   text: string;
   timeout?: number;
 };
 
-export default function useToast(props: Props) {
+export default function useToast(props: Omit<Notification, "id">) {
   if (!process.client) return;
+
+  const store = useAppStore();
 
   if (vnode === null) {
     vnode = createVNode(NotificationList, props);
@@ -23,5 +24,5 @@ export default function useToast(props: Props) {
     render(vnode, document.body);
   }
 
-  eventBus.emit("notification", props);
+  store.addNotification(props);
 }

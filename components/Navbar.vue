@@ -6,28 +6,28 @@ import { useRoute } from "vue-router";
 const menu = [
   {
     name: "Home",
-    path: "/",
+    path: "/"
   },
   {
     name: "Posts",
-    path: "/posts",
+    path: "/posts"
   },
   {
     name: "Stats",
-    path: "/stats",
+    path: "/stats"
   },
   {
     name: "Projects",
-    path: "/projects",
-  },
+    path: "/projects"
+  }
 ];
 
 const route = useRoute();
 const menuItems = ref<HTMLLIElement[]>([]);
 
 const currentIndex = ref(0);
-const position = reactive({ x: 0, y: 0 }),
-  size = reactive({ width: 0, height: 0 });
+const position = reactive({ x: 0, y: 0 });
+const size = reactive({ width: 0, height: 0 });
 
 const toggleClass = ref(false);
 
@@ -64,7 +64,7 @@ useEventListener("scroll", () => {
       :style="{
         transform: `translate(${position.x + 'px'}, ${position.y + 'px'})`,
         width: size.width + 'px',
-        height: size.height + 'px',
+        height: size.height + 'px'
       }"
     ></div>
     <nav class="flex relative z-50 justify-center items-center">

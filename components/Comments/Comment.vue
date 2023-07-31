@@ -2,7 +2,7 @@
 import {
   HeartIcon,
   ChatBubbleLeftEllipsisIcon,
-  TrashIcon,
+  TrashIcon
 } from "@heroicons/vue/24/outline";
 import { useCommentStore } from "~/stores/comments";
 
@@ -26,13 +26,13 @@ const { handleDeleteComment, $patch } = useCommentStore();
 
 const onReply = () => {
   $patch({
-    replyComment: props,
+    replyComment: props
   });
 };
 
 const handleReaction = async () => {
   await $fetch(`/api/post/comments/reaction?commentId=${props.id}`, {
-    method: "POST",
+    method: "POST"
   });
   loved.value++;
 };

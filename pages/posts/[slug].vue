@@ -40,61 +40,67 @@ fetchList(post.value.id);
 const commentsCount = computed(() => $state.rootComments.length);
 </script>
 <template>
-  <div
-    class="isolate mx-auto mt-24 sm:mt-48 rounded-2xl py-20 max-w-6xl px-5 sm:px-20 xs:px-0 bg-white"
-    v-if="data && post"
-  >
-    <article>
-      <header>
-        <h1 class="font-bold text-4xl sm:text-6xl text-center">
-          {{ post.title }}
-        </h1>
-        <div
-          class="flex items-center gap-x-4 mx-auto w-max mt-8 text-slate-600"
-        >
-          <div>{{ post.published }}</div>
-          /
-          <div class="flex items-center">{{ readingTime }} min read</div>
-        </div>
+  <div>
+    <div
+      v-if="data && post"
+      class="isolate mx-auto mt-24 sm:mt-48 rounded-2xl py-20 max-w-6xl px-5 sm:px-20 xs:px-0 bg-white"
+    >
+      <article>
+        <header>
+          <h1 class="font-bold text-4xl sm:text-6xl text-center">
+            {{ post.title }}
+          </h1>
+          <div
+            class="flex items-center gap-x-4 mx-auto w-max mt-8 text-slate-600"
+          >
+            <div>{{ post.published }}</div>
+            /
+            <div class="flex items-center">{{ readingTime }} min read</div>
+          </div>
+
+          <div
+            class="aspect-video lg:aspect-[2/1] relative overflow-hidden rounded-3xl mt-12"
+          >
+            <nuxt-img :src="post.coverImage" fit="cover" />
+          </div>
+
+          <PostReactions :slug="post.slug" class="mt-10"></PostReactions>
+        </header>
 
         <div
-          class="aspect-video lg:aspect-[2/1] relative overflow-hidden rounded-3xl mt-12"
+          class="prose prose-slate prose-base lg:prose-lg mt-20 prose-p:my-2 prose-headings:mt-14 prose-headings:mb-5"
+          style="max-width: 100%"
         >
-          <nuxt-img :src="post.coverImage" fit="cover" />
+          <NotionRender :blocks="blocks.results"></NotionRender>
         </div>
+      </article>
+      <hr class="mb-10" />
 
-        <PostReactions :slug="post.slug" class="mt-10"></PostReactions>
-      </header>
+      <div class="mt-20">
+        <h2 class="font-bold text-2xl mb-10">
+          Top Comments ({{ commentsCount }})
+        </h2>
 
-      <div
-        class="prose prose-slate prose-base lg:prose-lg mt-20 prose-p:my-2 prose-headings:mt-14 prose-headings:mb-5"
-        style="max-width: 100%"
-      >
-        <NotionRender :blocks="blocks.results"></NotionRender>
+        <CommentsContainer></CommentsContainer>
       </div>
-    </article>
-    <hr class="mb-10" />
 
-    <div class="mt-20">
-      <h2 class="font-bold text-2xl mb-10">
-        Top Comments ({{ commentsCount }})
-      </h2>
+      <div v-if="relatedPosts.length > 0" class="mt-24">
+        <h1 class="font-bold text-4xl text-center">Related posts</h1>
 
-      <CommentsContainer></CommentsContainer>
-    </div>
-
-    <div class="mt-24" v-if="relatedPosts.length > 0">
-      <h1 class="font-bold text-4xl text-center">Related posts</h1>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 mt-10">
-        <Post v-for="post in relatedPosts" :post="post"></Post>
+        <div class="grid grid-cols-1 lg:grid-cols-3 mt-10">
+          <Post
+            v-for="_post in relatedPosts"
+            :key="_post.id"
+            :post="_post"
+          ></Post>
+        </div>
       </div>
     </div>
+
+    <NotFound v-else-if="error"> </NotFound>
+
+    <Footer class="max-w-6xl mx-auto my-20 px-4"></Footer>
+
+    <DialogAuth></DialogAuth>
   </div>
-
-  <NotFound v-else-if="error"> </NotFound>
-
-  <Footer class="max-w-6xl mx-auto my-20 px-4"></Footer>
-
-  <DialogAuth></DialogAuth>
 </template>

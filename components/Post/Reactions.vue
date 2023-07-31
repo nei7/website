@@ -11,30 +11,30 @@ const {
   handleIncrementThumbup,
   handleDecrementThumbup,
   handleDecrementSkull,
-  handleIncrementSkull,
+  handleIncrementSkull
 } = usePostReactions(slug);
 </script>
 
 <template>
   <div class="flex gap-4">
     <PostReaction
-      :incrementFn="handleIncrementThumbup"
-      :decrementFn="handleDecrementThumbup"
-      :isActive="storage.liked"
+      :increment-fn="handleIncrementThumbup"
+      :decrement-fn="handleDecrementThumbup"
+      :is-active="storage.liked"
     >
       👍 {{ reactions.thumbup_count }}
     </PostReaction>
     <PostReaction
-      :incrementFn="handleIncrementHeart"
-      :decrementFn="handleDecrementHeart"
-      :isActive="storage.loved"
+      :increment-fn="handleIncrementHeart"
+      :decrement-fn="handleDecrementHeart"
+      :is-active="storage.loved"
     >
       ❤️ {{ reactions.heart_count }}
     </PostReaction>
     <PostReaction
-      :incrementFn="handleIncrementSkull"
-      :decrementFn="handleDecrementSkull"
-      :isActive="storage.hated"
+      :increment-fn="handleIncrementSkull"
+      :decrement-fn="handleDecrementSkull"
+      :is-active="storage.hated"
     >
       💀 {{ reactions.skull_count }}
     </PostReaction>

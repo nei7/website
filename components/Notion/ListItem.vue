@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   BulletedListItemBlockObjectResponse,
-  NumberedListItemBlockObjectResponse,
+  NumberedListItemBlockObjectResponse
 } from "@notionhq/client/build/src/api-endpoints";
 
 defineProps<{
@@ -14,8 +14,8 @@ defineProps<{
 <template>
   <div class="flex items-center mt-3">
     <div
-      class="bg-slate-700 rounded-full w-1.5 h-1.5 mr-2"
       v-if="list_item.type === 'bulleted_list_item'"
+      class="bg-slate-700 rounded-full w-1.5 h-1.5 mr-2"
     ></div>
 
     <NotionRichText

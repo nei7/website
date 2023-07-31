@@ -42,5 +42,5 @@ export const colorScheme = [
   "#feca57",
   "#5f27cd",
   "#54a0ff",
-  "#01a3a4",
+  "#01a3a4"
 ];

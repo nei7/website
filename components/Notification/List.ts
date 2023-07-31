@@ -1,17 +1,11 @@
 import { h, TransitionGroup } from "vue";
 import Notification from "./index";
-import { eventBus, Props } from "~/composables/useToast";
+import { useAppStore } from "~/stores";
 
 export default defineComponent({
   name: "Notifications",
   setup() {
-    const notifications = reactive<Props[]>([]);
-
-    onMounted(() =>
-      eventBus.on("notification", (props) => {
-        notifications.push(props);
-      })
-    );
+    const store = useAppStore();
 
     return () =>
       h(
@@ -25,17 +19,18 @@ export default defineComponent({
           enterToClass: "opacity-0 scale-95",
           leaveActiveClass: "duration-100 ease-in",
           leaveFromClass: "opacity-100 scale-100",
-          leaveToClass: "opacity-0 scale-95",
+          leaveToClass: "opacity-0 scale-95"
         },
         () =>
-          notifications.map((props, id) =>
+          store.$state.notifications.map((props) =>
             h(Notification, {
               ...props,
-              id,
-              onClose: (idx: number) => notifications.splice(idx, 1),
-              key: id,
+              id: props.id,
+              onClose: (notificationId: string) =>
+                store.removeNotification(notificationId),
+              key: props.id
             })
           )
       );
-  },
+  }
 });

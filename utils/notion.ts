@@ -39,13 +39,15 @@ export const convertPosts = (posts: any[]) => {
 
             return {
               name: tag.name,
-              color: tag.color.toString(),
+              color: tag.color.toString()
             };
           }),
           description: Description.rich_text[0].plain_text,
-          coverImage: CoverImage.rich_text[0].plain_text,
+          coverImage: CoverImage.rich_text[0].plain_text
         };
       }
+
+      return undefined;
     })
     .filter((_): _ is Post => _ !== undefined);
 

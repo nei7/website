@@ -16,9 +16,9 @@ const data: ChartData = {
       borderColor: "#f97316",
 
       label: "Total steps",
-      data: props.data.map((a) => a.steps.distance),
-    },
-  ],
+      data: props.data.map((a) => a.steps.distance)
+    }
+  ]
 };
 
 const options: ChartOptions = {
@@ -26,9 +26,9 @@ const options: ChartOptions = {
 
   plugins: {
     legend: {
-      position: "bottom",
-    },
-  },
+      position: "bottom"
+    }
+  }
 };
 </script>
 

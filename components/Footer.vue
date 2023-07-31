@@ -18,17 +18,17 @@
         <nuxt-link to="/projects">Projects</nuxt-link>
       </li>
       <li
-        class="text-slate-600 sm:text-lg py-3 hover:text-slate-800"
         v-if="user"
+        class="text-slate-600 sm:text-lg py-3 hover:text-slate-800"
       >
         <nuxt-link to="/logout">Log out</nuxt-link>
       </li>
-      <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800" v-else>
+      <li v-else class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/enter">Log in</nuxt-link>
       </li>
     </ul>
     <ul class="pr-8 sm:p-0 text-right sm:text-left">
-      <li class="font-medium text-lg text-slate-900 mb-4">Contact</li>
+      <li class="font-medium sm:text-lg text-slate-900 mb-4">Contact</li>
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <a
           href="https://github.com/nei7"
@@ -47,7 +47,7 @@
         </a>
       </li>
       <li
-        class="text-slate-600 text-lg py-3 hover:text-slate-800"
+        class="text-slate-600 sm:text-lg py-3 hover:text-slate-800"
         target="_blank"
         rel="noopener noreferrer"
       >

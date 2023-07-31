@@ -15,15 +15,15 @@ const data: ChartData = {
       label: "Deep sleep",
       data: props.data.map((activity) => activity.sleep.deepSleep / 60),
       backgroundColor: "#a855f7",
-      stack: "s1",
+      stack: "s1"
     },
     {
       label: "Light sleep",
       data: props.data.map((activity) => activity.sleep.lightSleep / 60),
       backgroundColor: "#38bdf8",
-      stack: "s1",
-    },
-  ],
+      stack: "s1"
+    }
+  ]
 };
 
 const options: ChartOptions = {
@@ -31,18 +31,18 @@ const options: ChartOptions = {
   scales: {
     x: {
       grid: {
-        display: false,
-      },
+        display: false
+      }
     },
     y: {
       grid: {
-        display: false,
-      },
-    },
+        display: false
+      }
+    }
   },
   plugins: {
     legend: {
-      position: "bottom",
+      position: "bottom"
     },
     tooltip: {
       enabled: true,
@@ -52,10 +52,10 @@ const options: ChartOptions = {
 
           const minutes = Math.round((Number(item.raw) - hour) * 60);
           return `${hour}g ${minutes}m`;
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 };
 </script>
 

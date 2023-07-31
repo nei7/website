@@ -7,7 +7,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div class="relative z-[60] transition-opacity" v-if="isOpen">
+    <div v-if="isOpen" class="relative z-[60] transition-opacity">
       <div
         class="fixed inset-0 bg-gray-200/75 dark:bg-gray-800/75 blur-xl"
       ></div>
@@ -15,8 +15,8 @@
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex justify-center mt-32 p-4 sm:p-0">
           <div
-            class="bg-white py-2 rounded-2xl w-full max-w-xl drop-shadow-2xl"
             ref="commandPalleteRef"
+            class="bg-white py-2 rounded-2xl w-full max-w-xl drop-shadow-2xl"
           >
             <div class="pb-1 border-b px-5">
               <Input
@@ -33,11 +33,12 @@
             <div class="px-5">
               <ul class="gap-5 mt-3">
                 <CommandPaletteItem
-                  @click="onItemSelected(i)"
+                  v-for="(item, i) in searchItems"
+                  :key="i"
                   :title="item.title"
                   :description="item.description"
                   :active="selectedIndex === i"
-                  v-for="(item, i) in searchItems"
+                  @click="onItemSelected(i)"
                 />
               </ul>
             </div>

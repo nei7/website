@@ -6,6 +6,6 @@ defineProps<{ heading: Heading2BlockObjectResponse }>();
 
 <template>
   <h2>
-    <NotionRichText :richText="heading.heading_2.rich_text"></NotionRichText>
+    <NotionRichText :rich-text="heading.heading_2.rich_text"></NotionRichText>
   </h2>
 </template>

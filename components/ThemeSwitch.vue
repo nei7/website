@@ -25,7 +25,7 @@ const toggleDark = useToggle(isDark);
         >
           <MoonIcon class="w-4 h-4"></MoonIcon>
           <p class="ml-2 mr-1 text-sm font-medium">Dark</p>
-          <CheckIcon class="w-3 h-3" v-if="isDark"></CheckIcon>
+          <CheckIcon v-if="isDark" class="w-3 h-3"></CheckIcon>
         </button>
       </MenuItem>
       <MenuItem>
@@ -34,7 +34,7 @@ const toggleDark = useToggle(isDark);
         >
           <SunIcon class="w-4 h-4"></SunIcon>
           <p class="ml-2 mr-1 text-sm font-medium">Light</p>
-          <CheckIcon class="w-3 h-3" v-if="!isDark"></CheckIcon>
+          <CheckIcon v-if="!isDark" class="w-3 h-3"></CheckIcon>
         </button>
       </MenuItem>
     </MenuItems>

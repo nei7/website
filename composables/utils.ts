@@ -1,7 +1,7 @@
 import {
   BlockObjectResponse,
   Heading1BlockObjectResponse,
-  RichTextItemResponse,
+  RichTextItemResponse
 } from "@notionhq/client/build/src/api-endpoints";
 
 export function useReadingTime(blocks: BlockObjectResponse[]) {

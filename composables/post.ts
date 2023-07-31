@@ -1,19 +1,19 @@
-import { Post } from "~/utils/notion";
-import { useCachedAsyncData } from "./cachedData";
 import { useLocalStorage } from "@vueuse/core";
+import { useCachedAsyncData } from "./cachedData";
+import { Post } from "~/utils/notion";
 import { Reactions } from "~/types/post";
 
 const initialReactionState = {
   liked: false,
   loved: false,
-  hated: false,
+  hated: false
 };
 
 export function usePostReactions(slug: string) {
   const reactions = reactive<Reactions>({
     thumbup_count: 0,
     skull_count: 0,
-    heart_count: 0,
+    heart_count: 0
   });
 
   const storage = useLocalStorage(slug, initialReactionState);
@@ -73,22 +73,19 @@ export function usePostReactions(slug: string) {
     updateReaction("loved");
   };
 
-  const apiRequest = async (
-    reaction: string,
-    type: "decrement" | "increment"
-  ) => {
+  const apiRequest = (reaction: string, type: "decrement" | "increment") => {
     try {
       return $fetch(`/api/post/reactions/${slug}`, {
         method: "POST",
 
         body: {
           reaction,
-          type,
-        },
+          type
+        }
       });
     } catch (err) {
       useToast({
-        text: (err as Error).message,
+        text: (err as Error).message
       });
     }
   };
@@ -105,7 +102,7 @@ export function usePostReactions(slug: string) {
     handleDecrementHeart,
     handleDecrementSkull,
     handleDecrementThumbup,
-    storage,
+    storage
   };
 }
 

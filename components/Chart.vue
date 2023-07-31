@@ -16,7 +16,7 @@ const renderChart = () => {
   chartRef.value = new Chart(canvasRef.value, {
     type: props.type,
     data: props.data,
-    options: props.options,
+    options: props.options
   });
 };
 

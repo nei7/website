@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Datapoint } from "~/types/wakatime";
 import SummaryChart from "./SummaryChart.vue";
+import { Datapoint } from "~/types/wakatime";
 
 defineProps<{
   data: Datapoint[];

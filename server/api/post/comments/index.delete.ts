@@ -1,19 +1,16 @@
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
 import { Database } from "../../../types/supabase";
-import { makeResponse } from "../../../utils/response";
+
+import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const supabase = serverSupabaseClient<Database>(event);
   const user = await serverSupabaseUser(event);
 
   if (!user) {
-    return makeResponse(
-      event,
-      {
-        error: "User not logged in",
-      },
-      { code: 401 }
-    );
+    return createError({
+      message: "User not logged in",
+      statusCode: 401
+    });
   }
 
   const query = getQuery(event);
@@ -27,14 +24,14 @@ export default defineEventHandler(async (event) => {
   if (!comment.data) {
     return createError({
       statusCode: 404,
-      message: "Comment not found",
+      message: "Comment not found"
     });
   }
 
   if (comment.data.user_id !== user.id)
     return createError({
       statusCode: 403,
-      message: "Forbidden",
+      message: "Forbidden"
     });
 
   return supabase.from("comments").delete().eq("id", query.postId);

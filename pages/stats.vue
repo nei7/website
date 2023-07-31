@@ -12,7 +12,7 @@ import {
   Title,
   Tooltip,
   PointElement,
-  LineElement,
+  LineElement
 } from "chart.js";
 
 ChartJS.register(

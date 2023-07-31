@@ -9,8 +9,8 @@ const { data: blocks } = useCachedFetch<any>(`/api/notion/blocks/${table.id}`);
 <template>
   <table>
     <tbody>
-      <tr v-for="row in blocks?.results">
-        <td v-for="cell in row[row.type].cells">
+      <tr v-for="(row, rowIndex) in blocks?.results" :key="rowIndex">
+        <td v-for="(cell, cellIndex) in row[row.type].cells" :key="cellIndex">
           <NotionRichText :rich-text="cell"></NotionRichText>
         </td>
       </tr>

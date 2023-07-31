@@ -11,12 +11,12 @@ const getAccessToken = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicAuth}`,
+        Authorization: `Basic ${basicAuth}`
       },
       body: stringify({
         grant_type: "refresh_token",
-        refresh_token: process.env.SPOTIFY_REFRESH_TOKEN,
-      }),
+        refresh_token: process.env.SPOTIFY_REFRESH_TOKEN
+      })
     }
   );
 };
@@ -29,14 +29,13 @@ const getNowPlaying = async () => {
       "https://api.spotify.com/v1/me/player/currently-playing",
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+          Authorization: `Bearer ${access_token}`
+        }
       }
     );
   } catch (err) {
-    console.error(err);
-    return;
+    return "";
   }
 };
 
-export default defineEventHandler((event) => getNowPlaying());
+export default defineEventHandler(() => getNowPlaying());
