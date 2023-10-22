@@ -1,16 +1,10 @@
-export const useCustomHead = (
-  title?: string,
-  description?: string,
-  image?: string
-) => {
+export const useCustomHead = (title?: string, description?: string, image?: string) => {
   useHead({
     title,
     meta: [
       {
         name: "description",
-        content:
-          description ??
-          "Nei's personal portfolio and blog. Built using nuxt 3 and typescript"
+        content: description ?? "Nei's personal portfolio and blog. Built using nuxt 3 and typescript"
       },
       { property: "og:type", content: "website" },
       {

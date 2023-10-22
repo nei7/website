@@ -32,10 +32,7 @@ const user = useSupabaseUser();
         :deletable="user?.id === comment.user_id"
       ></Comment>
 
-      <CommentsList
-        :comments="getChildComments(comment.id)"
-        class="ml-10"
-      ></CommentsList>
+      <CommentsList :comments="getChildComments(comment.id)" class="ml-10"></CommentsList>
     </div>
   </TransitionGroup>
 </template>

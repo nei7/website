@@ -69,8 +69,7 @@ export default defineComponent({
 
             [
               h("div", { class: "flex-1 mr-3 " }, [
-                props.title &&
-                  h("div", { class: "text-lg font-medium" }, props.title),
+                props.title && h("div", { class: "text-lg font-medium" }, props.title),
 
                 h("div", { class: "text-sm" }, props.text)
               ]),

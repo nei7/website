@@ -8,16 +8,11 @@
     leave-to-class="opacity-0"
   >
     <div v-if="isOpen" class="relative z-[60] transition-opacity">
-      <div
-        class="fixed inset-0 bg-gray-200/75 dark:bg-gray-800/75 blur-xl"
-      ></div>
+      <div class="fixed inset-0 bg-gray-200/75 dark:bg-gray-800/75 blur-xl"></div>
 
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex justify-center mt-32 p-4 sm:p-0">
-          <div
-            ref="commandPalleteRef"
-            class="bg-white py-2 rounded-2xl w-full max-w-xl drop-shadow-2xl"
-          >
+          <div ref="commandPalleteRef" class="bg-white py-2 rounded-2xl w-full max-w-xl drop-shadow-2xl">
             <div class="pb-1 border-b px-5">
               <Input
                 ref="inputRef"
@@ -94,15 +89,13 @@ onMounted(() => {
 
       case "ArrowUp":
         e.preventDefault();
-        if (selectedIndex.value === 0)
-          selectedIndex.value = props.items.length - 1;
+        if (selectedIndex.value === 0) selectedIndex.value = props.items.length - 1;
         else selectedIndex.value = selectedIndex.value - 1;
         break;
 
       case "ArrowDown":
         e.preventDefault();
-        if (selectedIndex.value === props.items.length - 1)
-          selectedIndex.value = 0;
+        if (selectedIndex.value === props.items.length - 1) selectedIndex.value = 0;
         else selectedIndex.value = selectedIndex.value + 1;
         break;
 
@@ -122,8 +115,6 @@ const onItemSelected = (index: number) => {
 };
 
 const searchItems = computed(() => {
-  return props.items.filter((item) =>
-    item.title.toLowerCase().includes(input.value.toLowerCase())
-  );
+  return props.items.filter((item) => item.title.toLowerCase().includes(input.value.toLowerCase()));
 });
 </script>

@@ -16,11 +16,7 @@ const data: ChartData = {
     label: name,
     backgroundColor: colorScheme[10 + i],
     data: props.data
-      .map((data) =>
-        data[props.summary]
-          .filter((datapoint) => datapoint.name === name)
-          .map(({ decimal }) => parseFloat(decimal))
-      )
+      .map((data) => data[props.summary].filter((datapoint) => datapoint.name === name).map(({ decimal }) => parseFloat(decimal)))
       .flat()
   }))
 };
@@ -41,14 +37,7 @@ const options: ChartOptions = {
 
 <template>
   <Card class="bg-white">
-    <h2 class="font-bold text-xl text-slate-700 mb-5 text-center">
-      Activities
-    </h2>
-    <Chart
-      :type="type"
-      :data="data"
-      :options="options"
-      class="w-full max-h-64"
-    ></Chart>
+    <h2 class="font-bold text-xl text-slate-700 mb-5 text-center">Activities</h2>
+    <Chart :type="type" :data="data" :options="options" class="w-full max-h-64"></Chart>
   </Card>
 </template>

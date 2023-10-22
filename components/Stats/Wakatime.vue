@@ -3,9 +3,7 @@ import { Datapoint, Summary } from "../../types/wakatime";
 import Editors from "./Editors.vue";
 import Languages from "./Languages.vue";
 
-const { data: summaries } = useCachedFetch<Summary[]>(
-  "/api/stats/wakatime/summaries"
-);
+const { data: summaries } = useCachedFetch<Summary[]>("/api/stats/wakatime/summaries");
 
 const { data: stats } = useCachedFetch<{
   data: { editors: Datapoint[]; languages: Datapoint[] };
@@ -13,13 +11,7 @@ const { data: stats } = useCachedFetch<{
 </script>
 
 <template>
-  <StatsActivites
-    v-if="summaries"
-    :data="summaries"
-    summary="categories"
-    class="lg:col-span-2"
-    type="bar"
-  />
+  <StatsActivites v-if="summaries" :data="summaries" summary="categories" class="lg:col-span-2" type="bar" />
 
   <template v-if="stats">
     <Editors :data="stats.data.editors" />

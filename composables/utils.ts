@@ -1,8 +1,4 @@
-import {
-  BlockObjectResponse,
-  Heading1BlockObjectResponse,
-  RichTextItemResponse
-} from "@notionhq/client/build/src/api-endpoints";
+import { BlockObjectResponse, Heading1BlockObjectResponse, RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export function useReadingTime(blocks: BlockObjectResponse[]) {
   const wordsPerMinute = 200;
@@ -20,9 +16,7 @@ export function useReadingTime(blocks: BlockObjectResponse[]) {
   return Math.ceil(words / wordsPerMinute);
 }
 
-export const hasRichText = (
-  block: BlockObjectResponse
-): block is Heading1BlockObjectResponse => {
+export const hasRichText = (block: BlockObjectResponse): block is Heading1BlockObjectResponse => {
   return (
     block.type in block &&
     // @ts-ignore

@@ -19,9 +19,7 @@ export function usePostReactions(slug: string) {
   const storage = useLocalStorage(slug, initialReactionState);
 
   onMounted(async () => {
-    const { data } = await $fetch<{ data: Reactions }>(
-      `/api/post/reactions/${slug}`
-    );
+    const { data } = await $fetch<{ data: Reactions }>(`/api/post/reactions/${slug}`);
     Object.assign(reactions, data);
   });
 
@@ -108,8 +106,6 @@ export function usePostReactions(slug: string) {
 
 export function usePosts(limit?: number) {
   return useCachedAsyncData<{ posts: Post[]; tags: string[] }>("posts", () =>
-    $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(
-      ({ results }) => convertPosts(results)
-    )
+    $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(({ results }) => convertPosts(results))
   );
 }

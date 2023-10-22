@@ -2,17 +2,9 @@ import { ref, computed } from "vue-demi";
 import { useTimestamp } from "@vueuse/core";
 import type { UseTimestampOptions } from "@vueuse/core";
 
-export default function useTimer(
-  cb: (...args: unknown[]) => any,
-  interval: number,
-  options?: UseTimestampOptions<true>
-) {
+export default function useTimer(cb: (...args: unknown[]) => any, interval: number, options?: UseTimestampOptions<true>) {
   let timer: number | null = null;
-  const {
-    pause: tPause,
-    resume: tResume,
-    timestamp
-  } = useTimestamp({ ...(options || {}), controls: true });
+  const { pause: tPause, resume: tResume, timestamp } = useTimestamp({ ...(options || {}), controls: true });
   const startTime = ref<number | null>(null);
 
   const remaining = computed(() => {

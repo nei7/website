@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  HeartIcon,
-  ChatBubbleLeftEllipsisIcon,
-  TrashIcon
-} from "@heroicons/vue/24/outline";
+import { HeartIcon, ChatBubbleLeftEllipsisIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import { useCommentStore } from "~/stores/comments";
 
 const props = defineProps<{
@@ -41,11 +37,7 @@ const handleReaction = async () => {
 <template>
   <div class="flex gap-x-5 w-full">
     <a :href="profile_url" class="shrink-0">
-      <img
-        :src="avatar_url"
-        alt=""
-        class="rounded-full w-6 h-6 sm:w-8 sm:h-8"
-      />
+      <img :src="avatar_url" alt="" class="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
     </a>
 
     <div class="w-full">

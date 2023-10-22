@@ -12,7 +12,5 @@ const { rootComments } = storeToRefs(store);
 <template>
   <Form class="mb-20"></Form>
 
-  <ClientOnly fallback="Loading comments...">
-    <List :comments="rootComments"></List
-  ></ClientOnly>
+  <ClientOnly fallback="Loading comments..."> <List :comments="rootComments"></List></ClientOnly>
 </template>

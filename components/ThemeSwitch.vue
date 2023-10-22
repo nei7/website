@@ -10,9 +10,7 @@ const toggleDark = useToggle(isDark);
 <template>
   <Menu>
     <MenuButton>
-      <div
-        class="dark:text-white text-gray-700 cursor-pointer flex items-center bg-gray-200 hover:bg-gray-300 opacity-80 p-2 rounded-xl"
-      >
+      <div class="dark:text-white text-gray-700 cursor-pointer flex items-center bg-gray-200 hover:bg-gray-300 opacity-80 p-2 rounded-xl">
         <SunIcon v-if="isDark" class="w-5 h-5"> </SunIcon>
         <MoonIcon v-else class="w-5 h-5"> </MoonIcon>
       </div>

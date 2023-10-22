@@ -12,8 +12,7 @@ export default defineComponent({
         TransitionGroup,
         {
           tag: "div",
-          class:
-            "fixed bottom-5 left-1/2 right-1/2 -translate-x-1/2  flex flex-col w-full max-w-sm gap-5",
+          class: "fixed bottom-5 left-1/2 right-1/2 -translate-x-1/2  flex flex-col w-full max-w-sm gap-5",
           enterActiveClass: "duration-200 ease-out",
           enterFromClass: "opacity-0 scale-95",
           enterToClass: "opacity-0 scale-95",
@@ -26,8 +25,7 @@ export default defineComponent({
             h(Notification, {
               ...props,
               id: props.id,
-              onClose: (notificationId: string) =>
-                store.removeNotification(notificationId),
+              onClose: (notificationId: string) => store.removeNotification(notificationId),
               key: props.id
             })
           )

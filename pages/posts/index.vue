@@ -5,9 +5,7 @@ const selectedTag = ref("");
 
 const posts = computed(() => {
   if (selectedTag.value) {
-    return data.value.posts.filter((post) =>
-      post.tags.find((tag) => tag.name === selectedTag.value)
-    );
+    return data.value.posts.filter((post) => post.tags.find((tag) => tag.name === selectedTag.value));
   }
 
   return data.value.posts;
@@ -20,10 +18,7 @@ useCustomHead("My blog", "");
   <div class="relative isolate max-w-6xl mx-auto">
     <header class="mt-32 sm:mt-48 px-3">
       <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>
-      <p class="text-slate-700 sm:text-xl mt-10">
-        I occasionally publish articles here. Hope you find something useful for
-        yourself.
-      </p>
+      <p class="text-slate-700 sm:text-xl mt-10">I occasionally publish articles here. Hope you find something useful for yourself.</p>
     </header>
 
     <section class="mt-16 px-4 mb-32">

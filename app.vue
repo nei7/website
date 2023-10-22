@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import Navbar from "./components/Navbar.vue";
 
-const items = [
-  {
-    title: "Blog",
-    description: "View my blog posts",
-    href: "/posts"
-  },
-  {
-    title: "Stats",
-    description: "",
-    href: "/stats"
-  },
-  {
-    title: "Projects",
-    description: "",
-    href: "/projects"
-  }
-];
+// const items = [
+//   {
+//     title: "Blog",
+//     description: "View my blog posts",
+//     href: "/posts"
+//   },
+//   {
+//     title: "Stats",
+//     description: "",
+//     href: "/stats"
+//   },
+//   {
+//     title: "Projects",
+//     description: "",
+//     href: "/projects"
+//   }
+// ];
 
 useHead({
   htmlAttrs: {
@@ -37,7 +37,6 @@ useHead({
   <div class="min-h-screen w-full bg-gray-50 dark:bg-gray-900 overflow-hidden">
     <NuxtLoadingIndicator color="#4F46E5" />
     <Navbar></Navbar>
-    <CommandPalette :items="items"></CommandPalette>
 
     <NuxtPage />
   </div>

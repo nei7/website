@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  ChartData,
-  ChartOptions,
-  ChartType,
-  ChartTypeRegistry,
-  TooltipItem
-} from "chart.js";
+import { ChartData, ChartOptions, ChartType, ChartTypeRegistry, TooltipItem } from "chart.js";
 import { Datapoint } from "~/types/wakatime";
 import { colorScheme } from "~/constants/colors";
 

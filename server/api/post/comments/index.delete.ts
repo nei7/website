@@ -14,12 +14,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const query = getQuery(event);
-  const comment = await supabase
-    .from("comments")
-    .select("*")
-    .eq("id", query.commentId)
-    .limit(1)
-    .single();
+  const comment = await supabase.from("comments").select("*").eq("id", query.commentId).limit(1).single();
 
   if (!comment.data) {
     return createError({

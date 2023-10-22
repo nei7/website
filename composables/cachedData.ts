@@ -22,9 +22,6 @@ export function useCachedAsyncData<Data = any>(
   ) as AsyncData<Data, Error>;
 }
 
-export function useCachedFetch<Data>(
-  url: string,
-  options?: AsyncDataOptions<Data>
-) {
+export function useCachedFetch<Data>(url: string, options?: AsyncDataOptions<Data>) {
   return useCachedAsyncData<Data>(url, () => $fetch(url), options);
 }

@@ -3,9 +3,7 @@ import { SmartwatchData } from "~/types/huami";
 
 const props = defineProps<{ data: SmartwatchData[] }>();
 
-const distance = computed(
-  () => props.data.reduce((a, b) => a + b.steps.distance, 0) / 1000
-);
+const distance = computed(() => props.data.reduce((a, b) => a + b.steps.distance, 0) / 1000);
 </script>
 
 <template>

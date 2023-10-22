@@ -43,13 +43,9 @@ export const useCommentStore = defineStore("comments", {
       this.childComments = new Map();
       this.rootComments = [];
 
-      const { data: comments } = await useCachedFetch<{ data: Comment[] }>(
-        `/api/post/comments?postId=${postId}`
-      );
+      const { data: comments } = await useCachedFetch<{ data: Comment[] }>(`/api/post/comments?postId=${postId}`);
 
-      this.rootComments = comments.value.data.filter(
-        (comment) => comment.reply_of === null
-      );
+      this.rootComments = comments.value.data.filter((comment) => comment.reply_of === null);
 
       this.postId = postId;
 
@@ -66,22 +62,18 @@ export const useCommentStore = defineStore("comments", {
 
     async handleAddComment(text: string, userId: string) {
       try {
-        const { data } = await $fetch<{ data: Comment[] }>(
-          "/api/post/comments",
-          {
-            method: "POST",
-            body: {
-              text,
-              postId: this.postId,
-              userId,
-              replyOf: this.replyComment?.id
-            }
+        const { data } = await $fetch<{ data: Comment[] }>("/api/post/comments", {
+          method: "POST",
+          body: {
+            text,
+            postId: this.postId,
+            userId,
+            replyOf: this.replyComment?.id
           }
-        );
+        });
 
         if (this.replyComment === null) this.rootComments.push(...data);
-        else if (this.childComments.has(this.replyComment.id))
-          this.childComments.get(this.replyComment.id)?.push(...data);
+        else if (this.childComments.has(this.replyComment.id)) this.childComments.get(this.replyComment.id)?.push(...data);
         else this.childComments.set(this.replyComment.id, data);
       } catch (err) {
       } finally {

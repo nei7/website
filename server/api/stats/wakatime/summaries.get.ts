@@ -6,25 +6,15 @@ export default cachedEventHandler(async () => {
   const { access_token } = await getToken();
   const summaries = await getSummaries(access_token);
 
-  return summaries.data.map(
-    ({
-      categories,
-      grand_total,
-      editors,
-      languages,
-      machines,
-      operating_systems,
-      range
-    }) => ({
-      categories,
-      grand_total,
-      editors,
-      languages,
-      machines,
-      operating_systems,
-      range
-    })
-  );
+  return summaries.data.map(({ categories, grand_total, editors, languages, machines, operating_systems, range }) => ({
+    categories,
+    grand_total,
+    editors,
+    languages,
+    machines,
+    operating_systems,
+    range
+  }));
 });
 
 const getSummaries = (token: string) => {
@@ -34,12 +24,9 @@ const getSummaries = (token: string) => {
   date.setDate(date.getDate() - 7);
   const startDate = yyyymmdd(date);
 
-  return $fetch<{ data: Summary[] }>(
-    `https://wakatime.com/api/v1/users/current/summaries?start=${startDate}&end=${endDate}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  return $fetch<{ data: Summary[] }>(`https://wakatime.com/api/v1/users/current/summaries?start=${startDate}&end=${endDate}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-  );
+  });
 };

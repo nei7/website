@@ -9,8 +9,7 @@ export default defineEventHandler(async (event) => {
 
   if (!user.data.user) return;
 
-  const { avatar_url, picture, preferred_username } =
-    user.data.user.user_metadata;
+  const { avatar_url, picture, preferred_username } = user.data.user.user_metadata;
 
   return supabase
     .from("comments")
@@ -19,9 +18,7 @@ export default defineEventHandler(async (event) => {
       data: body.text,
       avatar_url: avatar_url || picture,
       post_id: body.postId,
-      profile_url: preferred_username
-        ? `https://github.com/${preferred_username}`
-        : null,
+      profile_url: preferred_username ? `https://github.com/${preferred_username}` : null,
       reply_of: body.replyOf,
       user_id: body.userId
     })

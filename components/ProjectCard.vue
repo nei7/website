@@ -10,9 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <Card
-    class="flex flex-col sm:flex-row items-center justify-between px-4 py-4 sm:px-6"
-  >
+  <Card class="flex flex-col sm:flex-row items-center justify-between px-4 py-4 sm:px-6">
     <div class="flex flex-1 items-center justify-start w-full">
       <span class="text-2xl">
         <slot name="icon"></slot>
@@ -24,9 +22,7 @@ defineProps<{
         </p>
       </div>
     </div>
-    <div
-      class="inline-flex items-center justify-end space-x-2 w-full sm:w-auto mt-4 sm:mt-1"
-    >
+    <div class="inline-flex items-center justify-end space-x-2 w-full sm:w-auto mt-4 sm:mt-1">
       <a
         v-if="link"
         class="relative inline-flex justify-center w-full sm:w-10 h-10 px-3 py-2 bg-gray-50 hover:bg-gray-200 text-slate-500 hover:text-slate-700 border-gray-200 rounded-lg text-sm font-medium default-transition default-focus border"

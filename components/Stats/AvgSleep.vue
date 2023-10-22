@@ -3,8 +3,7 @@ import { SmartwatchData } from "~/types/huami";
 
 const props = defineProps<{ data: SmartwatchData[] }>();
 
-const formatTime = (minutes: number) =>
-  `${Math.floor(minutes / 60)}h ${Math.round(minutes % 60)}m`;
+const formatTime = (minutes: number) => `${Math.floor(minutes / 60)}h ${Math.round(minutes % 60)}m`;
 
 const date = computed(() => {
   const total = props.data.reduce((a, b) => a + b.sleep.total, 0);

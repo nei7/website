@@ -12,12 +12,7 @@ const user = useSupabaseUser();
 const store = useAppStore();
 
 const onClick = useDebounceFn(
-  () =>
-    user.value
-      ? props.isActive
-        ? props.decrementFn()
-        : props.incrementFn()
-      : store.setAuthDialog(user !== null),
+  () => (user.value ? (props.isActive ? props.decrementFn() : props.incrementFn()) : store.setAuthDialog(user !== null)),
   300
 );
 </script>

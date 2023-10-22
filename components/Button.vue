@@ -23,8 +23,7 @@ const onClick = () => {
 
 const buttonClasses = classNames(
   sizes[props.size || "md"],
-  props.color ||
-    "bg-indigo-600 text-white hover:bg-indigo-500 disabled:bg-indigo-400"
+  props.color || "bg-indigo-600 text-white hover:bg-indigo-500 disabled:bg-indigo-400"
 );
 </script>
 
@@ -42,14 +41,7 @@ const buttonClasses = classNames(
       fill="none"
       viewBox="0 0 24 24"
     >
-      <circle
-        class="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        stroke-width="4"
-      ></circle>
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path
         class="opacity-75"
         fill="currentColor"

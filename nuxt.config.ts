@@ -4,13 +4,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  modules: [
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/supabase",
-    "@nuxt/image",
-    "@nuxtjs/google-fonts",
-    "@pinia/nuxt"
-  ],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "@nuxt/image", "@nuxtjs/google-fonts", "@pinia/nuxt"],
 
   image: {
     provider: "cloudinary",

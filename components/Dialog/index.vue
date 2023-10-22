@@ -29,17 +29,11 @@ onClickOutside(dialogRef, () => emit("close", false));
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div
-        v-if="open"
-        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-[60]"
-        @click="$emit('close', false)"
-      ></div>
+      <div v-if="open" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-[60]" @click="$emit('close', false)"></div>
     </Transition>
 
     <div v-if="open" class="z-[70] fixed inset-0 overflow-y-auto">
-      <div
-        class="flex min-h-full justify-center p-4 text-center items-center sm:p-0"
-      >
+      <div class="flex min-h-full justify-center p-4 text-center items-center sm:p-0">
         <Transition
           appear
           enter-active-class="duration-200 ease-out"

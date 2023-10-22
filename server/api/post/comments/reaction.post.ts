@@ -6,12 +6,7 @@ export default defineEventHandler(async (event) => {
 
   const query = getQuery(event);
 
-  const { data: comment } = await supabase
-    .from("comments")
-    .select("*")
-    .eq("id", query.commentId)
-    .limit(1)
-    .single();
+  const { data: comment } = await supabase.from("comments").select("*").eq("id", query.commentId).limit(1).single();
 
   if (comment) {
     return supabase

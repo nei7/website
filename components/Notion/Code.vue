@@ -7,12 +7,7 @@ const { code } = defineProps<{ code: CodeBlockObjectResponse }>();
 
 function highlightCode() {
   const grammar = prism.languages[code.code.language];
-  if (grammar)
-    return prism.highlight(
-      code.code.rich_text[0].plain_text,
-      grammar,
-      code.code.language
-    );
+  if (grammar) return prism.highlight(code.code.rich_text[0].plain_text, grammar, code.code.language);
   else return prism.util.encode(code.code.rich_text[0].plain_text);
 }
 
@@ -21,9 +16,6 @@ const html = highlightCode();
 
 <template>
   <div>
-    <pre
-      :class="'language-' + code.code.language"
-      class="text-lg"
-    ><code v-html="html" ></code></pre>
+    <pre :class="'language-' + code.code.language" class="text-lg"><code v-html="html" ></code></pre>
   </div>
 </template>
