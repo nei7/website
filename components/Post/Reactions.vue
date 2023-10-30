@@ -16,7 +16,7 @@ const {
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex justify-center gap-4">
     <PostReaction :increment-fn="handleIncrementThumbup" :decrement-fn="handleDecrementThumbup" :is-active="storage.liked">
       👍 {{ reactions.thumbup_count }}
     </PostReaction>

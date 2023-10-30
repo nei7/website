@@ -34,10 +34,8 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen w-full bg-gray-50 dark:bg-gray-900 overflow-hidden">
-    <NuxtLoadingIndicator color="#4F46E5" />
-    <Navbar></Navbar>
+  <NuxtLoadingIndicator color="#4F46E5" />
+  <Navbar></Navbar>
 
-    <NuxtPage />
-  </div>
+  <NuxtPage />
 </template>

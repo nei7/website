@@ -25,7 +25,7 @@ defineProps<{
     <div class="inline-flex items-center justify-end space-x-2 w-full sm:w-auto mt-4 sm:mt-1">
       <a
         v-if="link"
-        class="relative inline-flex justify-center w-full sm:w-10 h-10 px-3 py-2 bg-gray-50 hover:bg-gray-200 text-slate-500 hover:text-slate-700 border-gray-200 rounded-lg text-sm font-medium default-transition default-focus border"
+        class="relative inline-flex justify-center w-full sm:w-10 h-10 px-3 py-2 hover:bg-gray-100 text-slate-500 hover:text-slate-700 border-gray-200 rounded-lg text-sm font-medium default-transition default-focus border"
         :href="link"
         rel="noopener noreferrer"
         target="_blank"
@@ -34,7 +34,7 @@ defineProps<{
       </a>
       <a
         v-if="githubLink"
-        class="relative inline-flex justify-center items-center w-full sm:w-10 h-10 px-3 py-2 bg-gray-50 hover:bg-gray-200 text-slate-500 hover:text-slate-700 border-gray-200 rounded-lg text-sm font-medium default-transition default-focus border"
+        class="relative inline-flex justify-center items-center w-full sm:w-10 h-10 px-3 py-2 hover:bg-gray-100 text-slate-500 hover:text-slate-700 border-gray-200 rounded-lg text-sm font-medium default-transition default-focus border"
         :href="githubLink"
         rel="noopener noreferrer"
         target="_blank"

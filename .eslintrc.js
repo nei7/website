@@ -17,6 +17,7 @@ module.exports = {
     "n/no-callback-literal": "off",
     "vue/require-default-prop": "off",
     "vue/prop-name-casing": "off",
-    "vue/no-v-html": "off"
+    "vue/no-v-html": "off",
+    "vue/no-multiple-template-root": "off"
   }
 };

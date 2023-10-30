@@ -9,6 +9,8 @@
     transition: background 0.2s linear;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+
   }
   body {
     overflow-y: scroll;
