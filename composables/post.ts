@@ -1,7 +1,7 @@
 import { useLocalStorage } from "@vueuse/core";
 import { useCachedAsyncData } from "./cachedData";
-import { Post } from "~/utils/notion";
-import { Reactions } from "~/types/post";
+import type { Post } from "../utils/notion";
+import type { Reactions } from "../types/post";
 
 const initialReactionState = {
   liked: false,

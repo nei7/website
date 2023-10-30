@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BlockObjectResponse, Heading1BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { BlockObjectResponse, Heading1BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { useEventListener } from "@vueuse/core";
 import { useReadingTime } from "~/composables/utils";
 

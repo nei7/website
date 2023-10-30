@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onClickOutside } from "@vueuse/core";
-import { FunctionalComponent } from "nuxt/dist/app/compat/capi";
+import { type Component } from "vue-demi";
 
 defineProps<{
   open: boolean;
-  icon?: FunctionalComponent;
+  icon?: Component;
   color?: "";
 }>();
 

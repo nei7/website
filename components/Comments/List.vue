@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Comment from "./Comment.vue";
-import { Comment as CommentType, useCommentStore } from "~/stores/comments";
+import { type Comment as CommentType, useCommentStore } from "~/stores/comments";
 
 defineProps<{ comments: CommentType[] | undefined }>();
 

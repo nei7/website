@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { FunctionalComponent } from "nuxt/dist/app/compat/capi";
+import { type Component } from "vue-demi";
 
 const sizes = {
   xl: "text-xl py-3 px-5",
@@ -29,7 +29,7 @@ const props = withDefaults(
     placeholder?: string;
     type?: string;
     required?: boolean;
-    icon?: FunctionalComponent;
+    icon?: Component;
     size: keyof typeof sizes;
     transparent?: boolean;
     disabled?: boolean;

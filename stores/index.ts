@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Notification } from "~/composables/useToast";
+import { type Notification } from "~/composables/useToast";
 
 export const useAppStore = defineStore("app", () => {
   const notifications = ref<Notification[]>([]);

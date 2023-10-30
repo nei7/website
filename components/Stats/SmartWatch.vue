@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SmartwatchData } from "~/types/huami";
+import type { SmartwatchData } from "~/types/huami";
 
 const { data: activites } = useCachedFetch<SmartwatchData[]>("/api/stats/huami");
 </script>

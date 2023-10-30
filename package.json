@@ -14,6 +14,7 @@
     "lint:prettier": "prettier --check .",
     "lint:fix": "prettier --write --list-different . && pnpm lint --fix"
   },
+
   "devDependencies": {
     "@lhci/cli": "^0.12.0",
     "@nuxt/devtools": "latest",
@@ -28,7 +29,7 @@
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "nuxt": "^3.6.5",
+    "nuxt": "^3.8.0",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"
   },
@@ -43,6 +44,7 @@
     "@vueuse/head": "^1.1.26",
     "chart.js": "^4.3.0",
     "mitt": "^3.0.1",
+    "node-fetch-native": "^1.4.1",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0"
   }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CurrentSongResponse } from "~/types/spotify";
+import { type CurrentSongResponse } from "~/types/spotify";
 
 const currentSong = ref<CurrentSongResponse>({
   is_playing: false,
@@ -19,7 +19,14 @@ const currentSong = ref<CurrentSongResponse>({
 });
 
 onMounted(async () => {
-  currentSong.value = await $fetch<CurrentSongResponse>("/api/status/spotify");
+  try {
+    const song = await $fetch<CurrentSongResponse>("/api/status/spotify");
+    if (song) {
+      currentSong.value = song;
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 const onClick = () => {

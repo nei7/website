@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Datapoint, Summary } from "../../types/wakatime";
+import type { Datapoint, Summary } from "../../types/wakatime";
 import Editors from "./Editors.vue";
 import Languages from "./Languages.vue";
 

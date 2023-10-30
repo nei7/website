@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Post } from "../../utils/notion";
+import { type Post } from "../../utils/notion";
 
 const props = defineProps<{
   post: Post;

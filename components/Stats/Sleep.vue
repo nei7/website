@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ChartData, ChartOptions } from "chart.js";
+import type { ChartData, ChartOptions } from "chart.js";
 
-import { SmartwatchData } from "~/types/huami";
+import type { SmartwatchData } from "~/types/huami";
 
 const props = defineProps<{
   data: SmartwatchData[];

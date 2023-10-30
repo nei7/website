@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chart, ChartData, ChartOptions, ChartType } from "chart.js";
+import { Chart, type ChartData, type ChartOptions, type ChartType } from "chart.js";
 
 const props = defineProps<{
   type: ChartType;

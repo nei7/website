@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ChartData, ChartOptions, ChartType } from "chart.js";
-import { Summary } from "~/types/wakatime";
+import type { ChartData, ChartOptions, ChartType } from "chart.js";
+import type { Summary } from "~/types/wakatime";
 import { colorScheme } from "~/constants/colors";
 
 const props = defineProps<{
