@@ -34,19 +34,17 @@ useCustomHead("My statistics", "various activity statistics gathered in one plac
 </script>
 
 <template>
-  <div class="bg-gray-50">
-    <div class="w-full max-w-7xl mx-auto sm:pt-20 pb-20">
-      <section class="pt-32">
-        <div>
-          <h1 class="font-bold text-4xl sm:text-6xl">📊 My weekly stats</h1>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 mt-10">
-          <StatsWakatime />
-          <StatsSmartWatch />
-        </div>
-      </section>
+  <div class="w-full max-w-7xl mx-auto">
+    <section>
+      <div>
+        <h1 class="font-bold text-4xl sm:text-6xl">📊 My weekly stats</h1>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 mt-10">
+        <StatsWakatime />
+        <StatsSmartWatch />
+      </div>
+    </section>
 
-      <section class="mt-32"></section>
-    </div>
+    <section class="mt-32"></section>
   </div>
 </template>

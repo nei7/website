@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AuthError, Provider } from "@supabase/supabase-js";
+import { AuthError, type Provider } from "@supabase/supabase-js";
 
 useCustomHead("Log in", "Log in to get the ability to comment, add reactions and more");
 

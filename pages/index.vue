@@ -19,11 +19,9 @@ const posts = computed(() => data.value.posts.slice(0, 3));
 </script>
 
 <template>
-  <Cursor />
-  <div class="relative isolate mx-auto sm:pt-20 max-w-6xl px-4 xs:px-0">
-    <GradientTop />
+  <div class="relative isolate mx-auto max-w-6xl px-4 xs:px-0">
     <section class="text-left">
-      <div class="mt-32">
+      <div>
         <h1 class="font-bold text-4xl sm:text-6xl">Hi. I'm franek 👋</h1>
 
         <p class="leading-8 sm:leading-10 sm:text-xl text-justify sm:text-left mt-10 text-slate-600">

@@ -10,7 +10,11 @@ export default defineNuxtConfig({
     provider: "cloudinary",
     cloudinary: {
       baseURL: "https://res.cloudinary.com/neiblog/image/upload/v1687877980"
-    }
+    },
+    domains: ["res.cloudinary.com"]
+  },
+  app: {
+    pageTransition: { name: "page", mode: "out-in" }
   },
   nitro: {
     routeRules: {

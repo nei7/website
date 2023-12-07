@@ -3,7 +3,6 @@ import type { BlockObjectResponse, Heading1BlockObjectResponse } from "@notionhq
 import { useEventListener } from "@vueuse/core";
 import { useReadingTime } from "~/composables/utils";
 
-import NotFound from "~/components/NotFound.vue";
 import { useCommentStore } from "~/stores/comments";
 
 const route = useRoute();
@@ -12,7 +11,7 @@ const { data } = await usePosts();
 
 const post = computed(() => data.value.posts.find(({ slug }) => slug === route.params.slug.toString())!);
 
-const { data: blocks, error } = await useCachedFetch<{
+const { data: blocks } = await useCachedFetch<{
   results: BlockObjectResponse[];
 }>(`/api/notion/blocks/${post.value?.id}`);
 
@@ -36,13 +35,29 @@ const margin = ref(0);
 const textOpacity = ref(1);
 const textTransform = ref(35);
 
+const topOffsets = ref<number[]>([]);
+const currentContent = ref(-1);
+
 onMounted(() => {
+  toc.value.forEach((h) => {
+    const h1 = document.getElementById(h.heading_1.rich_text[0].plain_text);
+    if (h1) {
+      topOffsets.value.push(h1.getBoundingClientRect().top + window.scrollY);
+    }
+  });
+
   borderRadius.value = 60 * (window.innerWidth / 600);
   margin.value = window.innerWidth / 500;
 });
 
 const onScroll = () => {
-  const scrollFromTop = document.body.getBoundingClientRect().top;
+  for (let i = 0; i < topOffsets.value.length; i++) {
+    if (window.scrollY >= topOffsets.value[i] && window.scrollY <= topOffsets.value[i + 1]) {
+      currentContent.value = i;
+    }
+  }
+
+  const scrollFromTop = document.querySelector("#post")?.getBoundingClientRect().top || 0;
   if (scrollFromTop > 0) {
     const percentage = (1 / (window.innerHeight * 0.6)) * (scrollFromTop - 0.4 * window.innerHeight);
     borderRadius.value = percentage * 60 * (window.innerWidth / 600);
@@ -71,7 +86,7 @@ useEventListener("scroll", onScroll);
 </script>
 
 <template>
-  <div v-if="data && post">
+  <div>
     <header
       class="text-white border-white fixed top-0 left-0 right-0 h-screen pb-10 md:pb-32 bg-gray-100 -z-50 bg-gradient-to-r from-gray-100 via-sky-50 to-indigo-100"
     >
@@ -95,6 +110,7 @@ useEventListener("scroll", onScroll);
     </header>
 
     <div
+      id="post"
       class="bg-white main pt-2 sm:pt-10 pb-0"
       :style="{ borderRadius: `${borderRadius}px`, marginLeft: `${margin}rem`, marginRight: `${margin}rem` }"
     >
@@ -121,11 +137,12 @@ useEventListener("scroll", onScroll);
           <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px]">
             <h1 class="font-bold mb-3 border-b dark:border-gray-800 pb-2">Table Of Content</h1>
             <a
-              v-for="c in toc"
+              v-for="(c, i) in toc"
               :key="c.id"
               :href="`#${c.heading_1.rich_text[0].plain_text}`"
+              :class="currentContent === i ? 'bg-indigo-600 text-white' : ''"
               aria-current="page"
-              class="block text-sm mb-3 hover:underline text-slate-800"
+              class="block text-sm mb-3 hover:underline text-slate-800 p-2 rounded-xl"
             >
               {{ c.heading_1.rich_text[0].plain_text }}
             </a>
@@ -144,7 +161,6 @@ useEventListener("scroll", onScroll);
       </div>
     </div>
   </div>
-  <NotFound v-else-if="error"> </NotFound>
 </template>
 
 <style>
@@ -155,9 +171,5 @@ useEventListener("scroll", onScroll);
 .prose.content div:first-child > p::first-letter {
   font-size: 200%;
   font-weight: bold;
-}
-
-.prose h1 {
-  scroll-margin-block-start: 10rem;
 }
 </style>

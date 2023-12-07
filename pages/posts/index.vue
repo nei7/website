@@ -15,9 +15,9 @@ useCustomHead("My blog", "");
 </script>
 
 <template>
-  <div class="relative isolate bg-gray-50 h-screen pt-16 pb-20">
+  <div class="relative isolate h-screen">
     <div class="max-w-6xl mx-auto">
-      <header class="sm:mt-48 px-3">
+      <header class="px-3">
         <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>
         <p class="text-slate-700 sm:text-xl mt-10">I occasionally publish articles here. Hope you find something useful for yourself.</p>
       </header>
