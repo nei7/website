@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { BulletedListItemBlockObjectResponse, NumberedListItemBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  type BulletedListItemBlockObjectResponse,
+  type NumberedListItemBlockObjectResponse
+} from "@notionhq/client/build/src/api-endpoints";
 
 defineProps<{
   list_item: BulletedListItemBlockObjectResponse | NumberedListItemBlockObjectResponse;

@@ -11,7 +11,7 @@ const posts = computed(() => {
   return data.value.posts;
 });
 
-useCustomHead("My blog", "");
+useCustomHead("My blog", "Posts");
 </script>
 
 <template>

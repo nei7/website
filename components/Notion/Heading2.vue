@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Heading2BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type Heading2BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 defineProps<{ heading: Heading2BlockObjectResponse }>();
 </script>

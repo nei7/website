@@ -4,7 +4,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
 
 <template>
   <main class="mx-auto sm:py-20 max-w-6xl px-4 xs:px-0">
-    <div class="mt-32">
+    <div>
       <h1 class="font-bold text-4xl sm:text-6xl">List of my favorite projects</h1>
     </div>
 

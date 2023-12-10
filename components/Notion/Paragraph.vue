@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ParagraphBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type ParagraphBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 defineProps<{
   paragraph: ParagraphBlockObjectResponse;

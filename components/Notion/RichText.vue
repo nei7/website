@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 
 defineProps<{
   richText: RichTextItemResponse[];

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const { image } = defineProps<{ image: ImageBlockObjectResponse }>();
 

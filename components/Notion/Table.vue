@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TableBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type TableBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const { table } = defineProps<{ table: TableBlockObjectResponse }>();
 

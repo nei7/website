@@ -37,6 +37,7 @@ const textTransform = ref(35);
 
 const topOffsets = ref<number[]>([]);
 const currentContent = ref(-1);
+const postRef = ref<HTMLElement>();
 
 onMounted(() => {
   toc.value.forEach((h) => {
@@ -57,9 +58,9 @@ const onScroll = () => {
     }
   }
 
-  const scrollFromTop = document.querySelector("#post")?.getBoundingClientRect().top || 0;
+  const scrollFromTop = postRef.value?.getBoundingClientRect().top || 0;
   if (scrollFromTop > 0) {
-    const percentage = (1 / (window.innerHeight * 0.6)) * (scrollFromTop - 0.4 * window.innerHeight);
+    const percentage = (1 / (window.innerHeight * 0.8)) * (scrollFromTop - 0.4 * window.innerHeight);
     borderRadius.value = percentage * 60 * (window.innerWidth / 600);
 
     textTransform.value = window.innerHeight / 6 - (window.innerHeight / 6) * percentage;
@@ -110,7 +111,7 @@ useEventListener("scroll", onScroll);
     </header>
 
     <div
-      id="post"
+      ref="postRef"
       class="bg-white main pt-2 sm:pt-10 pb-0"
       :style="{ borderRadius: `${borderRadius}px`, marginLeft: `${margin}rem`, marginRight: `${margin}rem` }"
     >

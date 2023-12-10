@@ -30,7 +30,7 @@ ChartJS.register(
   LineElement
 );
 
-useCustomHead("My statistics", "various activity statistics gathered in one place");
+useCustomHead("My statistics", "Various activity statistics gathered in one place");
 </script>
 
 <template>

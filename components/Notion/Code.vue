@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import * as prism from "prismjs";
 import "prism-themes/themes/prism-coldark-dark.css";
 
