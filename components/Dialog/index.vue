@@ -2,7 +2,7 @@
 import { onClickOutside } from "@vueuse/core";
 import { type Component } from "vue-demi";
 
-defineProps<{
+const props = defineProps<{
   open: boolean;
   icon?: Component;
   color?: "";
@@ -17,6 +17,11 @@ const emit = defineEmits(["close"]);
 const dialogRef = ref<HTMLDivElement>();
 
 onClickOutside(dialogRef, () => emit("close", false));
+
+watch(
+  () => props.open,
+  (isOpen) => (isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "auto"))
+);
 </script>
 
 <template>

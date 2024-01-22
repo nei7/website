@@ -48,7 +48,7 @@ const isOpen = ref(false);
 
 <template>
   <command-palette v-model="isOpen" :items="items"></command-palette>
-  <div class="w-full flex relative justify-between items-center py-10 pb-20 sm:py-14 sm:px-20">
+  <div class="w-full flex absolute justify-between items-center py-10 pb-20 sm:py-14 sm:px-20 z-10">
     <div class="pl-5">
       <RouterLink to="/" class="block sm:hidden text-xl">~</RouterLink>
     </div>
@@ -77,7 +77,8 @@ const isOpen = ref(false);
 nav li::after {
   content: "";
   display: block;
-  height: 4px;
+  height: 3px;
+  border-radius: 30px;
 
   position: absolute;
   left: 1rem;

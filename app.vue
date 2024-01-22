@@ -37,7 +37,7 @@ useHead({
   <NuxtLoadingIndicator color="#4F46E5" />
   <Navbar></Navbar>
 
-  <NuxtPage />
+  <NuxtPage class="pt-48" />
 </template>
 
 <style>
@@ -45,7 +45,7 @@ useHead({
 .page-leave-active {
   transition-property: opacity;
   transition-timing-function: ease-in-out;
-  transition-duration: 400ms;
+  transition-duration: 200ms;
 }
 .page-enter-from,
 .page-leave-to {
