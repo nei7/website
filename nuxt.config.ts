@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "@nuxt/image", "@nuxtjs/google-fonts", "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "@nuxt/image", "@nuxtjs/google-fonts", "@pinia/nuxt", "nuxt-server-utils"],
 
   image: {
     provider: "cloudinary",
@@ -28,7 +28,8 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 12
         }
       }
-    }
+    },
+    plugins: ["plugins/mongodb.ts"]
   },
   googleFonts: {
     families: {
