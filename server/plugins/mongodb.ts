@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
 export default defineNitroPlugin(async (_nitroApp) => {
-  const config = useRuntimeConfig() as any;
-  console.log(config);
   try {
-    await mongoose.connect(config.mongodbUri);
-    console.log("Connected to MongoDB");
+    await mongoose.connect(process.env.MONGODB_URI as string);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
   }
 });
