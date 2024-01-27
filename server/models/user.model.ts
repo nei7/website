@@ -1,8 +1,17 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, type Document } from "mongoose";
+
+export interface User {
+  email: string;
+  name: string;
+  password: string;
+  avatarUrl: string;
+}
 
 const UserSchema = new Schema({
   name: String,
-  email: String
+  email: String,
+  password: String,
+  avatar: String
 });
 
-export const User = model("User", UserSchema);
+export const User = model<User & Document>("User", UserSchema);
