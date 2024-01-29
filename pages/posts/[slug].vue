@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { useEventListener } from "@vueuse/core";
-import { useReadingTime } from "~/composables/utils";
+import { useReadingTime } from "~/utils/notion";
 
 import { useCommentStore } from "~/stores/comments";
 
@@ -46,7 +46,7 @@ useEventListener("scroll", onScroll);
 </script>
 
 <template>
-  <div class="relative bg-gray-100 bg-gradient-to-r from-gray-100 via-sky-50 to-indigo-100">
+  <div class="relative bg-gray-100 bg-gradient-to-r from-gray-100 via-sky-50 to-indigo-100 pt-48">
     <header class="text-white absolute border-white top-0 left-0 right-0 pb-10 md:pb-32 z-[1] h-screen -mt-38">
       <div class="flex w-full h-full justify-center items-center">
         <div class="max-w-5xl">

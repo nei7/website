@@ -16,9 +16,10 @@ const attrs = useAttrs();
 const router = useRouter();
 
 const onClick = () => {
-  const defaultHref = attrs.href || attrs.defaultHref;
+  const defaultHref = (attrs.href || attrs.defaultHref) as string | undefined;
 
-  if (defaultHref) router.push(defaultHref);
+  if (defaultHref?.startsWith("http")) window.location.href = defaultHref;
+  else if (defaultHref) router.push(defaultHref);
 };
 
 const buttonClasses = classNames(

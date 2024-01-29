@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from "./components/Navbar.vue";
-
+import { useUser } from "./stores/user";
 // const items = [
 //   {
 //     title: "Blog",
@@ -31,13 +31,17 @@ useHead({
     }
   ]
 });
+
+const user = useUser();
+
+onMounted(() => $fetch<{ userId: string }>("/api/auth/me").then(({ userId }) => user.$patch({ id: userId })));
 </script>
 
 <template>
   <NuxtLoadingIndicator color="#4F46E5" />
   <Navbar></Navbar>
 
-  <NuxtPage class="pt-48" />
+  <NuxtPage />
 </template>
 
 <style>

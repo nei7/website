@@ -15,7 +15,7 @@ useCustomHead("My blog", "Posts");
 </script>
 
 <template>
-  <div class="relative isolate h-screen">
+  <div class="relative isolate h-screen pt-48">
     <div class="max-w-6xl mx-auto">
       <header class="px-3">
         <h1 class="font-bold text-4xl sm:text-5xl">Blog 📝</h1>

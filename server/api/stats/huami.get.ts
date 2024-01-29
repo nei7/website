@@ -1,5 +1,5 @@
 import { Activity } from "../../utils/huami";
-import { yyyymmdd } from "../../../composables/utils";
+import { yyyymmdd } from "../../../utils";
 export interface Response<T = any> {
   code: number;
   message: string;

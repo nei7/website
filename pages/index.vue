@@ -19,7 +19,7 @@ const posts = computed(() => data.value.posts.slice(0, 3));
 </script>
 
 <template>
-  <div class="relative isolate mx-auto max-w-6xl px-4 xs:px-0">
+  <div class="relative isolate mx-auto max-w-6xl px-4 xs:px-0 pt-48">
     <section class="text-left">
       <div>
         <h1 class="font-bold text-4xl sm:text-6xl">Hi. I'm franek 👋</h1>

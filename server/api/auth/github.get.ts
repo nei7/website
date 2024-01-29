@@ -1,24 +1,52 @@
-import qs from "node:querystring";
+import { User } from "~/server/models/user.model";
+import { signToken } from "~/server/utils/jwt";
 
 export default defineWrappedResponseHandler(async (event) => {
   const query = getQuery(event);
 
-  const data = await $fetch<Blob>(
-    `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${query.code}`,
+  const data = await $fetch<{ access_token: string }>(
+    `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${query.code}&scope=read:user,user:email`,
     {
-      method: "POST",
-      responseType: "blob"
+      headers: {
+        Accept: "application/json"
+      },
+      method: "POST"
     }
   );
 
-  const { access_token } = qs.parse(await data.text());
+  const { access_token } = data;
 
-  const user = await $fetch("https://api.github.com/user", {
+  const githubUser = await $fetch<{ avatar_url: string; login: string; id: string; html_url: string; name: string; email: string }>(
+    "https://api.github.com/user",
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    }
+  );
+
+  const email = await $fetch<{ email: string; primary: boolean }[]>("https://api.github.com/user/emails", {
     headers: {
       Authorization: `Bearer ${access_token}`
     }
-  });
+  }).then((emails) => emails.find((e) => e.primary)?.email);
 
-  console.log(user);
-  return user;
+  if (!email) return createError({ status: 400, message: "No email assigned to account" });
+
+  const user =
+    (await User.findOneAndUpdate({ email }, { github: githubUser })) ||
+    (await new User({
+      email,
+      username: githubUser.login,
+      avatarUrl: githubUser.avatar_url,
+      password: null
+    }).save());
+
+  user.password = undefined;
+
+  const token = signToken(user.id);
+
+  setCookie(event, "token", token, { secure: true });
+
+  return sendRedirect(event, "/");
 });
