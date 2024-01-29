@@ -34,7 +34,7 @@ useCustomHead("My statistics", "Various activity statistics gathered in one plac
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto">
+  <div class="w-full max-w-7xl mx-auto pt-48">
     <section>
       <div>
         <h1 class="font-bold text-4xl sm:text-6xl">📊 My weekly stats</h1>

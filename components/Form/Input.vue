@@ -1,22 +1,4 @@
-<template>
-  <div class="relative">
-    <input
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :class="inputClass"
-      class="relative rounded-lg block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 placeholder-gray-400 text-gray-900"
-      :type="type"
-      @input="onInput"
-    />
-    <span v-if="icon" class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-2.5">
-      <component :is="icon" class="w-5 h-5 text-gray-400"></component>
-    </span>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { type Component } from "vue-demi";
-
 const sizes = {
   xl: "text-xl py-3 px-5",
   lg: "py-2 px-4",
@@ -29,7 +11,7 @@ const props = withDefaults(
     placeholder?: string;
     type?: string;
     required?: boolean;
-    icon?: Component;
+    icon?: any;
     size: keyof typeof sizes;
     transparent?: boolean;
     disabled?: boolean;
@@ -52,4 +34,23 @@ const inputClass = classNames(
   props.icon ? "ps-10" : "",
   props.transparent ? "" : "ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
 );
+
+const uid = inject("uid");
 </script>
+
+<template>
+  <div class="relative">
+    <input
+      :id="uid"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      :class="inputClass"
+      class="relative rounded-lg block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 placeholder-gray-400 text-gray-900"
+      :type="type"
+      @input="onInput"
+    />
+    <span v-if="icon" class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-2.5">
+      <component :is="icon" class="w-5 h-5 text-gray-400"></component>
+    </span>
+  </div>
+</template>

@@ -19,7 +19,7 @@ export function usePostReactions(slug: string) {
   const storage = useLocalStorage(slug, initialReactionState);
 
   onMounted(async () => {
-    const { data } = await $fetch<{ data: Reactions }>(`/api/post/reactions/${slug}`);
+    const data = await $fetch<{ data: Reactions }>(`/api/post/reactions/${slug}`);
     Object.assign(reactions, data);
   });
 

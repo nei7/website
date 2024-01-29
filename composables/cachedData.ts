@@ -1,4 +1,4 @@
-import { AsyncData, AsyncDataOptions, NuxtApp } from "nuxt/app";
+import type { AsyncData, AsyncDataOptions, NuxtApp } from "nuxt/app";
 
 export function useCachedAsyncData<Data = any>(
   cacheKey: string,

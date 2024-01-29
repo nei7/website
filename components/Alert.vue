@@ -1,4 +1,5 @@
 <script setup lang="ts">
+export type AlertType = "danger" | "warning" | "info";
 const props = defineProps<{
   type: "danger" | "warning" | "info";
 }>();

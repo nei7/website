@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
 import { onClickOutside, useEventListener } from "@vueuse/core";
-import Input from "../Input.vue";
+import Input from "../Form/Input.vue";
 
 const props = defineProps<{
   items: {

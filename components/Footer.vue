@@ -17,7 +17,7 @@
         <nuxt-link to="/logout">Log out</nuxt-link>
       </li>
       <li v-else class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
-        <nuxt-link to="/enter">Log in</nuxt-link>
+        <nuxt-link to="/login">Log in</nuxt-link>
       </li>
     </ul>
     <ul class="pr-8 sm:p-0 text-right sm:text-left">

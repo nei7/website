@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
 import { useAppStore } from "~/stores";
+import { useUser } from "~/stores/user";
 
 const props = defineProps<{
   incrementFn: () => void;
@@ -8,11 +9,11 @@ const props = defineProps<{
   isActive: boolean;
 }>();
 
-const user = useSupabaseUser();
+const user = useUser();
 const store = useAppStore();
 
 const onClick = useDebounceFn(
-  () => (user.value ? (props.isActive ? props.decrementFn() : props.incrementFn()) : store.setAuthDialog(user !== null)),
+  () => (user.isAuthenticated ? (props.isActive ? props.decrementFn() : props.incrementFn()) : store.setAuthDialog(user !== null)),
   300
 );
 </script>
