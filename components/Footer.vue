@@ -13,7 +13,7 @@
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/projects">Projects</nuxt-link>
       </li>
-      <li v-if="user" class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
+      <li v-if="user.id" class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/logout">Log out</nuxt-link>
       </li>
       <li v-else class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
@@ -36,5 +36,6 @@
 </template>
 
 <script setup lang="ts">
-const user = useSupabaseUser();
+import { useUser } from "~/stores/user";
+const user = useUser();
 </script>

@@ -1,9 +1,5 @@
 <script setup lang="ts">
-const client = useSupabaseAuthClient();
-
-const signOut = async () => {
-  await client.auth.signOut();
-
+const signOut = () => {
   navigateTo("/");
 };
 </script>

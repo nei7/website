@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import Comment from "./Comment.vue";
+import { useUser } from "~/stores/user";
 import { type Comment as CommentType, useCommentStore } from "~/stores/comments";
 
 defineProps<{ comments: CommentType[] | undefined }>();
 
 const { getChildComments } = useCommentStore();
 
-const user = useSupabaseUser();
+const user = useUser();
 </script>
 
 <template>
