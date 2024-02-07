@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const sizes = {
-  lg: "",
   md: "text-xs sm:text-base py-3 px-8 font-medium",
   sm: "text-xs sm:text-sm py-3 px-6 font-medium"
 };

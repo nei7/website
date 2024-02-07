@@ -2,9 +2,10 @@
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { useCommentStore } from "~/stores/comments";
 import { useAppStore } from "~/stores";
+import { useUser } from "~/stores/user";
 
 const commentFormRef = ref<HTMLDivElement>();
-const user = useSupabaseUser();
+const user = useUser();
 const isCommenting = ref(false);
 const commentText = ref("");
 const store = useCommentStore();
@@ -24,8 +25,8 @@ watch(
 );
 
 const onClick = async () => {
-  if (!user.value) return;
-  await store.handleAddComment(commentText.value, user.value?.id);
+  if (!user) return;
+  await store.handleAddComment(commentText.value, user.id);
   commentText.value = "";
 };
 
@@ -36,7 +37,7 @@ const handleDismissReply = () => {
 };
 
 const onFocus = (e: FocusEvent) => {
-  if (user.value) isCommenting.value = true;
+  if (user.id) isCommenting.value = true;
   else (e.target as HTMLInputElement).blur();
 };
 </script>

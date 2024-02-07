@@ -3,7 +3,7 @@ useCustomHead("Projects", "A selection list of my favorite projects");
 </script>
 
 <template>
-  <main class="mx-auto sm:py-20 max-w-6xl px-4 xs:px-0 pt-48">
+  <div class="mx-auto max-w-6xl px-4 xs:px-0 pt-48">
     <div>
       <h1 class="font-bold text-4xl sm:text-6xl">List of my favorite projects</h1>
     </div>
@@ -35,5 +35,5 @@ useCustomHead("Projects", "A selection list of my favorite projects");
         <template #icon> 💻 </template>
       </ProjectCard>
     </div>
-  </main>
+  </div>
 </template>
