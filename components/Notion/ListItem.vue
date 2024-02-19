@@ -10,8 +10,8 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center mt-3">
-    <div v-if="list_item.type === 'bulleted_list_item'" class="bg-slate-700 rounded-full w-1.5 h-1.5 mr-2"></div>
+  <div class="mt-3">
+    <div v-if="list_item.type === 'bulleted_list_item'" class="bg-slate-700 rounded-full w-1.5 h-1.5 mr-2 inline-block"></div>
 
     <NotionRichText
       :rich-text="

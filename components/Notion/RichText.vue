@@ -16,7 +16,7 @@ defineProps<{
       'line-through': element.annotations.strikethrough,
       underline: element.annotations.underline,
       'font-mono font-normal bg-base-200 rounded-box py-0.5 px-1': element.annotations.code,
-      'text-red-500': element.annotations.color == 'red',
+      'text-red-500': element.annotations.color == 'red' || element.annotations.code,
       'text-pink-500': element.annotations.color == 'pink',
       'text-purple-500': element.annotations.color == 'purple',
       'text-blue-500': element.annotations.color == 'blue',
@@ -36,9 +36,12 @@ defineProps<{
       'bg-gray-200 dark:bg-gray-800': element.annotations.color == 'gray_background'
     }"
   >
-    <a v-if="element.href" class="cursor-pointer" :href="element.href">
+    <a v-if="element.href" class="cursor-pointer text-slate-500" :href="element.href">
       {{ element.plain_text }}
     </a>
+    <span v-else-if="element.annotations.code" class="text-sm bg-gray-200 p-1 rounded-md">
+      {{ element.plain_text }}
+    </span>
     <template v-else>
       {{ element.plain_text }}
     </template>

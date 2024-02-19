@@ -19,7 +19,7 @@ function handleError() {
     <Navbar></Navbar>
 
     <div class="pt-10 w-full">
-      <div class="flex flex-col items-center max-w-4xl mx-auto text-center mt-64">
+      <div class="flex flex-col items-center max-w-4xl mx-auto text-center mt-32 sm:mt-64">
         <p class="p-5 text-sm font-medium text-indigo-500 rounded-full bg-indigo-50">
           <ExclamationTriangleIcon class="w-7 h-7"> </ExclamationTriangleIcon>
         </p>
@@ -31,7 +31,7 @@ function handleError() {
         </p>
         <pre v-if="isDev">{{ error }}</pre>
 
-        <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
+        <div class="flex items-center justify-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
           <Button @click="handleError"> Take me home </Button>
         </div>
       </div>

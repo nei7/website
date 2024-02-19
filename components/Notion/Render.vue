@@ -6,7 +6,7 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div v-for="block in blocks" :key="block.id">
+  <template v-for="block in blocks" :key="block.id">
     <NotionHeading1 v-if="block.type === 'heading_1'" :heading="block" />
     <NotionHeading2 v-else-if="block.type === 'heading_2'" :heading="block" />
     <NotionHeading3 v-else-if="block.type === 'heading_3'" :heading="block" />
@@ -15,5 +15,5 @@ defineProps<{
     <NotionCode v-else-if="block.type === 'code'" :code="block" />
     <NotionListItem v-else-if="block.type === 'bulleted_list_item' || block.type === 'numbered_list_item'" :list_item="block" />
     <NotionTable v-else-if="block.type === 'table'" :table="block"></NotionTable>
-  </div>
+  </template>
 </template>

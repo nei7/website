@@ -12,7 +12,7 @@
 
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex justify-center mt-20 sm:mt-32 p-4 sm:p-0">
-          <div ref="commandPalleteRef" class="bg-white py-2 rounded-xl w-full max-w-xl drop-shadow-2xl">
+          <div ref="commandPalleteRef" class="bg-white py-2 rounded-xl w-full max-w-2xl drop-shadow-2xl">
             <div class="pb-1 border-b px-5">
               <Input
                 ref="inputRef"
@@ -20,28 +20,39 @@
                 placeholder="Search..."
                 class="roundex-2xl"
                 :icon="MagnifyingGlassIcon"
-                size="md"
+                size="sm"
                 transparent
               ></Input>
             </div>
 
-            <div v-if="input.length === 0 || searchItems.length > 0" class="px-3">
-              <ul class="gap-5 mt-3">
-                <CommandPaletteItem
-                  v-for="(item, i) in searchItems"
-                  :key="i"
-                  :title="item.title"
-                  :description="item.description"
-                  :active="selectedIndex === i"
-                  @click="onItemSelected(i)"
-                />
-              </ul>
+            <div class="sm:h-full lg:h-80 overflow-y-scroll">
+              <div v-if="input.length === 0 || searchItems.length > 0" class="px-3">
+                <ul class="gap-5 mt-3">
+                  <CommandPaletteItem
+                    v-for="(item, i) in searchItems"
+                    :key="i"
+                    :title="item.title"
+                    :description="item.description"
+                    :active="selectedIndex === i"
+                    @click="onItemSelected(i)"
+                  >
+                    <p class="font-bold text-slate-800 text-lg">{{ item.title }}</p>
+                    <p class="text-slate-600 text-sm">{{ item.description }}</p>
+                  </CommandPaletteItem>
+                </ul>
+              </div>
+              <div v-else class="h-full flex items-center justify-center">
+                <div>
+                  <MagnifyingGlassIcon class="w-6 h-6 mx-auto mb-2 text-slate-500"></MagnifyingGlassIcon>
+                  <p>Not found any item</p>
+                </div>
+              </div>
             </div>
-            <div v-else></div>
           </div>
         </div>
-      </div></div
-  ></Transition>
+      </div>
+    </div></Transition
+  >
 </template>
 
 <script setup lang="ts">
@@ -67,6 +78,13 @@ const input = ref("");
 const router = useRouter();
 
 onClickOutside(commandPalleteRef, () => emit("update:modelValue", false));
+
+watch(router.currentRoute, () => findItem());
+
+const findItem = () => {
+  const itemIdx = props.items.findIndex((item) => item.href === router.currentRoute.value.path);
+  if (itemIdx) selectedIndex.value = itemIdx;
+};
 
 watch(
   () => props.modelValue,

@@ -43,13 +43,15 @@ export const useCommentStore = defineStore("comments", {
       this.childComments = new Map();
       this.rootComments = [];
 
-      const { data: comments } = await useCachedFetch<{ data: Comment[] }>(`/api/post/comments?postId=${postId}`);
+      const { data: comments } = await useCachedFetch<Comment[] | undefined>(`/api/post/comments?postId=${postId}`);
 
-      this.rootComments = comments.value.data.filter((comment) => comment.reply_of === null);
+      if (!comments.value) return;
+
+      this.rootComments = comments.value.filter((comment) => comment.reply_of === null);
 
       this.postId = postId;
 
-      comments.value.data.forEach((comment) => {
+      comments.value.forEach((comment) => {
         if (comment.reply_of === null) return;
 
         if (this.childComments.has(comment.reply_of)) {

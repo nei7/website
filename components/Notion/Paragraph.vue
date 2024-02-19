@@ -7,7 +7,14 @@ defineProps<{
 </script>
 
 <template>
-  <p class="min-h-[1rem]">
+  <p v-if="paragraph.paragraph.rich_text.length > 0">
     <NotionRichText :rich-text="paragraph.paragraph.rich_text"></NotionRichText>
   </p>
+  <div v-else class="empty min-h-1"></div>
 </template>
+
+<style>
+.empty::after {
+  content: attr(placeholder);
+}
+</style>

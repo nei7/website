@@ -14,7 +14,7 @@ export const defineWrappedResponseHandler = <T extends EventHandlerRequest, D>(h
       return response;
     } catch (err) {
       if (err instanceof MongooseError) {
-        return createError(err);
+        return createError({ message: err.message });
       }
 
       console.log(err);

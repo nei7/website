@@ -22,6 +22,11 @@ const menu = [
 
 const items = [
   {
+    title: "Home",
+    href: "/",
+    description: "Home page"
+  },
+  {
     title: "Posts",
     href: "/posts",
     description: "My personal blog"
