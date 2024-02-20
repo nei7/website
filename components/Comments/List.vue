@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Comment from "./Comment.vue";
-import { useUser } from "~/composables/useUser";
+import useUser from "~/composables/useUser";
 
 import { type Comment as CommentType, useCommentStore } from "~/stores/comments";
 
@@ -31,7 +31,7 @@ const { data: user } = useUser();
         :profile_url="comment.profile_url"
         :loved="comment.loved"
         :reply-of="comment.reply_of"
-        :deletable="user?.id === comment.user_id"
+        :deletable="user?.userId === comment.user_id"
       ></Comment>
 
       <CommentsList :comments="getChildComments(comment.id)" class="ml-10"></CommentsList>

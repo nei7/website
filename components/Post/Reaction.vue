@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
-import { useUser } from "~/composables/useUser";
+import useUser from "~/composables/useUser";
 
 const props = defineProps<{
   incrementFn: () => void;
@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const { data: user } = useUser();
 
-const onClick = useDebounceFn(() => user && (props.isActive ? props.decrementFn() : props.incrementFn()), 300);
+const onClick = useDebounceFn(() => user.value.userId && (props.isActive ? props.decrementFn() : props.incrementFn()), 300);
 </script>
 
 <template>

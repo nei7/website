@@ -9,11 +9,16 @@ const richText = code.code.rich_text.reduce((acc, curr) => acc + curr.plain_text
 
 function highlightCode() {
   const grammar = prism.languages[code.code.language];
+
   if (grammar) return prism.highlight(richText, grammar, code.code.language);
   else return prism.util.encode(richText);
 }
 
-const html = highlightCode();
+const html = ref<prism.TokenStream>("");
+
+onMounted(() => {
+  html.value = highlightCode();
+});
 </script>
 
 <template>

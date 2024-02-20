@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-import { useUser } from "~/composables/useUser";
+import useUser from "~/composables/useUser";
 import { useCommentStore } from "~/stores/comments";
 
 const store = useCommentStore();
@@ -24,8 +24,8 @@ watch(
 );
 
 const onClick = async () => {
-  if (!user) return;
-  await store.handleAddComment(commentText.value, user.value.id);
+  if (!user.value.userId) return;
+  await store.handleAddComment(commentText.value, user.value.userId);
   commentText.value = "";
 };
 

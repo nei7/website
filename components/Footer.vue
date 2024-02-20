@@ -13,7 +13,7 @@
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/projects">Projects</nuxt-link>
       </li>
-      <li v-if="user" class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
+      <li v-if="user?.userId" class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/logout">Log out</nuxt-link>
       </li>
       <li v-else class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUser } from "~/composables/useUser";
+import useUser from "~/composables/useUser";
 
 const { data: user } = useUser();
 </script>
