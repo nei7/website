@@ -36,7 +36,7 @@ defineProps<{
       'bg-gray-200 dark:bg-gray-800': element.annotations.color == 'gray_background'
     }"
   >
-    <a v-if="element.href" class="cursor-pointer text-slate-500" :href="element.href">
+    <a v-if="element.href" class="cursor-pointer text-slate-500 border-b" :href="element.href">
       {{ element.plain_text }}
     </a>
     <span v-else-if="element.annotations.code" class="text-sm bg-gray-200 p-1 rounded-md">

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { XMarkIcon } from "@heroicons/vue/24/outline";
-import { storeToRefs } from "pinia";
-import { useAppStore } from "~/stores";
+// import { XMarkIcon } from "@heroicons/vue/24/outline";
+// import { storeToRefs } from "pinia";
 
-const { authDialog } = storeToRefs(useAppStore());
+// const { authDialog } = storeToRefs(useAppStore());
 </script>
 <template>
-  <Dialog :open="authDialog" class="sm:px-6 pb-8 px-2" @close="authDialog = false">
+  <div></div>
+  <!-- <Dialog :open="authDialog" class="sm:px-6 pb-8 px-2" @close="authDialog = false">
     <div class="flex items-center justify-between mb-5">
       <DialogTitle>Log in </DialogTitle>
       <button class="p-1 hover:bg-gray-100 rounded-lg" @click="authDialog = false">
@@ -19,5 +19,5 @@ const { authDialog } = storeToRefs(useAppStore());
       <Button size="sm" href="/enter">Login</Button>
       <Button size="sm" transparent href="/enter" color="bg-transparent text-slate-700"> Create account </Button>
     </div>
-  </Dialog>
+  </Dialog> -->
 </template>

@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { useUser } from "~/composables/useUser";
 import { useCommentStore } from "~/stores/comments";
-import { useAppStore } from "~/stores";
-import { useUser } from "~/stores/user";
 
+const store = useCommentStore();
 const commentFormRef = ref<HTMLDivElement>();
-const user = useUser();
+
 const isCommenting = ref(false);
 const commentText = ref("");
-const store = useCommentStore();
 
-const { setAuthDialog } = useAppStore();
+const { data: user } = useUser();
 
 watch(
   () => store.$state.replyComment,
@@ -26,7 +25,7 @@ watch(
 
 const onClick = async () => {
   if (!user) return;
-  await store.handleAddComment(commentText.value, user.id);
+  await store.handleAddComment(commentText.value, user.value.id);
   commentText.value = "";
 };
 
@@ -37,14 +36,14 @@ const handleDismissReply = () => {
 };
 
 const onFocus = (e: FocusEvent) => {
-  if (user.id) isCommenting.value = true;
+  if (user) isCommenting.value = true;
   else (e.target as HTMLInputElement).blur();
 };
 </script>
 
 <template>
   <div ref="commentFormRef">
-    <Textarea v-model="commentText" placeholder="Leave a comment..." @focus="onFocus" @click.prevent="setAuthDialog(!user)"></Textarea>
+    <Textarea v-model="commentText" placeholder="Leave a comment..." @focus="onFocus"></Textarea>
 
     <div class="flex gap-x-5 items-center mt-5">
       <Button v-if="isCommenting" size="sm" :disabled="!commentText" @click="onClick"> Submit </Button>

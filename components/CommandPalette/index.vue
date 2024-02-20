@@ -81,22 +81,24 @@ onClickOutside(commandPalleteRef, () => emit("update:modelValue", false));
 
 watch(router.currentRoute, () => findItem());
 
-const findItem = () => {
-  const itemIdx = props.items.findIndex((item) => item.href === router.currentRoute.value.path);
-  if (itemIdx) selectedIndex.value = itemIdx;
-};
-
 watch(
   () => props.modelValue,
   (status) => {
     if (status) {
+      document.body.style.overflowY = "hidden";
+
       // setTimeout(() => {
       //   const el = inputRef.value?.$el;
       //   if (el) (el.children[0] as HTMLInputElement).focus();
       // });
-    }
+    } else document.body.style.overflowY = "auto";
   }
 );
+
+const findItem = () => {
+  const itemIdx = props.items.findIndex((item) => item.href === router.currentRoute.value.path);
+  if (itemIdx) selectedIndex.value = itemIdx;
+};
 
 onMounted(() => {
   useEventListener(window, "keydown", (e) => {

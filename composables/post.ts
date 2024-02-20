@@ -3,6 +3,12 @@ import type { Post } from "../utils/notion";
 import type { Reactions } from "../types/post";
 import { useCachedAsyncData } from "./cachedData";
 
+export function usePosts(limit?: number) {
+  return useCachedAsyncData<{ posts: Post[]; tags: string[] }>("posts", () =>
+    $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(({ results }) => convertPosts(results))
+  );
+}
+
 const initialReactionState = {
   liked: false,
   loved: false,
@@ -102,10 +108,4 @@ export function usePostReactions(slug: string) {
     handleDecrementThumbup,
     storage
   };
-}
-
-export function usePosts(limit?: number) {
-  return useCachedAsyncData<{ posts: Post[]; tags: string[] }>("posts", () =>
-    $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(({ results }) => convertPosts(results))
-  );
 }

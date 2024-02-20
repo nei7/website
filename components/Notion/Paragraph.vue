@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <p v-if="paragraph.paragraph.rich_text.length > 0">
+  <p v-if="paragraph.paragraph.rich_text.length > 0" class="my-6 text-lg leading-loose text-slate-700">
     <NotionRichText :rich-text="paragraph.paragraph.rich_text"></NotionRichText>
   </p>
   <div v-else class="empty min-h-1"></div>

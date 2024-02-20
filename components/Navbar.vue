@@ -20,39 +20,10 @@ const menu = [
   }
 ];
 
-const items = [
-  {
-    title: "Home",
-    href: "/",
-    description: "Home page"
-  },
-  {
-    title: "Posts",
-    href: "/posts",
-    description: "My personal blog"
-  },
-  {
-    title: "Projects",
-    description: "A selection list of my favorite projects",
-    href: "/projects"
-  },
-  {
-    title: "Statistics",
-    description: "Various activity statistics gathered in one place",
-    href: "/stats"
-  },
-  {
-    title: "Sign in",
-    description: "Get the ability to comment, add reactions and more",
-    href: "/enter"
-  }
-];
-
-const isOpen = ref(false);
+const menuOpen = useMenu();
 </script>
 
 <template>
-  <command-palette v-model="isOpen" :items="items"></command-palette>
   <div class="w-full flex absolute justify-between items-center py-10 pb-20 sm:py-14 sm:px-20 z-10">
     <div class="pl-5">
       <RouterLink to="/" class="block sm:hidden text-xl">~</RouterLink>
@@ -72,7 +43,7 @@ const isOpen = ref(false);
           </router-link>
         </li>
 
-        <li class="relative flex items-center cursor-pointer" @click="isOpen = true"><Bars2Icon class="w-6 h-6"></Bars2Icon></li>
+        <li class="relative flex items-center cursor-pointer" @click="menuOpen = !menuOpen"><Bars2Icon class="w-6 h-6"></Bars2Icon></li>
       </ul>
     </nav>
   </div>

@@ -18,6 +18,6 @@ const html = highlightCode();
 
 <template>
   <div>
-    <pre :class="'language-' + code.code.language" class="text-sm lg:text-lg"><code v-html="html" ></code></pre>
+    <pre :class="'language-' + code.code.language" class="text-sm lg:text-base rounded-lg"><code v-html="html" ></code></pre>
   </div>
 </template>

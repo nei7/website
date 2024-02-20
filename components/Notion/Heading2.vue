@@ -5,7 +5,7 @@ defineProps<{ heading: Heading2BlockObjectResponse }>();
 </script>
 
 <template>
-  <h2>
+  <h2 class="my-5 font-bold text-3xl">
     <NotionRichText :rich-text="heading.heading_2.rich_text"></NotionRichText>
   </h2>
 </template>

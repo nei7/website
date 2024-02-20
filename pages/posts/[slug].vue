@@ -51,7 +51,7 @@ useEventListener("scroll", onScroll);
           <h1 class="font-bold text-4xl sm:text-7xl text-center text-slate-800 px-3 md:px-0">
             {{ post.title }}
           </h1>
-          <div class="flex items-center gap-x-4 mx-auto w-max mt-8 text-slate-600">
+          <div class="flex items-center gap-x-4 mx-auto w-max mt-8 text-slate-600 text-sm sm:text-base">
             <div>{{ post.published }}</div>
             /
             <div class="flex items-center">{{ readingTime }} min read</div>
@@ -65,7 +65,7 @@ useEventListener("scroll", onScroll);
       </div>
     </header>
 
-    <div class="relative bg-white pb-0 pt-20 top-[50vh] z-10">
+    <div class="relative bg-white pb-0 pt-10 sm:pt-20 top-[45vh] sm:top-[50vh] z-10">
       <div class="mx-auto w-full max-w-4xl">
         <article class="content sm:prose xl:prose-xl prose-slate sm:px-0 px-4 text-justify md:text-start break-words max-w-full">
           <NotionRender :blocks="blocks"></NotionRender>

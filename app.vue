@@ -1,23 +1,5 @@
 <script setup lang="ts">
 import Navbar from "./components/Navbar.vue";
-import { useUser } from "./stores/user";
-// const items = [
-//   {
-//     title: "Blog",
-//     description: "View my blog posts",
-//     href: "/posts"
-//   },
-//   {
-//     title: "Stats",
-//     description: "",
-//     href: "/stats"
-//   },
-//   {
-//     title: "Projects",
-//     description: "",
-//     href: "/projects"
-//   }
-// ];
 
 useHead({
   htmlAttrs: {
@@ -32,13 +14,41 @@ useHead({
   ]
 });
 
-const user = useUser();
+const menuItems = [
+  {
+    title: "Home",
+    href: "/",
+    description: "Home page"
+  },
+  {
+    title: "Posts",
+    href: "/posts",
+    description: "My personal blog"
+  },
+  {
+    title: "Projects",
+    description: "A selection list of my favorite projects",
+    href: "/projects"
+  },
+  {
+    title: "Statistics",
+    description: "Various activity statistics gathered in one place",
+    href: "/stats"
+  },
+  {
+    title: "Sign in",
+    description: "Get the ability to comment, add reactions and more",
+    href: "/enter"
+  }
+];
 
-onMounted(() => $fetch<{ userId: string }>("/api/auth/me").then(({ userId }) => user.$patch({ id: userId })));
+const menuOpen = useMenu();
 </script>
 
 <template>
   <NuxtLoadingIndicator color="#4F46E5" />
+  <CommandPalette v-model="menuOpen" :items="menuItems"></CommandPalette>
+
   <Navbar></Navbar>
 
   <NuxtPage />
@@ -49,7 +59,7 @@ onMounted(() => $fetch<{ userId: string }>("/api/auth/me").then(({ userId }) => 
 .page-leave-active {
   transition-property: opacity;
   transition-timing-function: ease-in-out;
-  transition-duration: 200ms;
+  transition-duration: 100ms;
 }
 .page-enter-from,
 .page-leave-to {
