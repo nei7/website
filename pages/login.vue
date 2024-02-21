@@ -31,14 +31,13 @@ const handleSignIn = async () => {
 </script>
 
 <template>
-  <div class="w-full max-w-2xl mx-auto pt-48 2xl:pt-32">
-    <Alert v-if="alert.message" :type="alert.type">
+  <div class="w-full max-w-2xl mx-auto pt-[13rem]">
+    <!-- <Alert v-if="alert.message" :type="alert.type">
       <span class="font-medium">{{ alert.message }}</span>
-    </Alert>
-    <div class="bg-white sn:px-20 sm:p-10 p-6 rounded-xl pb-14 border">
+    </Alert> -->
+    <div>
       <div class="my-10 text-center">
-        <h1 class="font-bold text-5xl">Login</h1>
-        <p class="mt-1 text-slate-600">Get the ability to comment, add reactions and more!</p>
+        <h3 class="font-bold text-4xl">Welcome back</h3>
       </div>
 
       <div class="flex flex-col gap-y-6">
@@ -46,17 +45,12 @@ const handleSignIn = async () => {
           href="https://github.com/login/oauth/authorize?client_id=683946d47c799d190f58&redirect_uri=https://fszarek.me/api/auth/github&scope=read:user,user:email"
           type="button"
           size="sm"
-          color="text-white bg-gray-700 hover:bg-gray-800 rounded-lg"
+          color="bg-transparent hover:bg-gray-50 border border-gray-200"
         >
           <img src="~/assets/icons/github.svg" class="w-5 h-5 mr-4" alt="github icon" />
           Sign in with Github
         </Button>
-        <Button
-          type="button"
-          size="sm"
-          color="bg-transparent hover:bg-gray-50 border rounded-lg shadow-sm text-slate-700"
-          @click="handleSignIn()"
-        >
+        <Button type="button" size="sm" color="bg-transparent hover:bg-gray-50 border border-gray-200">
           <img src="~/assets/icons/discord.svg" class="w-5 h-5 mr-4" alt="discord icon" />
           Sign in with Discord
         </Button>
@@ -77,10 +71,10 @@ const handleSignIn = async () => {
         </FormField>
 
         <div class="my-10">
-          <Button size="sm" class="w-full rounded-lg" type="submit" :loading="isLoading"> Sign in </Button>
+          <Button size="sm" class="w-full" type="submit" :loading="isLoading"> Sign in </Button>
         </div>
 
-        <p class="text-slate-600">New user? <AppLink to="/register">Sign up</AppLink></p>
+        <p class="text-slate-700 text-center">Are you a new user? <AppLink to="/register">Sign up</AppLink></p>
       </form>
     </div>
   </div>

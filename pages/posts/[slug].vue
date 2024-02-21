@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { type BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { useEventListener } from "@vueuse/core";
 import { useReadingTime } from "~/utils/notion";
-
 import { useCommentStore } from "~/stores/comments";
 
 const route = useRoute();
+const { data: posts } = await usePosts();
 
-const { data } = await usePosts();
-
-const post = computed(() => data.value.posts.find(({ slug }) => slug === route.params.slug.toString())!);
-
-const { data: blocks } = await useCachedFetch<BlockObjectResponse[]>(`/api/notion/blocks/${post.value?.id}`);
+const post = computed(() => posts.value.posts.find(({ slug }) => slug === route.params.slug.toString())!);
 
 useCustomHead(post.value?.title, post.value?.description);
 
+const { data: blocks } = await useCachedFetch<BlockObjectResponse[]>(`/api/notion/blocks/${post.value?.id}`);
+
 const relatedPosts = computed(() =>
-  data.value.posts.slice(0, 3).filter(({ id, tags }) => id !== post.value.id && tags.some((tag) => post.value.tags.includes(tag)))
+  posts.value.posts.slice(0, 3).filter(({ id, tags }) => id !== post.value.id && tags.some((tag) => post.value.tags.includes(tag)))
 );
 const readingTime = computed(() => (blocks.value ? useReadingTime(blocks.value) : 0));
 
@@ -25,22 +22,6 @@ const { $state, fetchList } = useCommentStore();
 fetchList(post.value.id);
 
 const commentsCount = computed(() => $state.rootComments.length);
-
-const paragraphs = ref<Element[]>([]);
-const currentParagaph = ref(0);
-onMounted(() => {
-  paragraphs.value = [...document.querySelectorAll(".prose h1")];
-});
-
-const onScroll = () => {
-  paragraphs.value.forEach((paragraph, i) => {
-    if (paragraph.getBoundingClientRect().top < 0) {
-      currentParagaph.value = i;
-    }
-  });
-};
-
-useEventListener("scroll", onScroll);
 </script>
 
 <template>
@@ -95,8 +76,6 @@ useEventListener("scroll", onScroll);
           </div>
         </div> -->
       </div>
-
-      <DialogAuth></DialogAuth>
 
       <div class="w-full py-16 flex justify-center relative mt-20">
         <div class="w-full max-w-4xl px-10 lg:px-0">

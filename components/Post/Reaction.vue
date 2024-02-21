@@ -15,7 +15,7 @@ const onClick = useDebounceFn(() => user.value.userId && (props.isActive ? props
 
 <template>
   <div
-    class="sm:py-4 sm:px-6 py-3 px-4 text-sm sm:text-base bg-white rounded-full cursor-pointer transition ease-in-out active:scale-90 text-slate-600"
+    class="py-3 px-4 text-sm sm:text-base bg-white rounded-full cursor-pointer transition ease-in-out active:scale-90 text-slate-600"
     :class="isActive ? 'bg-gray-100' : ''"
     @click="onClick"
   >

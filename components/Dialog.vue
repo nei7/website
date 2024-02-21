@@ -3,7 +3,7 @@ import { onClickOutside } from "@vueuse/core";
 import { type Component } from "vue-demi";
 
 const props = defineProps<{
-  open: boolean;
+  modelValue: boolean;
   icon?: Component;
   color?: "";
 }>();
@@ -12,14 +12,14 @@ defineOptions({
   inheritAttrs: false
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["update:modelValue"]);
 
 const dialogRef = ref<HTMLDivElement>();
 
-onClickOutside(dialogRef, () => emit("close", false));
+onClickOutside(dialogRef, () => emit("update:modelValue", false));
 
 watch(
-  () => props.open,
+  () => props.modelValue,
   (isOpen) => (isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "auto"))
 );
 </script>
@@ -35,13 +35,13 @@ watch(
       leave-to-class="opacity-0"
     >
       <div
-        v-if="open"
+        v-if="modelValue"
         class="fixed inset-0 backdrop-blur-xl bg-white bg-opacity-30 transition-opacity z-[60]"
-        @click="$emit('close', false)"
+        @click="$emit('update:modelValue', false)"
       ></div>
     </Transition>
 
-    <div v-if="open" class="z-[70] fixed inset-0 overflow-y-auto">
+    <div v-if="modelValue" class="z-[70] fixed inset-0 overflow-y-auto">
       <div class="flex min-h-full justify-center p-4 text-center items-center sm:p-0">
         <Transition
           appear

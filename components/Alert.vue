@@ -12,7 +12,7 @@ const color = {
 </script>
 
 <template>
-  <div class="p-4 mb-4 text-sm rounded-lg" role="alert" :class="color[props.type]">
+  <div class="p-4 mb-4 text-sm rounded-2xl" role="alert" :class="color[props.type]">
     <slot></slot>
   </div>
 </template>
