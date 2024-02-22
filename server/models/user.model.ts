@@ -6,7 +6,7 @@ export interface IUser {
   username: string;
   password?: string;
   avatarUrl: string;
-  github: object;
+  github: any;
 }
 
 const UserSchema = new Schema(

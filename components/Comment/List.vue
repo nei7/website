@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Comment from "./Comment.vue";
+import Comment from "./index.vue";
 import useUser from "~/composables/useUser";
 
 import { type Comment as CommentType, useCommentStore } from "~/stores/comments";
@@ -13,6 +13,7 @@ const { data: user } = useUser();
 
 <template>
   <TransitionGroup
+    v-if="comments && comments?.length > 0"
     enter-active-class="transition-all duration-500"
     enter-from-class="opacity-0 translate-y-3"
     leave-active-class="transition-all duration-500"
@@ -20,9 +21,9 @@ const { data: user } = useUser();
     leave-to-class="opacity-0 translate-y-0"
     tag="div"
   >
-    <div v-for="comment in comments" :key="comment.id">
+    <div v-for="comment in comments" :key="comment._id" :class="{ 'border-b': !comment.reply_of }" class="pb-4">
       <Comment
-        :id="comment.id"
+        :_id="comment._id"
         class="mt-10"
         :username="comment.username"
         :avatar_url="comment.avatar_url"
@@ -34,7 +35,7 @@ const { data: user } = useUser();
         :deletable="user?.userId === comment.user_id"
       ></Comment>
 
-      <CommentsList :comments="getChildComments(comment.id)" class="ml-10"></CommentsList>
+      <CommentList :comments="getChildComments(comment._id)" class="ml-10 border-0"></CommentList>
     </div>
   </TransitionGroup>
 </template>

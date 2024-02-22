@@ -36,7 +36,7 @@ watch(
     >
       <div
         v-if="modelValue"
-        class="fixed inset-0 backdrop-blur-xl bg-white bg-opacity-30 transition-opacity z-[60]"
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-[60]"
         @click="$emit('update:modelValue', false)"
       ></div>
     </Transition>
@@ -55,8 +55,12 @@ watch(
           <div
             v-bind="$attrs"
             ref="dialogRef"
-            class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
+            class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
           >
+            <div>
+              <slot name="header"></slot>
+            </div>
+
             <div class="bg-white p-4">
               <div
                 v-if="icon"
@@ -64,7 +68,7 @@ watch(
               >
                 <component :is="icon"></component>
               </div>
-              <div class="text-center sm:text-left">
+              <div class="">
                 <slot></slot>
               </div>
             </div>

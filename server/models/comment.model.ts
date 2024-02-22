@@ -25,10 +25,21 @@ const CommentSchema = new Schema({
     required: true
   },
   profile_url: String,
-  reply_of: String,
+  reply_of: {
+    type: String,
+    default: null
+  },
   user_id: {
     type: String,
     required: true
+  },
+  created_at: {
+    type: Number,
+    default: Date.now()
+  },
+  loved: {
+    type: Number,
+    default: 0
   }
 });
 

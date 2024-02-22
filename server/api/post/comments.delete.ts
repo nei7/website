@@ -7,7 +7,7 @@ export default defineWrappedResponseHandler(async (event) => {
       status: 401
     });
 
-  const body = await readBody<{ commentId: string }>(event);
+  const query = await getQuery<{ id: string }>(event);
 
-  return await Comment.deleteOne({ _id: body.commentId, user_id: event.context.userI });
+  return await Comment.deleteOne({ _id: query.id, user_id: event.context.userId });
 });

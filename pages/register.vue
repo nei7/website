@@ -33,10 +33,7 @@ const handleSignUp = async () => {
 </script>
 
 <template>
-  <div class="w-full max-w-2xl mx-auto pt-[13rem]">
-    <!-- <Alert v-if="alert.message" :type="alert.type">
-      <span class="font-medium">{{ alert.message }}</span>
-    </Alert> -->
+  <div class="w-full max-w-2xl mx-auto py-32 sm:pt-[13rem] px-3">
     <div>
       <div class="my-10 text-center">
         <h3 class="font-bold text-4xl">Create an account</h3>

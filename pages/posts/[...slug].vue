@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { useReadingTime } from "~/utils/notion";
 import { useCommentStore } from "~/stores/comments";
 
@@ -17,15 +18,40 @@ const relatedPosts = computed(() =>
 );
 const readingTime = computed(() => (blocks.value ? useReadingTime(blocks.value) : 0));
 
-const { $state, fetchList } = useCommentStore();
+const { $state, fetchComments } = useCommentStore();
 
-fetchList(post.value.id);
+fetchComments(post.value.id);
 
 const commentsCount = computed(() => $state.rootComments.length);
+
+const dialog = ref(false);
+
+const { data: user } = useUser();
+
+const openDialog = () => {
+  if (!user.value.userId) dialog.value = true;
+};
 </script>
 
 <template>
   <div class="relative bg-gray-100 bg-gradient-to-r from-gray-100 via-sky-50 to-indigo-100 pt-48">
+    <Dialog v-model="dialog">
+      <template #header>
+        <div class="border-b py-2 px-6 flex items-center">
+          <p class="text-xl font-semibold grow">Log in to continue</p>
+          <div class="rounded-xl hover:bg-gray-100 p-2 cursor-pointer" @click="dialog = false"><XMarkIcon class="w-6 h-6"></XMarkIcon></div>
+        </div>
+      </template>
+
+      <div class="text-center flex flex-col justify-center items-center py-4">
+        <p class="text-slate-700 mb-7">Unlock access to add comments, reactions and more...</p>
+        <Button size="sm" class="w-full sm:w-[30rem] mb-5" href="/login">Log in</Button>
+        <Button size="sm" color="bg-transparent hover:bg-gray-50 w-full sm:w-[30rem] text-indigo-600" href="/register"
+          >Create account</Button
+        >
+      </div>
+    </Dialog>
+
     <header class="text-white absolute border-white top-0 left-0 right-0 pb-10 md:pb-32 z-[1] h-[80vh]">
       <div class="flex w-full h-full justify-center items-center">
         <div class="max-w-5xl">
@@ -37,12 +63,8 @@ const commentsCount = computed(() => $state.rootComments.length);
             /
             <div class="flex items-center">{{ readingTime }} min read</div>
           </div>
-          <ClientOnly><PostReactions :slug="post.slug" class="mt-10 mx-auto"></PostReactions></ClientOnly>
+          <ClientOnly><PostReactions :slug="post.slug" class="mt-10 mx-auto" @click="openDialog"></PostReactions></ClientOnly>
         </div>
-
-        <!-- <div class="aspect-video lg:aspect-[2/1] relative overflow-hidden rounded-3xl mt-12">
-          <nuxt-img :src="post.coverImage" fit="cover" />
-        </div> -->
       </div>
     </header>
 
@@ -59,29 +81,13 @@ const commentsCount = computed(() => $state.rootComments.length);
             <Post v-for="_post in relatedPosts" :key="_post.id" :post="_post"></Post>
           </div>
         </div>
-
-        <!-- <div class="lg:col-span-3 sticky top-28 h-96 hidden lg:block justify-self-end">
-          <div class="border dark:border-gray-800 p-3 rounded-md min-w-[230px]">
-            <h1 class="font-bold mb-3 border-b dark:border-gray-800 pb-2">Table Of Content</h1>
-            <a
-              v-for="(c, i) in paragraphs"
-              :key="c.id"
-              :href="`#${c.textContent}`"
-              :class="currentParagaph === i ? 'bg-indigo-600 text-white' : ''"
-              aria-current="page"
-              class="block text-sm mb-3 hover:underline text-slate-800 p-2 rounded-xl"
-            >
-              {{ c.textContent }}
-            </a>
-          </div>
-        </div> -->
       </div>
 
       <div class="w-full py-16 flex justify-center relative mt-20">
-        <div class="w-full max-w-4xl px-10 lg:px-0">
+        <div class="w-full max-w-4xl px-2 sm:px-10 lg:px-0">
           <h2 class="font-bold text-2xl mb-10">Top Comments ({{ commentsCount }})</h2>
 
-          <CommentsContainer></CommentsContainer>
+          <CommentContainer></CommentContainer>
         </div>
       </div>
     </div>

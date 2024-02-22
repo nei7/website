@@ -31,7 +31,7 @@ const handleSignIn = async () => {
 </script>
 
 <template>
-  <div class="w-full max-w-2xl mx-auto pt-[13rem]">
+  <div class="w-full max-w-2xl mx-auto py-32 sm:pt-[13rem] px-3">
     <!-- <Alert v-if="alert.message" :type="alert.type">
       <span class="font-medium">{{ alert.message }}</span>
     </Alert> -->

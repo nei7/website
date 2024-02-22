@@ -1,15 +1,15 @@
 import { defineStore } from "pinia";
 
 export interface Comment {
-  id: number;
+  _id: string;
   username: string;
   data: string;
-  reply_of: null | number;
+  reply_of: null | string;
   avatar_url: string;
   loved: number;
   post_id: string;
   profile_url: string;
-  created_at: string;
+  created_at: number;
   user_id: string;
 }
 
@@ -21,7 +21,7 @@ export interface CommentTreeNode {
 export const useCommentStore = defineStore("comments", {
   state(): {
     rootComments: Comment[];
-    childComments: Map<number, Comment[]>;
+    childComments: Map<string, Comment[]>;
     postId: string;
     replyComment: Comment | null;
   } {
@@ -34,12 +34,12 @@ export const useCommentStore = defineStore("comments", {
   },
   getters: {
     getChildComments: (state) => {
-      return (id: number) => state.childComments.get(id);
+      return (id: string) => state.childComments.get(id);
     }
   },
 
   actions: {
-    async fetchList(postId: string) {
+    async fetchComments(postId: string) {
       this.childComments = new Map();
       this.rootComments = [];
 
@@ -62,28 +62,25 @@ export const useCommentStore = defineStore("comments", {
       });
     },
 
-    async handleAddComment(text: string, userId: string) {
+    async handleAddComment(text: string, user_id: string) {
       try {
-        const { data } = await $fetch<{ data: Comment[] }>("/api/post/comments", {
+        const data = await $fetch<Comment>("/api/post/comments", {
           method: "POST",
           body: {
-            text,
-            postId: this.postId,
-            userId,
-            replyOf: this.replyComment?.id
+            data: text,
+            post_id: this.postId,
+            user_id,
+            reply_of: this.replyComment?._id
           }
         });
 
-        if (this.replyComment === null) this.rootComments.push(...data);
-        else if (this.childComments.has(this.replyComment.id)) this.childComments.get(this.replyComment.id)?.push(...data);
-        else this.childComments.set(this.replyComment.id, data);
-      } catch (err) {
-      } finally {
-        useToast({ text: "" });
-      }
+        if (this.replyComment === null) this.rootComments.push(data);
+        else if (this.childComments.has(this.replyComment._id)) this.childComments.get(this.replyComment._id)?.push(data);
+        else this.childComments.set(this.replyComment._id, [data]);
+      } catch (err) {}
     },
 
-    async handleDeleteComment(commentId: number, replyOf: number | null) {
+    async handleDeleteComment(commentId: string, replyOf: string | null) {
       try {
         await $fetch(`/api/post/comments?id=${commentId}`, {
           method: "DELETE"
@@ -94,16 +91,14 @@ export const useCommentStore = defineStore("comments", {
           const comments = this.childComments.get(replyOf);
           if (comments) removeCommentById(commentId, comments);
         }
-      } catch (err) {
-        useToast({ title: "Error", text: (err as any).response._data.message });
-      }
+      } catch (err) {}
     }
   }
 });
 
-function removeCommentById(id: number, comments: Comment[]) {
+function removeCommentById(id: string, comments: Comment[]) {
   return comments.splice(
-    comments.findIndex((comment) => comment.id === id),
+    comments.findIndex((comment) => comment._id === id),
     1
   );
 }

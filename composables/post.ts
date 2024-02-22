@@ -87,11 +87,7 @@ export function usePostReactions(slug: string) {
           type
         }
       });
-    } catch (err) {
-      useToast({
-        text: (err as Error).message
-      });
-    }
+    } catch (err) {}
   };
 
   const updateReaction = (reaction: "loved" | "liked" | "hated") => {
