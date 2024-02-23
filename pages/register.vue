@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import type { AlertType } from "~/components/Alert.vue";
-
 useCustomHead("Log in", "Log in to get the ability to comment, add reactions and more");
 
 const isLoading = ref(false);
 
-const alert = reactive<{ type: AlertType; message: string }>({
-  type: "danger",
-  message: ""
-});
 
 const router = useRouter();
 
@@ -25,7 +19,6 @@ const handleSignUp = async () => {
 
     router.push("/");
   } catch (err) {
-    alert.message = (err as any).data.message;
   } finally {
     isLoading.value = false;
   }

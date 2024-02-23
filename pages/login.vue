@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import type { AlertType } from "~/components/Alert.vue";
 
 useCustomHead("Log in", "Log in to get the ability to comment, add reactions and more");
 
 const isLoading = ref(false);
 
-const alert = reactive<{ type: AlertType; message: string }>({
-  type: "danger",
-  message: ""
-});
 
 const router = useRouter();
 
@@ -23,7 +18,6 @@ const handleSignIn = async () => {
     await $fetch("/api/auth/signin", { body: state, method: "POST" });
     router.push("/");
   } catch (err) {
-    alert.message = (err as any).data.message;
   } finally {
     isLoading.value = false;
   }
@@ -32,9 +26,6 @@ const handleSignIn = async () => {
 
 <template>
   <div class="w-full max-w-2xl mx-auto py-32 sm:pt-[13rem] px-3">
-    <!-- <Alert v-if="alert.message" :type="alert.type">
-      <span class="font-medium">{{ alert.message }}</span>
-    </Alert> -->
     <div>
       <div class="my-10 text-center">
         <h3 class="font-bold text-4xl">Welcome back</h3>
