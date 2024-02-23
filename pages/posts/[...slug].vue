@@ -31,6 +31,41 @@ const { data: user } = useUser();
 const openDialog = () => {
   if (!user.value.userId) dialog.value = true;
 };
+
+const content = ref<HTMLElement | null>();
+
+const observer = ref<IntersectionObserver | null>();
+const observerOptions = reactive({
+  root: content.value,
+  threshold: 0.5
+});
+
+const activeTocId = ref<string | null>(null);
+const headings = ref<{ content: string; type: string }[]>([]);
+
+onMounted(() => {
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      if (entry.isIntersecting) {
+        activeTocId.value = id;
+      }
+    });
+  }, observerOptions);
+  if (content) {
+    const data = content.value?.querySelectorAll("h1[id], h2[id]");
+    console.log(data);
+    data?.forEach((section) => {
+      observer.value?.observe(section);
+    });
+
+    if (data) headings.value.push(...Array.from(data).map((i) => ({ content: i.id, type: i.tagName })));
+  }
+});
+
+onUnmounted(() => {
+  observer.value?.disconnect();
+});
 </script>
 
 <template>
@@ -69,10 +104,34 @@ const openDialog = () => {
     </header>
 
     <div class="relative bg-white pb-0 pt-10 sm:pt-20 top-[45vh] sm:top-[50vh] z-10">
-      <div class="mx-auto w-full max-w-4xl">
-        <article class="content sm:prose xl:prose-xl prose-slate sm:px-0 px-4 text-justify md:text-start break-words max-w-full">
-          <NotionRender :blocks="blocks"></NotionRender>
-        </article>
+      <div class="mx-auto w-full max-w-[90rem]">
+        <div class="grid grid-cols-7">
+          <div class="hidden xl:block"></div>
+          <article
+            ref="content"
+            class="col-span-7 xl:col-span-4 2xl:col-span-5 sm:px-10 px-5 text-justify md:text-start break-words w-full"
+          >
+            <div class="max-w-4xl mx-auto"><NotionRender :blocks="blocks"></NotionRender></div>
+          </article>
+          <div class="z-10 order-2 hidden w-[15rem] min-w-0 shrink-0 xl:block xl:pl-8">
+            <div class="sticky top-0 mt-[-72px] max-h-screen overflow-y-auto pb-10 pt-28">
+              <div>
+                <p class="font-semibold">On this page</p>
+                <nav>
+                  <ul class="text-sm">
+                    <li
+                      class="mt-1 p-2.5 rounded-xl"
+                      v-for="heading in headings"
+                      :class="{ 'ml-5': heading.type === 'H2', 'bg-gray-100 ': activeTocId === heading.content }"
+                    >
+                      <a :href="`#${heading.content}`" class="font-medium text-slate-700 hover:text-indigo-600">{{ heading.content }}</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div v-if="relatedPosts.length > 0" class="mt-24">
           <h1 class="font-bold text-4xl text-center">Related posts</h1>

@@ -2,12 +2,15 @@ import { useLocalStorage } from "@vueuse/core";
 import type { Post } from "../utils/notion";
 import type { Reactions } from "../types/post";
 import { useCachedAsyncData } from "./cachedData";
+import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export function usePosts(limit?: number) {
   return useCachedAsyncData<{ posts: Post[]; tags: string[] }>("posts", () =>
     $fetch(`/api/notion/query-database${limit ? "?size=" + limit : ""}`).then(({ results }) => convertPosts(results))
   );
 }
+
+const headingTypes = new Set(["heading_1", "heading_2"]);
 
 const initialReactionState = {
   liked: false,
