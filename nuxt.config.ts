@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/image", "@nuxtjs/google-fonts", "@pinia/nuxt", "nuxt-server-utils", "@nuxt/test-utils/module"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxt/image", "@nuxtjs/google-fonts", "nuxt-server-utils", "@nuxt/test-utils/module", "@pinia/nuxt"],
 
   image: {
     provider: "cloudinary",
@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" }
   },
+
   nitro: {
     routeRules: {
       "/notion/**": {
