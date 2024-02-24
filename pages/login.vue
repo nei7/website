@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
 useCustomHead("Log in", "Log in to get the ability to comment, add reactions and more");
 
 const isLoading = ref(false);
-
 
 const router = useRouter();
 

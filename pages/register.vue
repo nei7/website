@@ -3,7 +3,6 @@ useCustomHead("Log in", "Log in to get the ability to comment, add reactions and
 
 const isLoading = ref(false);
 
-
 const router = useRouter();
 
 const state = reactive({
