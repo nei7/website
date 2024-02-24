@@ -7,7 +7,7 @@ const store = useCommentStore();
 const commentFormRef = ref<HTMLDivElement>();
 
 const isCommenting = ref(false);
-const commentText = ref("");
+const text = ref("");
 
 const { data: user } = useUser();
 
@@ -25,8 +25,8 @@ watch(
 
 const onClick = async () => {
   if (!user.value.userId) return;
-  await store.handleAddComment(commentText.value, user.value.userId);
-  commentText.value = "";
+  await store.handleAddComment(text.value, user.value.userId);
+  text.value = "";
 };
 
 const handleDismissReply = () => {
@@ -43,10 +43,10 @@ const onFocus = (e: FocusEvent) => {
 
 <template>
   <div ref="commentFormRef">
-    <Textarea v-model="commentText" placeholder="Leave a comment..." @focus="onFocus"></Textarea>
+    <Textarea v-model="text" placeholder="Leave a comment..." @focus="onFocus"></Textarea>
 
     <div class="flex gap-x-5 items-center mt-5">
-      <Button v-if="isCommenting" size="sm" :disabled="!commentText" @click="onClick"> Submit </Button>
+      <Button v-if="isCommenting" size="sm" :disabled="!text" @click="onClick"> Submit </Button>
 
       <div
         v-if="store.$state.replyComment !== null"

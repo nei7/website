@@ -54,7 +54,6 @@ onMounted(() => {
   }, observerOptions);
   if (content) {
     const data = content.value?.querySelectorAll("h1[id], h2[id]");
-    console.log(data);
     data?.forEach((section) => {
       observer.value?.observe(section);
     });
@@ -116,12 +115,13 @@ onUnmounted(() => {
           <div class="z-10 order-2 hidden w-[15rem] min-w-0 shrink-0 xl:block xl:pl-8">
             <div class="sticky top-0 mt-[-72px] max-h-screen overflow-y-auto pb-10 pt-28">
               <div>
-                <p class="font-semibold">On this page</p>
+                <p class="font-semibold mb-3">On this page</p>
                 <nav>
                   <ul class="text-sm">
                     <li
+                      v-for="(heading, i) in headings"
+                      :key="i"
                       class="mt-1 p-2.5 rounded-xl"
-                      v-for="heading in headings"
                       :class="{ 'ml-5': heading.type === 'H2', 'bg-gray-100 ': activeTocId === heading.content }"
                     >
                       <a :href="`#${heading.content}`" class="font-medium text-slate-700 hover:text-indigo-600">{{ heading.content }}</a>

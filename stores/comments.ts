@@ -74,7 +74,7 @@ export const useCommentStore = defineStore("comments", {
           }
         });
 
-        if (this.replyComment === null) this.rootComments.push(data);
+        if (this.replyComment === null) this.rootComments.unshift(data);
         else if (this.childComments.has(this.replyComment._id)) this.childComments.get(this.replyComment._id)?.push(data);
         else this.childComments.set(this.replyComment._id, [data]);
       } catch (err) {}

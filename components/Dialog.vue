@@ -20,7 +20,7 @@ onClickOutside(dialogRef, () => emit("update:modelValue", false));
 
 watch(
   () => props.modelValue,
-  (isOpen) => (isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "auto"))
+  (isOpen) => (isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "scroll"))
 );
 </script>
 

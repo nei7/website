@@ -14,11 +14,9 @@ const { data: user } = useUser();
 <template>
   <TransitionGroup
     v-if="comments && comments?.length > 0"
-    enter-active-class="transition-all duration-500"
-    enter-from-class="opacity-0 translate-y-3"
-    leave-active-class="transition-all duration-500"
-    leave-from-class="opacity-100 translate-y-3"
-    leave-to-class="opacity-0 translate-y-0"
+    enter-active-class="transition-all duration-1000"
+    enter-from-class="opacity-0 -translate-y-3"
+    enter-to-class="opacity-100 translate-y-0"
     tag="div"
   >
     <div v-for="comment in comments" :key="comment._id" :class="{ 'border-b': !comment.reply_of }" class="pb-4">
