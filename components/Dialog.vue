@@ -22,6 +22,10 @@ watch(
   () => props.modelValue,
   (isOpen) => (isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "scroll"))
 );
+
+onBeforeUnmount(() => {
+  document.body.style.overflowY = "scroll";
+});
 </script>
 
 <template>

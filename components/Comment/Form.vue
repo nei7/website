@@ -23,27 +23,29 @@ watch(
   }
 );
 
-const onClick = async () => {
-  if (!user.value.userId) return;
-  await store.handleAddComment(text.value, user.value.userId);
-  text.value = "";
-};
-
 const handleDismissReply = () => {
   store.$patch({
     replyComment: null
   });
 };
 
+const onClick = async () => {
+  if (!user.value.userId) return;
+  await store.handleAddComment(text.value, user.value.userId);
+  text.value = "";
+};
+
 const onFocus = (e: FocusEvent) => {
   if (user) isCommenting.value = true;
   else (e.target as HTMLInputElement).blur();
 };
+
+const openDialog = inject<() => void>("openDialog");
 </script>
 
 <template>
   <div ref="commentFormRef">
-    <Textarea v-model="text" placeholder="Leave a comment..." @focus="onFocus"></Textarea>
+    <Textarea v-model="text" placeholder="Leave a comment..." @click="openDialog" @focus="onFocus"></Textarea>
 
     <div class="flex gap-x-5 items-center mt-5">
       <Button v-if="isCommenting" size="sm" :disabled="!text" @click="onClick"> Submit </Button>

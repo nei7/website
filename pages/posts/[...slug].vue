@@ -25,12 +25,16 @@ fetchComments(post.value.id);
 const commentsCount = computed(() => $state.rootComments.length);
 
 const dialog = ref(false);
-
 const { data: user } = useUser();
 
-const openDialog = () => {
-  if (!user.value.userId) dialog.value = true;
+const openDialog = (e: Event) => {
+  if (user.value.userId) return;
+
+  (e.target as HTMLElement)?.blur();
+  dialog.value = true;
 };
+
+provide("openDialog", openDialog);
 
 const content = ref<HTMLElement | null>();
 
