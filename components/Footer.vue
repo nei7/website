@@ -3,7 +3,7 @@
     <SpotifyStatus class="block w-full lg:w-96 mb-10 col-span-2"></SpotifyStatus>
 
     <ul class="pl-5 lg:p-0">
-      <li class="font-medium text-xl text-slate-900 mb-4">Links</li>
+      <li class="font-medium sm:text-xl text-slate-900 mb-4">Links</li>
       <li class="text-slate-600 sm:text-lg py-3 hover:text-slate-800">
         <nuxt-link to="/posts">Blog</nuxt-link>
       </li>
