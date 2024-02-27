@@ -28,8 +28,8 @@ const posts = computed(() => data.value.posts.slice(0, 3));
           I'm high school student in Poland. I'm
           <span class="underline decoration-wavy font-semibold"> {{ age }}</span>
           years old. My main interest is programming; I'am passionate about gaining knowledge and solving new problems while working on new
-          projects. I mainly use rust, go, typescript and vue js. When I'm not online I enjoy reading books, working out at the gym, running
-          and listening to music.
+          projects. I mainly use rust, go, typescript and vue js. When I'm not online I enjoy reading books, working out at the gym and
+          listening to music.
         </p>
       </div>
       <div class="mt-14 flex w-max">

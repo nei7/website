@@ -19,8 +19,8 @@ export const hasRichText = (block: BlockObjectResponse): block is Heading1BlockO
     (block[block.type]?.rich_text as RichTextItemResponse[])?.length > 0
   );
 };
-export function useReadingTime(blocks: BlockObjectResponse[]) {
-  const wordsPerMinute = 200;
+export function getReadingTime(blocks: BlockObjectResponse[]) {
+  const wordsPerMinute = 150;
 
   const content = blocks.reduce((acc, block) => {
     if (hasRichText(block)) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-import { useReadingTime } from "~/utils/notion";
+import { getReadingTime } from "~/utils/notion";
 import { useCommentStore } from "~/stores/comments";
 
 const route = useRoute();
@@ -16,7 +16,7 @@ const { data: blocks } = await useCachedFetch<BlockObjectResponse[]>(`/api/notio
 const relatedPosts = computed(() =>
   posts.value.posts.slice(0, 3).filter(({ id, tags }) => id !== post.value.id && tags.some((tag) => post.value.tags.includes(tag)))
 );
-const readingTime = computed(() => (blocks.value ? useReadingTime(blocks.value) : 0));
+const readingTime = computed(() => (blocks.value ? getReadingTime(blocks.value) : 0));
 
 const { $state, fetchComments } = useCommentStore();
 

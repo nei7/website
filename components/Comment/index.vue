@@ -31,9 +31,7 @@ const onReply = () => {
 };
 
 const handleReaction = async () => {
-  await $fetch(`/api/post/comments/reaction?commentId=${props._id}`, {
-    method: "POST"
-  });
+  await addReaction(props._id);
   loved.value++;
 };
 

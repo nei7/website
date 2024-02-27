@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { twMerge } from "tailwind-merge";
+
 const sizes = {
   md: "text-xs sm:text-base py-3 px-8 font-medium",
   sm: "text-xs sm:text-sm py-3 px-6 font-medium"
@@ -21,7 +23,7 @@ const onClick = () => {
   else if (defaultHref) router.push(defaultHref);
 };
 
-const buttonClasses = classNames(
+const buttonClasses = twMerge(
   sizes[props.size || "md"],
   props.color || "bg-indigo-600 text-white hover:bg-indigo-500 disabled:bg-indigo-400"
 );
