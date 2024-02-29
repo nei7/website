@@ -47,11 +47,13 @@ const menuOpen = useMenu();
 
 <template>
   <NuxtLoadingIndicator color="#4F46E5" />
-  <CommandPalette v-model="menuOpen" :items="menuItems"></CommandPalette>
+  <CommandPalette v-model="menuOpen" :items="menuItems" />
 
-  <Navbar></Navbar>
+  <Navbar />
 
   <NuxtPage />
+
+  <Notifications />
 </template>
 
 <style>

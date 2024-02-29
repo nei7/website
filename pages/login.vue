@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { ExclamationCircleIcon } from "@heroicons/vue/24/outline";
+import { CheckIcon } from "@heroicons/vue/24/solid";
+
 useCustomHead("Log in", "Log in to get the ability to comment, add reactions and more");
+
+const toast = useToast();
 
 const isLoading = ref(false);
 
@@ -14,8 +19,15 @@ const handleSignIn = async () => {
   isLoading.value = true;
   try {
     await $fetch("/api/auth/signin", { body: state, method: "POST" });
+    toast.add({ icon: CheckIcon, iconClass: "w-6 h-6 text-green-600", text: "Logged in", timeout: 6000 });
     router.push("/");
   } catch (err) {
+    toast.add({
+      icon: ExclamationCircleIcon,
+      iconClass: "w-6 h-6 text-red-600",
+      text: (err as any)?.response._data?.message,
+      timeout: 6000
+    });
   } finally {
     isLoading.value = false;
   }
