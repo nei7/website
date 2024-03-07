@@ -13,21 +13,21 @@
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex justify-center mt-20 sm:mt-32 p-4 sm:p-0">
           <div ref="commandPalleteRef" class="bg-white py-2 rounded-3xl w-full max-w-2xl drop-shadow-2xl px-1">
-            <div class="pb-1 border-b px-5">
+            <div class="pb-1 border-b mx-6">
               <Input
                 ref="inputRef"
                 v-model="input"
                 placeholder="Search..."
                 class="roundex-2xl"
                 :icon="MagnifyingGlassIcon"
-                size="sm"
+                size="md"
                 transparent
               ></Input>
             </div>
 
-            <div id="command-items" class="sm:h-full lg:h-80 overflow-y-scroll mt-1">
+            <div id="command-items" class="sm:h-full lg:h-80 overflow-y-scroll my-3">
               <div v-if="input.length === 0 || searchItems.length > 0" class="px-3">
-                <ul class="gap-5 mt-3">
+                <ul class="gap-5">
                   <CommandPaletteItem
                     v-for="(item, i) in searchItems"
                     :key="i"

@@ -12,8 +12,10 @@ import {
   Title,
   Tooltip,
   PointElement,
-  LineElement
+  LineElement,
+  PieController
 } from "chart.js";
+import type { Summary } from "~/types/wakatime";
 
 ChartJS.register(
   BarController,
@@ -27,14 +29,30 @@ ChartJS.register(
   BarElement,
   LineController,
   PointElement,
-  LineElement
+  LineElement,
+  PieController
 );
 
 useCustomHead("My statistics", "Various activity statistics gathered in one place");
+
+const { data } = useFetch<Summary[]>("/api/stats/wakatime/summaries");
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto pt-48">
+  <div class="w-full max-w-[100rem] mx-auto pt-48">
+    <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 px-2">
+      <div class="rounded-[2rem] p-6 mt-10 border sm:h-[25rem] w-full pb-10">
+        <p>Weekly activites</p>
+
+        <ChartsActivity v-if="data" :data="data"></ChartsActivity>
+      </div>
+      <div class="rounded-[2rem] p-6 mt-10 border sm:h-[25rem]">
+        <p>Editors</p>
+
+        <ChartsLangs v-if="data" :data="data"></ChartsLangs>
+      </div>
+    </div>
+
     <!-- <section>
       <div>
         <h1 class="font-bold text-4xl sm:text-6xl">📊 My weekly stats</h1>

@@ -38,7 +38,7 @@ const onClick = () => {
 
 <template>
   <div class="cursor-pointer" @click="onClick">
-    <Card class="rounded-[2rem] hover:scale-105 transition-all duration-500">
+    <div class="rounded-[2rem] hover:scale-105 transition-all duration-500 p-6 mt-10 border">
       <div class="font-bold text-xl sm:text-2xl flex items-center gap-x-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 168 168">
           <path
@@ -53,6 +53,6 @@ const onClick = () => {
         {{ currentSong.item.name }} by {{ currentSong.item.artists[0].name }}
       </p>
       <p v-else class="mt-4 text-slate-800 sm:text-base text-sm">Not playing</p>
-    </Card>
+    </div>
   </div>
 </template>

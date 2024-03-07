@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <Card class="flex flex-col sm:flex-row items-center justify-between px-4 py-4 sm:px-6">
+  <div class="p-6 mt-10 border rounded-3xl flex flex-col sm:flex-row items-center justify-between px-4 py-4 sm:px-6">
     <div class="flex flex-1 items-center justify-start w-full">
       <span class="text-2xl">
         <slot name="icon"></slot>
@@ -60,5 +60,5 @@ defineProps<{
         </svg>
       </a>
     </div>
-  </Card>
+  </div>
 </template>

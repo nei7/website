@@ -15,8 +15,8 @@ const menu = [
     path: "/stats"
   },
   {
-    name: "Projects",
-    path: "/projects"
+    name: "Register",
+    path: "/register"
   }
 ];
 
