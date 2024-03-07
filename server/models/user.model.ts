@@ -22,9 +22,10 @@ const UserSchema = new Schema(
       trim: true,
       required: true
     },
-    password: String,
+    password: { type: String, required: false, default: null },
     avatarUrl: String,
-    github: Object
+    github: { type: Object, required: false, default: null },
+    discord: { type: Object, required: false, default: null }
   },
   { versionKey: false }
 );

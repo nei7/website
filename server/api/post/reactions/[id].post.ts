@@ -1,6 +1,12 @@
 import { Reaction } from "~/server/models/reaction.model";
 
 export default defineWrappedResponseHandler(async (event) => {
+  if (!event.context.userId)
+    return createError({
+      message: "Unauthorized",
+      status: 401
+    });
+
   const postId = getRouterParam(event, "id");
   if (!postId) return createError({ message: "Invalid postId", status: 400 });
   const body = await readBody<{ reaction: "thumbup" | "skull" | "heart"; type: "increment" | "decrement" }>(event);

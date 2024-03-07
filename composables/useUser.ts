@@ -7,3 +7,8 @@ export default function useUser() {
     }
   });
 }
+
+export async function signOut() {
+  await $fetch("/api/auth/signout");
+  navigateTo("/");
+}

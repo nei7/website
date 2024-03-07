@@ -55,7 +55,12 @@ const handleSignUp = async () => {
           <img src="~/assets/icons/github.svg" class="w-5 h-5 mr-4" alt="github icon" />
           Sign in with Github
         </Button>
-        <Button type="button" size="sm" color="bg-transparent hover:bg-gray-50 border border-gray-200">
+        <Button
+          href="https://discord.com/oauth2/authorize?client_id=1215385278550646824&response_type=code&redirect_uri=https%3A%2F%2Ffszarek.me%2Fapi%2Fauth%2Fdiscord&scope=identify+email"
+          type="button"
+          size="sm"
+          color="bg-transparent hover:bg-gray-50 border border-gray-200"
+        >
           <img src="~/assets/icons/discord.svg" class="w-5 h-5 mr-4" alt="discord icon" />
           Sign in with Discord
         </Button>

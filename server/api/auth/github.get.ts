@@ -41,7 +41,8 @@ export default defineEventHandler(async (event) => {
         email,
         username: githubUser.login,
         avatarUrl: githubUser.avatar_url,
-        password: null
+        password: null,
+        github: githubUser
       }).save());
 
     user.password = undefined;
