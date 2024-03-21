@@ -1,15 +1,11 @@
-import { getToken } from "../../../utils/wakatime";
-
-export default cachedEventHandler(async () => {
-  const access_token = await getToken();
-
-  return getStats(access_token);
+export default cachedEventHandler(() => {
+  return getStats();
 });
 
-const getStats = (token: string) => {
+const getStats = () => {
   return $fetch("https://wakatime.com/api/v1/users/current/stats", {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Basic ${process.env.WAKATIME_TOKEN}`
     }
   });
 };

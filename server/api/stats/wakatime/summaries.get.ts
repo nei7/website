@@ -1,10 +1,8 @@
 import { Summary } from "../../../../types/wakatime";
-import { getToken } from "../../../utils/wakatime";
 import { yyyymmdd } from "../../../../utils";
 
 export default cachedEventHandler(async () => {
-  const access_token = await getToken();
-  const summaries = await getSummaries(access_token);
+  const summaries = await getSummaries();
 
   return summaries.data.map(({ categories, grand_total, editors, languages, machines, operating_systems, range }) => ({
     categories,
@@ -17,7 +15,7 @@ export default cachedEventHandler(async () => {
   }));
 });
 
-const getSummaries = (token: string) => {
+const getSummaries = () => {
   const date = new Date();
   const endDate = yyyymmdd(date);
 
@@ -26,7 +24,7 @@ const getSummaries = (token: string) => {
 
   return $fetch<{ data: Summary[] }>(`https://wakatime.com/api/v1/users/current/summaries?start=${startDate}&end=${endDate}`, {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Basic ${process.env.WAKATIME_TOKEN}`
     }
   });
 };

@@ -18,18 +18,18 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    routeRules: {
-      "/notion/**": {
-        cache: {
-          maxAge: 60 * 60 * 24
-        }
-      },
-      "/stats/**": {
-        cache: {
-          maxAge: 60 * 60 * 12
-        }
-      }
-    },
+    // routeRules: {
+    //   "/notion/**": {
+    //     cache: {
+    //       maxAge: 60 * 60 * 24
+    //     }
+    //   },
+    //   "/stats/**": {
+    //     cache: {
+    //       maxAge: 60 * 60 * 12
+    //     }
+    //   }
+    // },
     plugins: ["plugins/mongodb.ts"]
   },
   googleFonts: {

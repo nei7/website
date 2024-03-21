@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ChartData } from "chart.js";
+import type { ChartData, ChartOptions } from "chart.js";
 import type { Summary } from "~/types/wakatime";
 
 const props = defineProps<{ data: Summary[] }>();
 
-const chartData = computed(() =>
+const data = computed(() =>
   props.data.reduce<ChartData>(
     (acc, current) => {
       acc.labels?.push(current.range.date);
@@ -24,8 +24,16 @@ const chartData = computed(() =>
     }
   )
 );
+
+const options: ChartOptions = {
+  plugins: {
+    legend: {
+      position: "bottom"
+    }
+  }
+};
 </script>
 
 <template>
-  <Chart v-if="props" type="bar" :data="chartData"></Chart>
+  <Chart v-if="props" type="bar" :data="data" :options="options"></Chart>
 </template>

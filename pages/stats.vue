@@ -42,12 +42,12 @@ const { data } = useFetch<Summary[]>("/api/stats/wakatime/summaries");
   <div class="w-full max-w-[100rem] mx-auto pt-48">
     <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 px-2">
       <div class="rounded-[2rem] p-6 mt-10 border sm:h-[25rem] w-full pb-10">
-        <p>Weekly activites</p>
+        <p class="font-semibold text-lg text-slate-800 mb-3 text-center">Weekly activites</p>
 
         <ChartsActivity v-if="data" :data="data"></ChartsActivity>
       </div>
       <div class="rounded-[2rem] p-6 mt-10 border sm:h-[25rem]">
-        <p>Editors</p>
+        <p class="font-semibold text-lg text-slate-800 mb-3 text-center">Editors</p>
 
         <ChartsLangs v-if="data" :data="data"></ChartsLangs>
       </div>

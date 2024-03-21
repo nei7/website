@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ChartData } from "chart.js";
+import type { ChartData, ChartOptions } from "chart.js";
 import type { Summary } from "~/types/wakatime";
 
 const props = defineProps<{ data: Summary[] }>();
@@ -33,8 +33,16 @@ const chartData = computed(() => {
 
   return data;
 });
+
+const options: ChartOptions = {
+  plugins: {
+    legend: {
+      position: "bottom"
+    }
+  }
+};
 </script>
 
 <template>
-  <Chart type="pie" :data="chartData" class="mx-auto"></Chart>
+  <Chart type="pie" :data="chartData" :options="options" class="mx-auto"></Chart>
 </template>
