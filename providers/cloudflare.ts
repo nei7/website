@@ -39,11 +39,12 @@ export const getImage: ProviderGetImage = (src, {
     baseURL = '/',
     accountHash = ''
 } = {}) => {
+
+
     const mergeModifiers = { ...defaultModifiers, ...modifiers }
     const operations = operationsGenerator(mergeModifiers as any)
 
-    // https://fszarek.me/cdn-cgi/imagedelivery/gC77PfJa-d3eBOxGPxtDxw/b224f771-431f-45aa-dee9-51c615e5ff00/public
-    const url = operations ? joinURL(baseURL, 'cdn-cgi/imagedelivery', accountHash, src, operations) : joinURL(baseURL, src)
+    const url = joinURL(baseURL, 'cdn-cgi/imagedelivery', accountHash, src, operations)
 
     return {
         url,

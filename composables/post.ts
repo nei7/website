@@ -15,6 +15,7 @@ export async function usePost(postId: string) {
         queryFn: () => $fetch<Post>(`/api/notion/page/${postId}`),
     })
 
+
     await suspense()
 
     return data

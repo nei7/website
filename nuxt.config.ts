@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
-    '@nuxtjs/google-fonts',
     '@nuxt/image',
     '@nuxtjs/color-mode',
     '@nuxtjs/seo',
@@ -19,6 +18,27 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@vueuse/nuxt',
   ],
+
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com'
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: ''
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+        }
+      ]
+    }
+  },
+
   future: {
     compatibilityVersion: 4,
   },
@@ -49,7 +69,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://www.fszarek.me',
+    url: 'https://fszarek.me',
     name: "Nei's website",
     indexable: true,
     defaultLocale: "en",
@@ -69,6 +89,8 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
+    enabled: false,
+
     compatibility: {
       runtime: {
         satori: "node",
@@ -79,7 +101,6 @@ export default defineNuxtConfig({
       }
     },
 
-    enabled: isProduction(),
     debug: true,
     fonts: ["Inter:400", 'Inter:500', "Inter:700"],
     defaults: {
@@ -119,18 +140,18 @@ export default defineNuxtConfig({
     componentDir: './components/ui'
   },
 
-  googleFonts: {
-    families: {
-      Inter: [100, 200, 300, 400, 500, 600, 700, 800, 900]
-    }
-  },
-
   image: {
+    screens: {
+      xs: 320,
+      xl: 1280,
+    },
     domains: [],
+
 
     provider: "none",
     providers: {
       cloudflareProvider: {
+
         name: 'cloudflare-custom',
         provider: '~/providers/cloudflare.ts',
         options: {

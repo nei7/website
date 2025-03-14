@@ -36,26 +36,3 @@ onMounted(async () => {
 <template>
     <div v-html="html" class="rounded-md overflow-x-auto"></div>
 </template>
-
-<style>
-.shiki {
-    padding: 1rem;
-    border-radius: calc(var(--radius) - 2px);
-    overflow-x: auto;
-}
-
-.shiki,
-.shiki span {
-    background-color: hsl(0 0% 96.1%) !important;
-}
-
-html.dark-mode .shiki,
-html.dark-mode .shiki span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    /* Optional, if you also want font styles */
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-</style>
