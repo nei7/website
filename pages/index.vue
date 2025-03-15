@@ -103,6 +103,7 @@ defineOgImageComponent('Image', {
                         <ul class="flex items-center justify-center text-sm flex-wrap gap-5 text-muted-foreground">
                             <li v-for="link in links">
                                 <AppLink :icon="link.icon" :to="link.link" class="border-b">
+                                    {{ link.name }}
                                 </AppLink>
                             </li>
                         </ul>

@@ -5,17 +5,17 @@ import { Badge } from '~/components/ui/badge';
 const props = defineProps<{
     id: string,
     title: string,
-    date: string,
+    createdAt: string,
     image?: string,
-    path?: string,
+    url?: string,
     tags: { name: string, color: string }[]
 }>()
 
-const date = useFormattedDate(props.date)
+const date = useFormattedDate(props.createdAt)
 </script>
 
 <template>
-    <NuxtLink :to="`/blog/${id}/${path}`" :aria-label="title" class="flex cursor-pointer flex-col gap-2 group">
+    <NuxtLink :to="`/blog/${id}/${url}`" :aria-label="title" class="flex cursor-pointer flex-col gap-2 group">
         <div class="relative rounded-md overflow-hidden">
             <div class="absolute z-10 top-2 left-2">
                 <Badge v-for="tag in tags" class="mr-2 text-white bg-neutral-800">

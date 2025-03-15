@@ -128,7 +128,6 @@ export default function useComments() {
 
         await suspense()
 
-
         return data
     }
 
@@ -138,11 +137,17 @@ export default function useComments() {
         return computed(() => comments.value?.length ?? 0)
     }
 
-    function useSortedComments() {
-        const sortedComments = computed(() => {
-            if (!comments.value) return []
 
-            return [...comments.value].sort((a, b) => {
+    function repliesCount(commentId: number) {
+        return computed(() => replies.value[commentId]?.length ?? 0)
+
+    }
+
+    function useSortedComments(commentsRef: Ref<Comment[]>) {
+        const sortedComments = computed(() => {
+            if (!commentsRef.value) return []
+
+            return [...commentsRef.value].sort((a, b) => {
                 const dateA = new Date(a.createdAt).getTime()
                 const dateB = new Date(b.createdAt).getTime()
 
@@ -164,7 +169,8 @@ export default function useComments() {
         useAddComment,
         useAddReply,
         fetchReplies,
-        getReplies
+        getReplies,
+        repliesCount
     }
 
 }

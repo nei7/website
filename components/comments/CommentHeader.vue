@@ -8,15 +8,20 @@ import {
 } from '@/components/ui/dropdown-menu'
 import useComments from '~/composables/useComments'
 
-const { commentsCount, order } = useComments()
 
-const commentsNumber = commentsCount()
+const props = defineProps<{
+    repliedCommentId?: number | null
+}>()
+
+const { commentsCount, order, repliesCount } = useComments()
+
+const commentsNumber = props.repliedCommentId ? repliesCount(props.repliedCommentId) : commentsCount()
 </script>
 
 <template>
     <ClientOnly>
         <div class="flex items-center justify-between mb-10">
-            <div>{{ commentsNumber }} comments</div>
+            <div>{{ commentsNumber }} {{ props.repliedCommentId ? 'replies' : 'comments' }}</div>
 
             <div>
                 <DropdownMenu>

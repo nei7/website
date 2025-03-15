@@ -118,7 +118,7 @@ const copyLink = async () => await useClipboard(`${window.origin}${commentUrl}`)
 
 
 
-        <div class="pl-10 flex items-center w-full justify-center" v-if="isLoading">
+        <div class="pl-10 flex items-center w-full justify-center mt-6" v-if="isLoading">
             <Icon icon="svg-spinners:180-ring-with-bg" class="text-gray-300 w-5 h-5" />
         </div>
 

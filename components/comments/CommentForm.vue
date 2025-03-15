@@ -17,7 +17,7 @@ import useComment from '~/composables/useComments'
 const { loggedIn, openInPopup } = useUserSession()
 
 const props = defineProps<{
-    repliedCommentId?: number
+    repliedCommentId?: number | null
 }>()
 
 const { useAddReply, useAddComment } = useComment()
@@ -35,6 +35,8 @@ const formSchema = toTypedSchema(z.object({
 
 const { handleSubmit, resetForm } = useForm({
     validationSchema: formSchema,
+
+
 })
 
 
@@ -56,7 +58,7 @@ const onSubmit = handleSubmit(({ content }) => {
                 <Button @click="openInPopup('/api/auth/github')" size="sm">Log in to comment</Button>
             </div>
 
-            <FormField v-slot="{ componentField }" name="content">
+            <FormField v-slot="{ componentField }" name="content" :validateOnBlur="false">
                 <FormItem>
 
                     <FormControl>

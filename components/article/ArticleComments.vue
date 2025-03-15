@@ -3,9 +3,9 @@ import CommentForm from '~/components/comments/CommentForm.vue'
 import CommentList from '~/components/comments/CommentList.vue'
 import CommentHeader from '~/components/comments/CommentHeader.vue';
 
-const { useSortedComments } = await useComments()
+const { useSortedComments, comments } = await useComments()
 
-const commments = useSortedComments()
+const commments = useSortedComments(comments)
 </script>
 
 <template>
