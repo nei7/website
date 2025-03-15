@@ -15,8 +15,6 @@ const color = notionColorToCss(props.callout.callout.color)
     <div :style="color" class="p-3 text-muted-foreground rounded-md" :class="{
         'border': !color
     }">
-
         <TextRenderer :text="callout.callout.rich_text"></TextRenderer>
-
     </div>
 </template>

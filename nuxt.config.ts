@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['shiki'],
+    transpile: ['shiki', 'vee-validate'],
   },
 
   site: {
@@ -145,6 +145,7 @@ export default defineNuxtConfig({
       xs: 320,
       xl: 1280,
     },
+
     domains: [],
 
 

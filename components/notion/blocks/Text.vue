@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import type { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints';
 import { notionColorToCss } from '~/shared/notion/utils';
+import AppLink from '~/components/AppLink.vue';
 
-const props = defineProps<{
+defineProps<{
     text: RichTextItemResponse
 }>()
 </script>
 
 <template>
-    <ExternalLink v-if="text.href" :link="text.href" :name="text.plain_text" style="display: inline-block;"
-        class="text-green-600 font-medium" />
+    <AppLink v-if="text.href" :to="text.href" style="display: inline-block;" class="text-green-500 font-medium">
+        {{ text.plain_text }}
+    </AppLink>
 
     <span v-else :class="{
         'font-bold': text.annotations.bold,
@@ -20,5 +22,4 @@ const props = defineProps<{
     }" :style="notionColorToCss(text.annotations.color)">
         {{ text.plain_text }}
     </span>
-
 </template>

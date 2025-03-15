@@ -24,7 +24,6 @@ export default function useComments() {
 
         await suspense()
 
-
         comments.value = data.value ? [...data.value] : []
     }
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import CommentForm from '~/components/comments/CommentForm.vue'
-import CommentList from '~/components/comments/CommentList.vue'
-import CommentHeader from '~/components/comments/CommentHeader.vue';
-import { useFormattedDate } from '~/composables/useDate';
+import ArticleComments from '~/components/article/ArticleComments.vue';
+import { Icon } from '@iconify/vue';
+
 import { useInfiniteQuery } from '@tanstack/vue-query';
 import { usePost } from '~/composables/post';
+import { fetchBlocks } from '~/composables/block'
 
 definePageMeta({
     alias: [
@@ -23,28 +23,28 @@ if (!post.value) throw createError({
     statusCode: 404
 })
 
+
+
+const { fetchComments } = useComments()
+
+await fetchComments()
+
 const {
     data,
     fetchNextPage,
     hasNextPage,
-    suspense
+    suspense,
+    isLoading
 } = useInfiniteQuery({
     queryKey: ['blocks', postId],
-    queryFn: ({ pageParam }) => fetchBlocks({ postId, nextCursor: pageParam }),
+    queryFn: ({ pageParam }) => fetchBlocks({ blockId: postId, nextCursor: pageParam }),
     getNextPageParam: (lastPage) => lastPage.next_cursor,
-    initialPageParam: ''
+    initialPageParam: '',
 })
 
 await suspense()
 
-
-const { useSortedComments, fetchComments } = await useComments()
-
-await fetchComments()
-
-const commments = useSortedComments()
-
-const blocks = computed(() => data.value?.pages.flatMap(chunk => chunk.results))
+const blocks = computed(() => data.value?.pages.flatMap(chunk => chunk.results) ?? [])
 
 const { loadMoreTrigger } = useScrollLoader(fetchNextPage, hasNextPage)
 
@@ -74,32 +74,26 @@ useSchemaOrg([
 </script>
 
 <template>
+    <div class="mx-auto w-full max-w-4xl px-4">
+        <article class="mb-24 text-justify sm:text-start">
 
-    <div class="mx-auto w-full max-w-4xl px-4" v-if="post">
+            <ArticleHeader :post="post"></ArticleHeader>
 
-        <div class="mt-12 lg:py-12 ">
-            <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-            <p class="text-muted-foreground mt-4">{{ useFormattedDate(post.createdAt) }}</p>
-        </div>
-
-        <article class="mb-24 text-justify sm:text-start" v-if="blocks">
-            <NotionRenderer :blocks="blocks"></NotionRenderer>
+            <ArticleContent :blocks="blocks"></ArticleContent>
 
             <ClientOnly>
-                <div class="mt-10" ref="loadMoreTrigger" v-if="hasNextPage">
-                    Loading...
+                <div class="mt-10 flex items-center justify-center  gap-2 text-muted-foreground w-full"
+                    v-if="hasNextPage && isLoading" ref="loadMoreTrigger">
+                    <Icon icon="svg-spinners:180-ring-with-bg" class="text-gray-300 w-5 h-5" />
+                    Loading the rest of the content...
+
                 </div>
             </ClientOnly>
+
+            <ArticleFooter>
+            </ArticleFooter>
+
         </article>
-
-
-
-        <div class="my-10">
-            <CommentForm />
-
-            <CommentHeader></CommentHeader>
-
-            <CommentList :comments="commments"></CommentList>
-        </div>
+        <ArticleComments></ArticleComments>
     </div>
 </template>

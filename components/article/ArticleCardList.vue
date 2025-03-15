@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import type { AsyncDataRequestStatus } from '#app';
 import type { Post } from '~/shared/notion/post';
 import ArticleCard from './ArticleCard.vue';
 
 defineProps<{
-    status?: AsyncDataRequestStatus,
-    error?: Error | null
     posts?: Post[]
 }>()
 </script>

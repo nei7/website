@@ -8,13 +8,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import useComments from '~/composables/useComments'
 
-const postId = usePostId()
-
 const { commentsCount, order } = useComments()
 
 const commentsNumber = commentsCount()
-
-
 </script>
 
 <template>

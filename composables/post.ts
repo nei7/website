@@ -1,4 +1,3 @@
-import type { ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints"
 import type { Post } from "~/shared/notion/post"
 import { useQuery } from '@tanstack/vue-query'
 
@@ -14,7 +13,6 @@ export async function usePost(postId: string) {
         queryKey: [`posts`, postId],
         queryFn: () => $fetch<Post>(`/api/notion/page/${postId}`),
     })
-
 
     await suspense()
 
@@ -32,12 +30,3 @@ export async function usePosts() {
     return data
 }
 
-export function fetchBlocks({
-    postId,
-    nextCursor
-}: { postId: string, nextCursor?: string }) {
-    return $fetch<ListBlockChildrenResponse>(`/api/notion/blocks/${postId}`, {
-        params: nextCursor ? { start_cursor: nextCursor } : {}
-    });
-
-}

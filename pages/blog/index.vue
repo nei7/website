@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import ArticleCards from '~/components/ArticleCards.vue'
+import ArticleCards from '~/components/article/ArticleCardList.vue'
 
 import {
     PATTERN_BACKGROUND_DIRECTION,

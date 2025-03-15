@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { type ListBlockChildrenResponse, type TableBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { type TableBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -15,24 +14,27 @@ import TextRenderer from "./TextRenderer.vue";
 
 const props = defineProps<{ table: TableBlockObjectResponse }>();
 
-const { data } = useLazyFetch('/api/notion/blocks/' + props.table.id, {
-    transform: (input: ListBlockChildrenResponse) => {
-        return input.results.filter(isFullBlock).filter(res => isType(res, 'table_row'))
-    }
+const { data } = useBlocks({ blockId: props.table.id })
+
+const rows = computed(() => {
+    const filteredData = data.value.filter(isFullBlock).filter(res => isType(res, 'table_row'))
+    return props.table.table.has_row_header ? filteredData.slice(1) : filteredData
 })
+
+const headerRow = computed(() => rows.value[0] ? rows.value[0].table_row.cells : [])
 </script>
 
 <template>
-    <Table v-if="data">
+    <Table>
         <TableHeader v-if="props.table.table.has_row_header">
             <TableRow>
-                <TableHead v-for="cell in data[0].table_row.cells">
+                <TableHead v-for="cell in headerRow">
                     <TextRenderer :text="cell"></TextRenderer>
                 </TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
-            <TableRow v-for="row in data.slice(1)">
+            <TableRow v-for="row in rows">
                 <TableCell v-for="cell in row.table_row.cells">
                     <TextRenderer :text="cell"></TextRenderer>
                 </TableCell>

@@ -20,6 +20,8 @@ import { isType } from '~/shared/notion/utils';
 defineProps<{
     block: BlockObjectResponse | PartialBlockObjectResponse
 }>()
+
+
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColumnBlockObjectResponse, ListBlockChildrenResponse } from '@notionhq/client/build/src/api-endpoints';
+import type { ColumnBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import NotionRenderer from '../Renderer.vue'
 
@@ -8,12 +8,14 @@ const props = defineProps<{
 }>()
 
 
-const { data } = useLazyFetch<ListBlockChildrenResponse>("/api/notion/blocks/" + props.block.id)
+const { data } = useBlocks({
+    blockId: props.block.id
+})
 </script>
 
 
 <template>
     <div>
-        <NotionRenderer v-if="data" :blocks="data?.results"></NotionRenderer>
+        <NotionRenderer v-if="data" :blocks="data"></NotionRenderer>
     </div>
 </template>

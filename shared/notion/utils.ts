@@ -56,7 +56,7 @@ export function getTextProperty(prop: Property | undefined): string | undefined 
     if (!res) return ""
 
     if (Array.isArray(res))
-        return res[0].plain_text
+        return res.map(r => r.plain_text).join(' ')
 
 
     return res

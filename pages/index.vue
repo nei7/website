@@ -8,7 +8,8 @@ import {
     PATTERN_BACKGROUND_VARIANT,
 } from "../components/PatternBackground.vue"
 
-import ArticleCards from '~/components/ArticleCards.vue';
+import ArticleCards from '~/components/article/ArticleCardList.vue';
+import AppLink from '~/components/AppLink.vue';
 
 
 const links = [
@@ -101,7 +102,8 @@ defineOgImageComponent('Image', {
                     <div class="py-12 mx-auto max-w-max">
                         <ul class="flex items-center justify-center text-sm flex-wrap gap-5 text-muted-foreground">
                             <li v-for="link in links">
-                                <ExternalLink :icon="link.icon" :link="link.link" :name="link.name"></ExternalLink>
+                                <AppLink :icon="link.icon" :to="link.link" class="border-b">
+                                </AppLink>
                             </li>
                         </ul>
                     </div>
