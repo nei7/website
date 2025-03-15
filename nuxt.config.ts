@@ -18,6 +18,9 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@vueuse/nuxt',
   ],
+  colorMode: {
+    classSuffix: ''
+  },
 
   app: {
     head: {
