@@ -43,7 +43,7 @@ const isReplying = ref(false)
 const showReplies = ref(false)
 
 const { execute, isLoading, isReady } = useAsyncState(
-    fetchReplies(props.id),
+    () => fetchReplies(props.id),
     [],
     {
         immediate: false
