@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import BlogCard from "~/components/blog/BlogCard.vue";
+import Button from "~/components/ui/button/Button.vue";
+import { ArrowRight } from "lucide-vue-next";
 
 // definePageMeta({
 //   layout: "home",
 // });
-
-const { data: posts } = getFeaturedPosts();
 </script>
 
 <template>
@@ -25,12 +24,9 @@ const { data: posts } = getFeaturedPosts();
 
     <br />
 
-    <h3>My latest blog post</h3>
-
-    <div class="grid grid-cols-1 gap-7 not-prose">
-      <BlogCard v-for="(post, idx) in posts" :key="idx" v-bind="post" />
-    </div>
-
+    <NuxtLink to="/blog">
+      <Button class="cursor-pointer">Read my blog<ArrowRight /></Button>
+    </NuxtLink>
     <SpotifyStatus class="mt-14 not-prose" />
   </div>
 </template>

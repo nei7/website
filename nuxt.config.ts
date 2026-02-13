@@ -34,8 +34,12 @@ export default defineNuxtConfig({
     notionApiKey: process.env.NOTION_API_KEY,
   },
   shiki: {
-    defaultTheme: "material-theme",
-    bundledThemes: ["material-theme"],
+    defaultTheme: {
+      light: "vitesse-light",
+      dark: "vitesse-dark",
+    },
+    bundledThemes: ["vitesse-dark", "vitesse-light"],
+
     bundledLangs: ["js", "yaml", "yml", "typescript", "bash", "python"],
   },
 });
