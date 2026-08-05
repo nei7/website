@@ -18,9 +18,14 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+          registry-url: https://npm.pkg.github.com
 
       - name: Install dependencies
         run: pnpm install
+        env:
+          # @nei7/nuxt-notion is served from GitHub Packages, which
+          # requires auth even for public packages
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: pnpm build

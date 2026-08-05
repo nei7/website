@@ -16,14 +16,22 @@ pnpm dev
 
 Required environment variables are documented in [.env.example](.env.example). All of them follow the `NUXT_*` runtime-config convention — in production they are set as Cloudflare Worker secrets, not baked into the build.
 
+`@nei7/nuxt-notion` is installed from the GitHub Packages registry (scope mapping lives in [.npmrc](.npmrc)), which requires auth even for public packages — your `~/.npmrc` needs a token with `read:packages`:
+
+```ini
+//npm.pkg.github.com/:_authToken=<personal access token>
+```
+
 ### Working on `@nei7/nuxt-notion` locally
 
-The blog rendering lives in the sibling module repo. To develop against a local checkout instead of the npm release:
+The blog rendering lives in the sibling module repo. To develop against a local checkout instead of the published release:
 
 ```bash
 cd ../nuxt-notion && pnpm install && pnpm prepack   # build dist/
 cd ../website && pnpm link ../nuxt-notion
 ```
+
+`pnpm link` adds an override to `pnpm-workspace.yaml` — don't commit it.
 
 ## Architecture notes
 
