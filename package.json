@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@nei7/nuxt-notion": "^0.1.0",
+    "@nei7/nuxt-notion": "^0.2.0",
     "@notionhq/client": "^5.6.0",
     "@nuxthub/core": "^0.10.8",
     "@nuxt/eslint": "1.12.1",
