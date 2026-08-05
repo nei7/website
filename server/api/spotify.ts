@@ -1,11 +1,24 @@
-const getAccessToken = () => {
+interface SpotifyConfig {
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+}
+
+const notPlaying = {
+  isPlaying: false as const,
+  songUrl: null,
+  name: null,
+  artist: null,
+};
+
+const getAccessToken = (config: SpotifyConfig) => {
   const params = new URLSearchParams();
 
   params.set("grant_type", "refresh_token");
-  params.set("refresh_token", process.env.SPOTIFY_REFRESH_TOKEN as string);
+  params.set("refresh_token", config.refreshToken);
 
   const basicAuth = Buffer.from(
-    `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+    `${config.clientId}:${config.clientSecret}`
   ).toString("base64");
 
   return $fetch<{ access_token: string }>(
@@ -21,9 +34,9 @@ const getAccessToken = () => {
   );
 };
 
-const getNowPlaying = async () => {
+const getNowPlaying = async (config: SpotifyConfig) => {
   try {
-    const { access_token } = await getAccessToken();
+    const { access_token } = await getAccessToken(config);
 
     const response = await $fetch<{
       is_playing: boolean;
@@ -38,13 +51,7 @@ const getNowPlaying = async () => {
       },
     });
 
-    if (!response)
-      return {
-        isPlaying: false,
-        songUrl: null,
-        name: null,
-        artist: null,
-      };
+    if (!response) return notPlaying;
 
     return {
       isPlaying: response.is_playing,
@@ -54,11 +61,11 @@ const getNowPlaying = async () => {
         (artist: { name: string }) => artist.name
       ),
     };
-  } catch (err) {
-    console.log(err);
-
-    return createError({});
+  } catch {
+    return notPlaying;
   }
 };
 
-export default eventHandler(() => getNowPlaying());
+export default eventHandler((event) =>
+  getNowPlaying(useRuntimeConfig(event).spotify)
+);

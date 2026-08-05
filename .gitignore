@@ -3,6 +3,8 @@
 .data
 .nuxt
 .nitro
+.wrangler
+.eslintcache
 .cache
 dist
 

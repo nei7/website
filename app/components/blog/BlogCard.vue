@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Calendar, Clock } from "lucide-vue-next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { BlogPost } from "~/types/blog";
+import type { BlogPost } from "#shared/types/blog";
 
 const props = defineProps<BlogPost>();
 

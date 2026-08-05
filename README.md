@@ -1,75 +1,51 @@
-# Nuxt Minimal Starter
+# website
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal website and blog. Posts are written in [Notion](https://notion.so) and rendered with the [`@nei7/nuxt-notion`](https://github.com/nei7/nuxt-notion) module.
+
+- Nuxt 4, Tailwind CSS v4, shadcn-vue
+- Blog content fetched from a Notion database (only entries with `status = Published`)
+- Deployed to Cloudflare Workers via [NuxtHub](https://hub.nuxt.com) (self-hosted) with KV-backed server cache
 
 ## Setup
 
-Make sure to install dependencies:
-
 ```bash
-# npm
-npm install
-
-# pnpm
+cp .env.example .env   # fill in the values
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Required environment variables are documented in [.env.example](.env.example). All of them follow the `NUXT_*` runtime-config convention — in production they are set as Cloudflare Worker secrets, not baked into the build.
 
-Build the application for production:
+### Working on `@nei7/nuxt-notion` locally
+
+The blog rendering lives in the sibling module repo. To develop against a local checkout instead of the npm release:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+cd ../nuxt-notion && pnpm install && pnpm prepack   # build dist/
+cd ../website && pnpm link ../nuxt-notion
 ```
 
-Locally preview production build:
+## Architecture notes
 
-```bash
-# npm
-npm run preview
+- `server/api/posts.get.ts` — list of published posts (cached 15 min)
+- `server/api/posts/[slug].get.ts` — single post + all its blocks, with Notion pagination (cached 30 min, below the ~1 h lifetime of Notion's signed asset URLs)
+- The Notion proxy routes registered by the module (`/api/_notion/*`) are locked to the configured data source via `NUXT_NUXT_NOTION_DATA_SOURCE_ID`
+- `server/api/spotify.ts` — "now playing" widget for the home page
 
-# pnpm
-pnpm preview
+## Deployment
 
-# yarn
-yarn preview
+Pushes to `master` build and deploy to Cloudflare Workers via [.github/workflows/deploy.yml](.github/workflows/deploy.yml). One-time setup:
 
-# bun
-bun run preview
-```
+1. Create a Cloudflare KV namespace for the cache; put its id in the `NUXT_HUB_CACHE_NAMESPACE_ID` repository **variable** (build-time, not a secret).
+2. Add repository **secrets** `CLOUDFLARE_API_TOKEN` (Workers Scripts + KV edit) and `CLOUDFLARE_ACCOUNT_ID`.
+3. After the first deploy, set the Worker secrets:
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+   ```bash
+   npx wrangler secret put NUXT_NUXT_NOTION_API_KEY
+   npx wrangler secret put NUXT_NUXT_NOTION_DATA_SOURCE_ID
+   npx wrangler secret put NUXT_SPOTIFY_CLIENT_ID
+   npx wrangler secret put NUXT_SPOTIFY_CLIENT_SECRET
+   npx wrangler secret put NUXT_SPOTIFY_REFRESH_TOKEN
+   ```
+
+Manual deploy from a machine with credentials: `pnpm deploy`.
