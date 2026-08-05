@@ -35,9 +35,8 @@ cd ../website && pnpm link ../nuxt-notion
 
 ## Architecture notes
 
-- `server/api/posts.get.ts` — list of published posts (cached 15 min)
-- `server/api/posts/[slug].get.ts` — single post + all its blocks, with Notion pagination (cached 30 min, below the ~1 h lifetime of Notion's signed asset URLs)
-- The Notion proxy routes registered by the module (`/api/_notion/*`) are locked to the configured data source via `NUXT_NUXT_NOTION_DATA_SOURCE_ID`
+- Blog data flows through the module's proxy routes (`/api/_notion/*`): `useNotionDatabase` for the post list, the blocks route with cursor pagination for post content (posts longer than 100 blocks render fully)
+- The proxy is locked to the configured data source via `NUXT_NUXT_NOTION_DATA_SOURCE_ID` — the module fills it in as the default and rejects any other id with 403
 - `server/api/spotify.ts` — "now playing" widget for the home page
 
 ## Deployment
