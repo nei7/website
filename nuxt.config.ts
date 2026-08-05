@@ -14,9 +14,36 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/color-mode",
     "@nuxt/image",
-    "nuxt-notion",
+    "@nei7/nuxt-notion",
     "nuxt-shiki",
+    "@nuxthub/core",
   ],
+
+  // Overridden at runtime via NUXT_SPOTIFY_* environment variables
+  runtimeConfig: {
+    spotify: {
+      clientId: "",
+      clientSecret: "",
+      refreshToken: "",
+    },
+  },
+
+  nitro: {
+    preset: "cloudflare_module",
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+    },
+  },
+
+  hub: {
+    cache: {
+      driver: "cloudflare-kv-binding",
+      // KV namespace used for Nitro's cache storage on Cloudflare.
+      // Not a secret — safe to commit.
+      namespaceId: process.env.NUXT_HUB_CACHE_NAMESPACE_ID || "",
+    },
+  },
 
   eslint: {
     checker: true, // <---
@@ -29,9 +56,6 @@ export default defineNuxtConfig({
 
   colorMode: {
     classSuffix: "",
-  },
-  nuxtNotion: {
-    notionApiKey: process.env.NOTION_API_KEY,
   },
   shiki: {
     defaultTheme: {
