@@ -17,9 +17,8 @@ const getAccessToken = (config: SpotifyConfig) => {
   params.set("grant_type", "refresh_token");
   params.set("refresh_token", config.refreshToken);
 
-  const basicAuth = Buffer.from(
-    `${config.clientId}:${config.clientSecret}`
-  ).toString("base64");
+  // btoa instead of Buffer: works on Workers without node compat
+  const basicAuth = btoa(`${config.clientId}:${config.clientSecret}`);
 
   return $fetch<{ access_token: string }>(
     "https://accounts.spotify.com/api/token",
@@ -35,6 +34,8 @@ const getAccessToken = (config: SpotifyConfig) => {
 };
 
 const getNowPlaying = async (config: SpotifyConfig) => {
+  if (!config.clientId || !config.clientSecret || !config.refreshToken) return notPlaying;
+
   try {
     const { access_token } = await getAccessToken(config);
 
@@ -51,21 +52,21 @@ const getNowPlaying = async (config: SpotifyConfig) => {
       },
     });
 
-    if (!response) return notPlaying;
+    if (!response?.item) return notPlaying;
 
     return {
       isPlaying: response.is_playing,
       songUrl: response.item.external_urls.spotify,
       name: response.item.name,
-      artist: response.item.artists.map(
-        (artist: { name: string }) => artist.name
-      ),
+      artist: response.item.artists.map((artist) => artist.name),
     };
   } catch {
     return notPlaying;
   }
 };
 
-export default eventHandler((event) =>
-  getNowPlaying(useRuntimeConfig(event).spotify)
+// Short cache: one Spotify round-trip per 30 s instead of one per visitor.
+export default defineCachedEventHandler(
+  (event) => getNowPlaying(useRuntimeConfig(event).spotify),
+  { group: "site", name: "spotify", maxAge: 30, swr: false }
 );
