@@ -10,13 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
           registry-url: https://npm.pkg.github.com
 
@@ -26,6 +26,9 @@ jobs:
           # @nei7/nuxt-notion is served from GitHub Packages, which
           # requires auth even for public packages
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Lint
+        run: pnpm lint
 
       - name: Build
         run: pnpm build
