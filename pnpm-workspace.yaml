@@ -5,3 +5,5 @@ allowBuilds:
   unrs-resolver: true
   vue-demi: true
   workerd: true
+minimumReleaseAgeExclude:
+  - '@nei7/nuxt-notion@0.3.0'
