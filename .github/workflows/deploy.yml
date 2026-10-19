@@ -34,6 +34,18 @@ jobs:
         run: pnpm build
         env:
           NUXT_HUB_CACHE_NAMESPACE_ID: ${{ vars.NUXT_HUB_CACHE_NAMESPACE_ID }}
+          NUXT_HUB_DATABASE_ID: ${{ vars.NUXT_HUB_DATABASE_ID }}
+
+      # Schema first, code second: the new Worker must never see an old schema.
+      # D1 commands ignore the .wrangler/deploy redirect that `deploy` follows,
+      # so point them at the generated config explicitly (its migrations_dir is
+      # where NuxtHub bundles the SQL files); already-applied files are skipped.
+      - name: Apply D1 migrations
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx wrangler -c .output/server/wrangler.json d1 migrations apply DB --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy to Cloudflare Workers
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
