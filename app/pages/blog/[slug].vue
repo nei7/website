@@ -134,5 +134,7 @@ useHead({
         {{ data.next.title }} →
       </NuxtLink>
     </nav>
+
+    <PostComments :slug="post.slug" />
   </article>
 </template>
