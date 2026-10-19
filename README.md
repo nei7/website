@@ -4,6 +4,7 @@ Personal portfolio and blog. Posts and projects live in [Notion](https://notion.
 
 - Nuxt 4, Tailwind CSS v4 (typography plugin), `@nuxt/fonts` (Newsreader / Inter / JetBrains Mono)
 - Two Notion collections: `posts` (the "Articles" database, `status = Published`) and `projects` (`published` checkbox)
+- Comments under posts: readers sign in with GitHub (`nuxt-auth-utils`, sealed-cookie sessions), comments live in Cloudflare D1 through NuxtHub's Drizzle `db`
 - Deployed to Cloudflare Workers via [NuxtHub](https://hub.nuxt.com) (self-hosted) with KV-backed server cache, invalidated by Notion webhooks
 
 ## Setup
@@ -40,6 +41,15 @@ cd ../website && pnpm link ../nuxt-notion
 - `POST /api/_notion/webhook` receives Notion events and clears exactly the affected cache entries, plus the `notion-derived` group used by `server/routes/rss.xml.ts` and `sitemap.xml.ts`.
 - `server/api/spotify.ts` — "now playing" widget for the footer (cached 30 s).
 - Site metadata (name, role, GitHub, email) lives in `app/app.config.ts`.
+- `server/db/schema.ts` (Drizzle) defines `users` and `comments`; `server/api/comments/*` is the comments API and `server/routes/auth/github.get.ts` the sign-in route. `app/components/PostComments.vue` renders the thread under each post.
+
+## Comments and sign-in
+
+Readers sign in with GitHub to comment; only the public profile (id, login, name, avatar) is stored. Sessions are sealed cookies (`nuxt-auth-utils`), so nothing is stored server-side for them. Comments are threaded one level deep, can be edited by their author, and are soft-deleted (by the author or by the logins in `comments.adminLogins`, who also get an "author" badge). The API rate-limits to 5 comments per user per minute and caps a comment at 2000 characters.
+
+Locally the database is a SQLite file under `.data/db/` (migrations are applied on `pnpm dev`), and the "Dev sign-in" button under a post creates a session without a GitHub app. That button and its `/api/_dev/login` route only exist in development builds.
+
+Schema changes: edit `server/db/schema.ts`, run `pnpm db:generate` and commit the new file in `server/db/migrations/sqlite/`. Migrations are bundled into the build; in production they are applied with `pnpm db:migrate` (what the deploy workflow does before `wrangler deploy`).
 
 ## Notion
 
@@ -54,8 +64,10 @@ Both databases must be shared with the integration (… → Connections).
 Pushes to `master` build and deploy to Cloudflare Workers via [.github/workflows/deploy.yml](.github/workflows/deploy.yml). One-time setup:
 
 1. Create a Cloudflare KV namespace for the cache; put its id in the `NUXT_HUB_CACHE_NAMESPACE_ID` repository **variable** (build-time, not a secret).
-2. Add repository **secrets** `CLOUDFLARE_API_TOKEN` (Workers Scripts + KV edit) and `CLOUDFLARE_ACCOUNT_ID`.
-3. After the first deploy, set the Worker secrets:
+2. Create the D1 database (`npx wrangler d1 create nei7-website`) and put its id in the `NUXT_HUB_DATABASE_ID` repository **variable**. The workflow applies pending migrations to it before every deploy.
+3. Add repository **secrets** `CLOUDFLARE_API_TOKEN` (Workers Scripts, KV and D1 edit) and `CLOUDFLARE_ACCOUNT_ID`.
+4. Create a [GitHub OAuth app](https://github.com/settings/developers) with the authorization callback URL `https://<site>/auth/github`.
+5. After the first deploy, set the Worker secrets:
 
    ```bash
    npx wrangler secret put NUXT_NUXT_NOTION_API_KEY
@@ -65,7 +77,12 @@ Pushes to `master` build and deploy to Cloudflare Workers via [.github/workflows
    npx wrangler secret put NUXT_SPOTIFY_CLIENT_ID
    npx wrangler secret put NUXT_SPOTIFY_CLIENT_SECRET
    npx wrangler secret put NUXT_SPOTIFY_REFRESH_TOKEN
+   npx wrangler secret put NUXT_SESSION_PASSWORD          # 32+ random characters
+   npx wrangler secret put NUXT_OAUTH_GITHUB_CLIENT_ID
+   npx wrangler secret put NUXT_OAUTH_GITHUB_CLIENT_SECRET
    ```
+
+   If GitHub reports a redirect-URI mismatch, the Worker could not work out its public origin: set `NUXT_OAUTH_GITHUB_REDIRECT_URL` to the callback URL as well.
 
 ### Webhook
 
