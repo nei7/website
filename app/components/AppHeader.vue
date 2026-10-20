@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const { site } = useAppConfig();
 
 const linkClass =
   "transition-colors hover:text-foreground aria-[current=page]:text-foreground";
@@ -13,7 +12,7 @@ const linkClass =
       to="/"
       class="font-serif text-lg tracking-tight hover:underline underline-offset-4"
     >
-      {{ site.name }}
+      Home
     </NuxtLink>
 
     <nav

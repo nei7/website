@@ -12,12 +12,6 @@ usePageSeo({ description: site.description, path: "/" });
 <template>
   <div class="space-y-16">
     <section>
-      <h1 class="font-serif text-4xl leading-tight tracking-tight sm:text-5xl">
-        {{ site.name }}
-      </h1>
-      <p class="mt-2 font-mono text-xs tracking-wider text-muted-foreground uppercase">
-        {{ site.role }}
-      </p>
 
       <div class="prose mt-8">
         <p>
