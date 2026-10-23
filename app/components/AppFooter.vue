@@ -9,7 +9,7 @@ const linkClass = "transition-colors hover:text-foreground";
     Width + padding live on the outer element (no font classes) so `65ch` is
     measured against the body font, exactly like <main> and <AppHeader>.
   -->
-  <footer class="mx-auto mt-16 w-full max-w-[65ch] px-5 sm:px-6">
+  <footer class="mx-auto mt-6 w-full max-w-[65ch] px-5 sm:px-6">
     <div
       class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-border py-8 font-mono text-xs text-muted-foreground"
     >

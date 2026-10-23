@@ -115,23 +115,29 @@ useHead({
     </div>
 
     <nav
+      v-if="data.prev || data.next"
       aria-label="Post navigation"
-      class="mt-16 grid gap-4 border-t border-border pt-6 font-mono text-xs sm:grid-cols-2"
+      class="mt-16 grid gap-6 border-t border-border pt-8 sm:grid-cols-2 sm:gap-10"
     >
       <NuxtLink
         v-if="data.prev"
         :to="`/blog/${data.prev.slug}`"
-        class="text-muted-foreground transition-colors hover:text-foreground"
+        class="group min-w-0"
       >
-        ← {{ data.prev.title }}
+        <span class="font-mono text-xs text-muted-foreground">← Older</span>
+        <span class="mt-1 block text-sm leading-snug underline-offset-4 group-hover:underline">
+          {{ data.prev.title }}
+        </span>
       </NuxtLink>
-      <span v-else />
       <NuxtLink
         v-if="data.next"
         :to="`/blog/${data.next.slug}`"
-        class="text-muted-foreground transition-colors hover:text-foreground sm:text-right"
+        class="group min-w-0 sm:col-start-2 sm:text-right"
       >
-        {{ data.next.title }} →
+        <span class="font-mono text-xs text-muted-foreground">Newer →</span>
+        <span class="mt-1 block text-sm leading-snug underline-offset-4 group-hover:underline">
+          {{ data.next.title }}
+        </span>
       </NuxtLink>
     </nav>
 

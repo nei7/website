@@ -42,6 +42,7 @@ cd ../website && pnpm link ../nuxt-notion
 - `server/api/spotify.ts` — "now playing" widget for the footer (cached 30 s).
 - Site metadata (name, role, GitHub, email) lives in `app/app.config.ts`.
 - `server/db/schema.ts` (Drizzle) defines `users` and `comments`; `server/api/comments/*` is the comments API and `server/routes/auth/github.get.ts` the sign-in route. `app/components/PostComments.vue` renders the thread under each post.
+- `server/api/visits/*` is the analytics API: the beacon endpoint, the public summary and the owner-only report. `app/plugins/analytics.client.ts` sends the beacons, `app/components/VisitSummary.vue` and `VitalsStrip.vue` sit under the bio on the home page, `app/pages/analytics.vue` is the dashboard. Tables `page_views` and `web_vitals` live in the same D1 database.
 
 ## Comments and sign-in
 
@@ -50,6 +51,12 @@ Readers sign in with GitHub to comment; only the public profile (id, login, name
 Locally the database is a SQLite file under `.data/db/` (migrations are applied on `pnpm dev`), and the "Dev sign-in" button under a post creates a session without a GitHub app. That button and its `/api/_dev/login` route only exist in development builds.
 
 Schema changes: edit `server/db/schema.ts`, run `pnpm db:generate` and commit the new file in `server/db/migrations/sqlite/`. Migrations are bundled into the build; in production they are applied with `pnpm db:migrate` (what the deploy workflow does before `wrangler deploy`).
+
+## Analytics
+
+Traffic is measured first-party, in the same D1 database, without cookies or third-party scripts. The client plugin posts one beacon per page view (path, external referrer) and, for each hard page load, the web vitals measured by the [`web-vitals`](https://github.com/GoogleChrome/web-vitals) library plus the Navigation Timing load time. The server adds the country from Cloudflare, a coarse browser / OS / device class parsed from the user agent, and a visitor hash = sha256(salt, UTC date, IP, user agent) truncated to 16 hex characters, so "visitors" means unique visitors per day and nobody can be tracked across days. The IP itself is never stored. Bots (by user agent) and visits made while signed in as an owner are not recorded; setting `localStorage.analytics:ignore` in a browser excludes it too.
+
+The home page shows views and visitors for all time, the last 30 days and today (cached 5 minutes) and, under them, the current visitor's own load time and web vitals rated with Google's thresholds. `/analytics` (owner logins only, `noindex`) has the daily chart, top pages, referrers, countries, browsers, systems, devices and the p75 of each vital with its good / needs-improvement / poor split for the last 7, 30 or 90 days.
 
 ## Notion
 
@@ -80,6 +87,7 @@ Pushes to `master` build and deploy to Cloudflare Workers via [.github/workflows
    npx wrangler secret put NUXT_SESSION_PASSWORD          # 32+ random characters
    npx wrangler secret put NUXT_OAUTH_GITHUB_CLIENT_ID
    npx wrangler secret put NUXT_OAUTH_GITHUB_CLIENT_SECRET
+   npx wrangler secret put NUXT_ANALYTICS_SALT              # optional, see .env.example
    ```
 
    If GitHub reports a redirect-URI mismatch, the Worker could not work out its public origin: set `NUXT_OAUTH_GITHUB_REDIRECT_URL` to the callback URL as well.

@@ -8,6 +8,13 @@
       "when": 1792431727233,
       "tag": "0000_users-and-comments",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792505370579,
+      "tag": "0001_analytics",
+      "breakpoints": true
     }
   ]
 }
