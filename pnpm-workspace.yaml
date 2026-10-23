@@ -6,4 +6,4 @@ allowBuilds:
   vue-demi: true
   workerd: true
 minimumReleaseAgeExclude:
-  - '@nei7/nuxt-notion@0.3.0'
+  - '@nei7/nuxt-notion@0.3.1'
