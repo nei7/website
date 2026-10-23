@@ -1,5 +1,16 @@
 import tailwindcss from "@tailwindcss/vite";
 
+// Workers Logs and traces in the dashboard, plus Issues, which groups uncaught
+// exceptions, 5xx responses and console.error() calls. Must stay in the config:
+// a deploy without it turns Issues off again. Declared outside the literal
+// because Nitro 2's bundled wrangler types only know `logs`; Nitro copies the
+// object into wrangler.json as-is.
+const observability = {
+  logs: { enabled: true },
+  traces: { enabled: true },
+  issues: { enabled: true },
+};
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
@@ -106,6 +117,7 @@ export default defineNuxtConfig({
       deployConfig: true,
       nodeCompat: true,
       wrangler: {
+        observability,
         // D1 database holding users and comments, exposed to NuxtHub as `DB`.
         // The id is build-time config like the KV id (NUXT_HUB_DATABASE_ID);
         // migrations_dir is where NuxtHub bundles server/db/migrations/sqlite.
