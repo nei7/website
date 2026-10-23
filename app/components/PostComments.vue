@@ -54,12 +54,11 @@ async function devSignIn() {
   await refresh();
 }
 
-const buttonClass =
-  "inline-flex cursor-pointer items-center rounded-sm border px-3 py-1.5 font-mono text-xs transition-colors";
 </script>
 
 <template>
-  <section id="comments" class="mt-16 border-t border-border pt-8" aria-labelledby="comments-heading">
+  <!-- Spaced like the homepage sections: the serif heading does the separating, not another rule. -->
+  <section id="comments" class="mt-20 scroll-mt-24" aria-labelledby="comments-heading">
     <h2 id="comments-heading" class="font-serif text-2xl tracking-tight">
       Comments
       <span class="ml-1 font-mono text-xs text-muted-foreground tabular-nums">{{ total }}</span>
@@ -98,9 +97,9 @@ const buttonClass =
         />
       </li>
     </ol>
-    <p v-else class="mt-8 text-sm text-muted-foreground">No comments yet.</p>
+    <p v-else class="mt-6 text-sm text-muted-foreground">No comments yet.</p>
 
-    <div class="mt-10">
+    <div class="mt-8">
       <AuthState>
         <template #default="{ loggedIn: signedIn, user, clear }">
           <CommentForm v-if="signedIn && user" :slug="slug" @saved="onSaved">
@@ -121,31 +120,32 @@ const buttonClass =
             </template>
           </CommentForm>
 
-          <div v-else class="rounded-sm border border-border p-4">
-            <p class="text-sm text-muted-foreground">
-              Sign in with GitHub to join the discussion. Only your public profile is used.
+          <div v-else class="text-sm text-muted-foreground">
+            <p>
+              <a
+                :href="loginHref"
+                class="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-current"
+              >
+                Sign in with GitHub
+              </a>
+              to join the discussion.
+            </p>
+            <p class="mt-1.5 flex flex-wrap gap-x-2 font-mono text-xs">
+              <span>Only your public profile is used.</span>
+              <template v-if="isDev">
+                <span>·</span>
+                <button
+                  type="button"
+                  class="cursor-pointer transition-colors hover:text-foreground"
+                  @click="devSignIn"
+                >
+                  Dev sign-in
+                </button>
+              </template>
             </p>
             <p v-if="loginFailed" class="mt-2 font-mono text-xs text-accent" role="alert">
               Sign-in failed, please try again.
             </p>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <a
-                :href="loginHref"
-                :class="buttonClass"
-                class="border-foreground bg-foreground text-background hover:opacity-80"
-              >
-                Sign in with GitHub
-              </a>
-              <button
-                v-if="isDev"
-                type="button"
-                :class="buttonClass"
-                class="border-border text-muted-foreground hover:border-foreground hover:text-foreground"
-                @click="devSignIn"
-              >
-                Dev sign-in
-              </button>
-            </div>
           </div>
         </template>
 

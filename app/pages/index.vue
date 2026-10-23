@@ -12,28 +12,24 @@ usePageSeo({ description: site.description, path: "/" });
 <template>
   <div class="space-y-16">
     <section>
-
       <div class="prose mt-8">
         <p>
-          Hi, I'm Franek, a Computer Science student from Poland driven by a
-          passion for problem solving and continuous learning. I love applying
-          new concepts to real-world projects. You can see my work
-          <NuxtLink to="/projects">here</NuxtLink>.
+          Hi, I'm Franek, a Computer Science student specializing in web development.
+          Beyond shipping web apps, I'm always exploring broader software engineering domains to expand my toolkit.
+          Outside of tech, I spend my time at the gym, playing guitar, and reading.
         </p>
-        <p>
-          Besides programming, I am passionate about music and play the guitar.
-          I also go to the gym regularly.
-        </p>
+      </div>
+
+      <div class="mt-8 space-y-3">
+        <VisitSummary />
+        <VitalsStrip />
       </div>
     </section>
 
     <section v-if="posts?.items.length">
       <div class="mb-4 flex items-baseline justify-between">
         <h2 class="font-serif text-2xl">Writing</h2>
-        <NuxtLink
-          to="/blog"
-          class="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
-        >
+        <NuxtLink to="/blog" class="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
           All posts →
         </NuxtLink>
       </div>
@@ -44,9 +40,8 @@ usePageSeo({ description: site.description, path: "/" });
       <div class="mb-4 flex items-baseline justify-between">
         <h2 class="font-serif text-2xl">Projects</h2>
         <NuxtLink
-          to="/projects"
-          class="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
-        >
+to="/projects"
+          class="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
           All projects →
         </NuxtLink>
       </div>

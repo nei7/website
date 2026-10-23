@@ -15,6 +15,11 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-accent: var(--accent);
+
+  /* Status colours, reserved for web-vitals ratings. */
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-poor: var(--poor);
 }
 
 /* Warm, paper-like neutrals: the editorial feel comes from tone, not colour. */
@@ -25,6 +30,9 @@
   --muted-foreground: oklch(0.5 0.01 70);
   --border: oklch(0.9 0.006 85);
   --accent: oklch(0.55 0.12 40);
+  --good: oklch(0.58 0.14 150);
+  --warn: oklch(0.65 0.15 82);
+  --poor: oklch(0.56 0.19 25);
 }
 
 .dark {
@@ -34,6 +42,9 @@
   --muted-foreground: oklch(0.66 0.01 80);
   --border: oklch(0.3 0.006 70);
   --accent: oklch(0.78 0.1 60);
+  --good: oklch(0.64 0.14 150);
+  --warn: oklch(0.66 0.14 88);
+  --poor: oklch(0.62 0.17 25);
 }
 
 @layer base {

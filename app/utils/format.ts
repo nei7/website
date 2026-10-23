@@ -31,3 +31,11 @@ export const formatMonthYear = (iso: string) => monthYear.format(parse(iso));
 
 export const yearOf = (iso: string | null) =>
   iso ? String(parse(iso).getUTCFullYear()) : "Undated";
+
+const count = new Intl.NumberFormat("en-GB");
+
+/** "12,345" */
+export const formatCount = (value: number) => count.format(value);
+
+/** "view" or "views", to follow a formatted count. */
+export const pluralize = (value: number, noun: string) => (value === 1 ? noun : `${noun}s`);

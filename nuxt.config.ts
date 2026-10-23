@@ -45,9 +45,14 @@ export default defineNuxtConfig({
       },
     },
     comments: {
-      // GitHub logins that may delete anyone's comment, comma-separated
-      // (NUXT_COMMENTS_ADMIN_LOGINS). Also shown with an "author" badge.
+      // GitHub logins that may delete anyone's comment and open /analytics,
+      // comma-separated (NUXT_COMMENTS_ADMIN_LOGINS). Also shown with an "author" badge.
       adminLogins: "nei7",
+    },
+    analytics: {
+      // Secret mixed into the daily visitor hash (NUXT_ANALYTICS_SALT);
+      // falls back to session.password when empty.
+      salt: "",
     },
     public: {
       // Canonical origin used for SEO tags, RSS and the sitemap.
