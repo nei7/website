@@ -41,8 +41,21 @@ export async function signIn(event: H3Event, profile: SignInProfile): Promise<Us
     .values({ id, provider: profile.provider, createdAt: now, ...identity })
     .onConflictDoUpdate({ target: users.id, set: identity });
 
-  const user: User = { id, login: identity.login, name: identity.name, avatar: identity.avatarUrl };
+  const user: User = {
+    id,
+    login: identity.login,
+    name: identity.name,
+    avatar: identity.avatarUrl,
+    owner: isAdmin(event, { id, login: identity.login }),
+  };
   await replaceUserSession(event, { user, loggedInAt: now.toISOString() });
+  return user;
+}
+
+/** The signed-in site owner, or 401 (signed out) / 403 (anyone else). */
+export async function requireOwner(event: H3Event): Promise<User> {
+  const { user } = await requireUserSession(event);
+  if (!isAdmin(event, user)) throw forbidden("Only the site owner can do that");
   return user;
 }
 

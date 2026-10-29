@@ -6,6 +6,11 @@ declare module "#auth-utils" {
     login: string;
     name: string | null;
     avatar: string | null;
+    /**
+     * Listed in `comments.adminLogins`. Set at sign-in and recomputed on every
+     * session fetch (server/plugins/session.ts); server routes still call `isAdmin`.
+     */
+    owner: boolean;
   }
 
   interface UserSession {
