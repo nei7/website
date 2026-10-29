@@ -22,6 +22,9 @@ const linkClass =
       <NuxtLink to="/blog" :class="linkClass" active-class="text-foreground">
         Blog
       </NuxtLink>
+      <NuxtLink to="/notes" :class="linkClass" active-class="text-foreground">
+        Notes
+      </NuxtLink>
       <NuxtLink to="/projects" :class="linkClass" active-class="text-foreground">
         Projects
       </NuxtLink>

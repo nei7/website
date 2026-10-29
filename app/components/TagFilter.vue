@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import type { NotionCollectionTag } from "@nei7/nuxt-notion/types";
 
-defineProps<{
-  tags: NotionCollectionTag[];
-  active?: string;
-  total: number;
-}>();
+withDefaults(
+  defineProps<{
+    tags: NotionCollectionTag[];
+    active?: string;
+    total: number;
+    /** Page the filter links point at. */
+    path?: string;
+  }>(),
+  { active: undefined, path: "/blog" }
+);
 
 const linkClass =
   "transition-colors hover:text-foreground aria-[current=page]:text-foreground aria-[current=page]:underline underline-offset-4";
@@ -17,7 +22,7 @@ const linkClass =
     class="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-muted-foreground"
   >
     <NuxtLink
-      :to="{ path: '/blog' }"
+      :to="{ path }"
       :class="linkClass"
       :aria-current="!active ? 'page' : undefined"
     >
@@ -26,7 +31,7 @@ const linkClass =
     <NuxtLink
       v-for="tag in tags"
       :key="tag.name"
-      :to="{ path: '/blog', query: active === tag.name ? {} : { tag: tag.name } }"
+      :to="{ path, query: active === tag.name ? {} : { tag: tag.name } }"
       :class="linkClass"
       :aria-current="active === tag.name ? 'page' : undefined"
     >

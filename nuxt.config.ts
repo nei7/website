@@ -56,8 +56,8 @@ export default defineNuxtConfig({
       },
     },
     comments: {
-      // GitHub logins that may delete anyone's comment and open /analytics,
-      // comma-separated (NUXT_COMMENTS_ADMIN_LOGINS). Also shown with an "author" badge.
+      // GitHub logins that may delete anyone's comment, open /analytics and add
+      // notes, comma-separated (NUXT_COMMENTS_ADMIN_LOGINS). Also shown with an "author" badge.
       adminLogins: "nei7",
     },
     analytics: {
@@ -72,8 +72,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // Content comes from two Notion databases exposed as collections.
-  // Data source ids: NUXT_NUXT_NOTION_COLLECTIONS_{POSTS,PROJECTS}_DATA_SOURCE_ID
+  // Content comes from three Notion databases exposed as collections.
+  // Data source ids: NUXT_NUXT_NOTION_COLLECTIONS_{POSTS,PROJECTS,NOTES}_DATA_SOURCE_ID
   nuxtNotion: {
     cache: { maxAge: 3600, swr: true },
     collections: {
@@ -95,6 +95,17 @@ export default defineNuxtConfig({
           published: { property: "published", equals: true },
           order: "order",
           featured: "featured",
+        },
+      },
+      // Short notes; the owner adds them from /notes (POST /api/notes creates the page).
+      notes: {
+        dataSourceId: "",
+        properties: {
+          slug: "slug",
+          // Explicit: the default ['date', 'published'] would read the checkbox below.
+          date: "date",
+          tags: "tags",
+          published: { property: "published", equals: true },
         },
       },
     },
