@@ -68,9 +68,8 @@ usePageSeo({
             class="flex flex-col items-start gap-y-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 print:flex-row print:items-baseline print:justify-between print:gap-6"
           >
             <h3 class="min-w-0 leading-snug">
-              <!-- The link goes on the company or school when there is one, otherwise on the title. -->
               <a
-                v-if="entry.href && !entry.org"
+                v-if="entry.href"
                 :href="entry.href"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,8 +83,8 @@ usePageSeo({
               <template v-if="entry.org">
                 <span class="text-muted-foreground"> · </span>
                 <a
-                  v-if="entry.href"
-                  :href="entry.href"
+                  v-if="entry.orgHref"
+                  :href="entry.orgHref"
                   target="_blank"
                   rel="noopener noreferrer"
                   :class="linkClass"

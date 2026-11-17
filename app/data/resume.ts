@@ -15,10 +15,12 @@ export interface ResumeLink {
 export interface ResumeEntry {
   /** Role, project name or degree. */
   title: string;
-  /** Company or school, shown after the title. */
-  org?: string;
-  /** Links the company or school when there is one, otherwise the title. */
+  /** Links the title: the project's own site or repository. */
   href?: string;
+  /** Company, school or event, shown after the title. */
+  org?: string;
+  /** Links the company, school or event. */
+  orgHref?: string;
   /** Free text: "Oct 2023 – Present", "2025". */
   period?: string;
   location?: string;
@@ -66,7 +68,7 @@ export const resume: Resume = {
         // {
         //   title: "Software Engineer Intern",
         //   org: "Company",
-        //   href: "https://example.com",
+        //   orgHref: "https://example.com",
         //   period: "Jul 2026 – Sep 2026",
         //   location: "Remote",
         //   bullets: ["What you built and what it changed."],
@@ -87,6 +89,7 @@ export const resume: Resume = {
         },
         {
           title: "Fire Activity Calendar API",
+          href: "https://nullrunners.space",
           org: "NASA Space Apps Challenge",
           period: "Nov 2026",
           location: "Rzeszów",
@@ -134,13 +137,13 @@ export const resume: Resume = {
         {
           title: "Computer Science, 2nd year",
           org: "Rzeszów University of Technology",
-          href: "https://w.prz.edu.pl",
+          orgHref: "https://w.prz.edu.pl",
           period: "Oct 2025 - Present",
         },
         {
           title: "IT Technician (technik informatyk)",
           org: "ZSTiO Jarosław",
-          href: "https://zstiojar.edu.pl",
+          orgHref: "https://zstiojar.edu.pl",
           period: "Sep 2020 - Apr 2025",
           summary:
             "Vocational qualifications INF.02 (computer systems and local networks) and INF.03 (web apps and databases).",
