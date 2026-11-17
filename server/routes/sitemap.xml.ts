@@ -10,7 +10,7 @@ export default defineCachedEventHandler(
       }),
     ]);
 
-    const staticPages = ["/", "/blog", "/notes", "/projects"].map(
+    const staticPages = ["/", "/blog", "/notes", "/projects", "/resume"].map(
       (path) => `<url><loc>${siteUrl}${path}</loc></url>`
     );
     const postPages = posts.map(

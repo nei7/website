@@ -35,16 +35,26 @@
   --poor: oklch(0.56 0.19 25);
 }
 
-.dark {
-  --background: oklch(0.17 0.006 70);
-  --foreground: oklch(0.93 0.006 90);
-  --muted: oklch(0.23 0.006 70);
-  --muted-foreground: oklch(0.66 0.01 80);
-  --border: oklch(0.3 0.006 70);
-  --accent: oklch(0.78 0.1 60);
-  --good: oklch(0.64 0.14 150);
-  --warn: oklch(0.66 0.14 88);
-  --poor: oklch(0.62 0.17 25);
+/* Paper is white: a tinted page would print as a cream box inside the sheet's white margins. */
+@media print {
+  :root {
+    --background: white;
+  }
+}
+
+/* Screens only: printing from dark mode keeps the light palette above. */
+@media not print {
+  .dark {
+    --background: oklch(0.17 0.006 70);
+    --foreground: oklch(0.93 0.006 90);
+    --muted: oklch(0.23 0.006 70);
+    --muted-foreground: oklch(0.66 0.01 80);
+    --border: oklch(0.3 0.006 70);
+    --accent: oklch(0.78 0.1 60);
+    --good: oklch(0.64 0.14 150);
+    --warn: oklch(0.66 0.14 88);
+    --poor: oklch(0.62 0.17 25);
+  }
 }
 
 @layer base {
@@ -52,8 +62,10 @@
     color-scheme: light;
   }
 
-  html.dark {
-    color-scheme: dark;
+  @media not print {
+    html.dark {
+      color-scheme: dark;
+    }
   }
 
   body {
@@ -124,12 +136,14 @@
   font-size: 0.75rem;
 }
 
-/* Shiki: follow the site theme instead of the OS preference. */
-html.dark .shiki,
-html.dark .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+/* Shiki: follow the site theme instead of the OS preference (light on paper, like the palette). */
+@media not print {
+  html.dark .shiki,
+  html.dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
 }

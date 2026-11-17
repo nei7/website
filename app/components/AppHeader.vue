@@ -5,8 +5,9 @@ const linkClass =
 </script>
 
 <template>
+  <!-- Four links and the toggle only just fit a 360px phone, hence the tighter gaps there; anything narrower wraps the nav. -->
   <header
-    class="mx-auto flex w-full max-w-[65ch] items-baseline justify-between gap-6 px-5 pt-8 pb-2 sm:px-6"
+    class="mx-auto flex w-full max-w-[65ch] flex-wrap items-baseline justify-between gap-x-4 gap-y-2 px-5 pt-8 pb-2 sm:gap-x-6 sm:px-6 print:hidden"
   >
     <NuxtLink
       to="/"
@@ -17,7 +18,7 @@ const linkClass =
 
     <nav
       aria-label="Main"
-      class="flex items-baseline gap-5 font-mono text-xs tracking-wider text-muted-foreground uppercase"
+      class="flex items-baseline gap-3.5 font-mono text-xs tracking-wider text-muted-foreground uppercase sm:gap-5"
     >
       <NuxtLink to="/blog" :class="linkClass" active-class="text-foreground">
         Blog
@@ -27,6 +28,9 @@ const linkClass =
       </NuxtLink>
       <NuxtLink to="/projects" :class="linkClass" active-class="text-foreground">
         Projects
+      </NuxtLink>
+      <NuxtLink to="/resume" :class="linkClass" active-class="text-foreground">
+        Resume
       </NuxtLink>
       <ThemeToggle />
     </nav>
