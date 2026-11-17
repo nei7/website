@@ -59,7 +59,7 @@ export const resume: Resume = {
   ],
 
   summary:
-    "Computer Science student specializing in web development. Beyond shipping web apps with Nuxt and TypeScript, I keep exploring broader software engineering domains: backend services in Go, Kubernetes, Raspberry Pi clusters and Linux.",
+    "Computer Science student specializing in web development. Beyond shipping web apps with Nuxt and TypeScript, I keep exploring broader software engineering domains: backend services in Go, Kubernetes and Linux.",
 
   sections: [
     {
