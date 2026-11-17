@@ -84,8 +84,8 @@ export const resume: Resume = {
           href: "https://quizit.online",
           period: "2025 - Present",
           summary:
-            "An online tool and Chrome extension that provides rapid answers and AI-driven solutions for school and platform quizzes. Serves 150k monthly visits and handles payments.",
-          tags: ["Nuxt", "TypeScript", "Kubernetes", "Linux"],
+            "An online tool and Chrome extension that provides rapid answers and AI-driven solutions for school and platform quizzes. It gets 150k visits a month and takes payments through Stripe.",
+          tags: ["Nuxt", "TypeScript", "Stripe", "Kubernetes", "Linux"],
         },
         {
           title: "Fire Activity Calendar API",
