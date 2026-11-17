@@ -131,12 +131,19 @@ export const resume: Resume = {
     {
       title: "Education",
       entries: [
-        // {
-        //   title: "BSc in Computer Science",
-        //   org: "University",
-        //   period: "2024 – 2027",
-        //   location: "City",
-        // },
+        {
+          title: "Computer Science",
+          org: "Rzeszów University of Technology",
+          href: "https://w.prz.edu.pl",
+          period: "2nd year",
+        },
+        {
+          title: "IT Technician (technik informatyk)",
+          org: "ZSTiO Jarosław",
+          href: "https://zstiojar.edu.pl",
+          summary:
+            "Vocational qualifications INF.02 (computer systems and local networks) and INF.03 (web apps and databases).",
+        },
       ],
     },
   ],
