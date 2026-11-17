@@ -20,7 +20,7 @@ const meta = (entry: ResumeEntry) => [entry.period, entry.location].filter(Boole
 
 usePageSeo({
   title: "Resume",
-  description: `Resume of ${site.name}: projects, skills and experience.`,
+  description: "My resume: the projects I have built and the technologies I work with.",
   path: "/resume",
 });
 </script>
