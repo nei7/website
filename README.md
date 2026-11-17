@@ -58,6 +58,19 @@ Traffic is measured first-party, in the same D1 database, without cookies or thi
 
 The home page shows views and visitors for all time, the last 30 days and today (cached 5 minutes) and, under them, the current visitor's own load time and web vitals rated with Google's thresholds. `/analytics` (owner logins only, `noindex`) has the daily chart, top pages, referrers, countries, browsers, systems, devices and the p75 of each vital with its good / needs-improvement / poor split for the last 7, 30 or 90 days.
 
+## Resume
+
+`/resume` renders [app/data/resume.ts](app/data/resume.ts): contact links, summary, sections of entries (a section without entries is left out) and skills. Name, role and email come from `app/app.config.ts`.
+
+The "Download PDF" button serves `public/resume.pdf`, a committed file that is the same page printed by headless Chromium through its `print:` styles (A4, one sheet). Nothing rebuilds it on deploy, so regenerate and commit it after editing the data or the page:
+
+```bash
+pnpm dev          # in one terminal
+pnpm resume:pdf   # in another; pass the page URL if the dev server is not on :3000
+```
+
+The script needs `chromium` or `google-chrome` on `PATH` (or `CHROME_BIN`) and warns when the resume no longer fits on one page.
+
 ## Notion
 
 Posts come from the "Articles" database. Properties used: `title`, `url` or `slug` (slug), `date` (falls back to `created_time`), `description`, `tags` or `category`, `status` (`Published`).
